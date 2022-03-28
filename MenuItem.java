@@ -13,13 +13,13 @@ public class MenuItem{
     private boolean IS_SPECIAL;
 
     public MenuItem(String NAME, int PRICE, boolean CONTAINS_MEAT,
-                    boolean ANIMAL_PRODUCT, boolean IS_HALAL, boolean IS_SPECIAL = false){
+                    boolean ANIMAL_PRODUCT, boolean IS_HALAL, boolean IS_SPECIAL){
         this.NAME = NAME;
         this.PRICE = PRICE;
         this.CONTAINS_MEAT = CONTAINS_MEAT;
         this.ANIMAL_PRODUCT = ANIMAL_PRODUCT;
         this.IS_HALAL = IS_HALAL;
-        this.boolean IS_SPECIAL = IS_SPECIAL;
+        this.IS_SPECIAL = IS_SPECIAL;
     }
 
     //Setters
@@ -43,7 +43,7 @@ public class MenuItem{
         this.IS_HALAL = NEW_IS_HALAL;
     }
 
-    public void setSpecial(boolean IS_SPECIAL){
+    public void setIsSpecial(boolean NEW_IS_SPECIAL){
         this.IS_SPECIAL = NEW_IS_SPECIAL;
     }
 
@@ -69,7 +69,7 @@ public class MenuItem{
     }
 
     public boolean getIsSpecial(){
-        return this.IS_Special;
+        return this.IS_SPECIAL;
     }
 
 }
