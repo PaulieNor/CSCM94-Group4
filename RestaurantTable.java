@@ -1,13 +1,13 @@
 public class RestaurantTable{
 
     private int TABLE_ID;
-    private N_SEATS;
+    private int N_SEATS;
 
 
 
     public RestaurantTable(int TABLE_ID, int N_SEATS){
         this.TABLE_ID = TABLE_ID;
-        int N_SEATS = N_SEATS;
+        this.N_SEATS = N_SEATS;
     }
 
     public void setTableID(int NEW_TABLE_ID){
@@ -24,7 +24,7 @@ public class RestaurantTable{
     }
 
     public int getNSeats(){
-        return this.N_TABLES;
+        return this.N_SEATS;
     }
 
 }
