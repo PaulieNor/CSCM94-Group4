@@ -4,7 +4,6 @@ public class MenuList{
 
     private ArrayList<MenuItem> ITEMS;
 
-
     public MenuList(){
     }
 
@@ -25,9 +24,18 @@ public class MenuList{
         int total = 0;
         for (int item = 0; item < ITEMS.size(); item++){
             total += this.getItem(item).getPrice();
-
         }
         return total;
+    }
+
+    public int getMinWait(){
+        int max = 0;
+        for (int item = 0; item < ITEMS.size(); item++){
+            if (this.getItem(item).getWaitTime() > max){
+                max = this.getItem(item).getPrice();
+            }
+        }
+        return max;
     }
 
     public void setSpecial(int i){
