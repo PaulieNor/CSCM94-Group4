@@ -5,8 +5,7 @@ public class MenuList{
     private ArrayList<MenuItem> ITEMS;
 
 
-    public MenuList{
-
+    public MenuList(){
     }
 
     public ArrayList<MenuItem> getList(){
@@ -18,32 +17,25 @@ public class MenuList{
     }
 
     public MenuItem getItem(int i){
-        ITEMS.get(i);
+        return ITEMS.get(i);
+
     }
 
     public int getTotalPrice(){
-        int total;
-        for (int items = 0; items > ITEMS.size; items++){
-            total += this.getItem(i).getPrice();
-            return total;
-        }
-    }
+        int total = 0;
+        for (int item = 0; item < ITEMS.size(); item++){
+            total += this.getItem(item).getPrice();
 
-    public int getTotalPrice(){
-        int total;
-        for (int items = 0; items > ITEMS.size; items++){
-            total += this.getItem(i).getPrice();
-            return total;
         }
-
+        return total;
     }
 
     public void setSpecial(int i){
-        for (int item = 0; item > ITEMS.size; item++)
+        for (int item = 0; item < ITEMS.size(); item++)
             if (this.getItem(item).getIsSpecial() == true){
-                this.getItem(item).setIsSpecial() = false;
+                this.getItem(item).setIsSpecial(false);
             }
-        this.getItem(i).setIsSpecial() = true;
+        this.getItem(i).setIsSpecial(true);
     }
 
 
