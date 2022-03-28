@@ -1,11 +1,11 @@
-public class RestuarantTable{
+public class RestaurantTable{
 
     private int TABLE_ID;
     private N_SEATS;
 
 
 
-    public RestuarantTable(int TABLE_ID, int N_SEATS){
+    public RestaurantTable(int TABLE_ID, int N_SEATS){
         this.TABLE_ID = TABLE_ID;
         int N_SEATS = N_SEATS;
     }
