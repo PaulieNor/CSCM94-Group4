@@ -1,0 +1,22 @@
+If the project isn't compiling/running for you, check these things:
+
+1) Update to Java Version 18, or whatever is the latest one. Make sure to change your IDE to this version too (it can be easy to miss).
+
+2) If you're getting a "javaFX package not found" error, you need to download javaFX and put it somewhere. There's a folder in there called 'lib' that you need to 
+directly reference.
+
+Then to compile this either type this into your terminal in whever all the .java files are kept:
+javac --module-path "C:/whatever/the/path/to/'javafx-sdk-18/lib'/is" --add-modules javafx.controls,javafx.fxml *.java
+
+Or go to run configuration on your IDE, go to add VM settings and put this in:
+--module-path "C:/whatever/the/path/to/'javafx-sdk-18/lib'/is" --add-modules javafx.controls,javafx.fxml
+And press the Build/Run button.
+
+3) Cry a lot.
+
+4) If you're getting an error about a MySQL package, copypaste the mysql-connector-java-8.0.28.jar file that should be in main/java file in Sumi's upload
+into the javaFX directory you just referenced in step 2.
+
+5) Delete module-info.java and run again.
+
+This got mine working in IntelliJ but it might be different depending on what you use.
