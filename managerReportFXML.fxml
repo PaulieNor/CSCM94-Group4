@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.shape.Circle?>
+<BorderPane fx:controller="src.main.manager.ManagerReportController"
+            xmlns:fx="http://javafx.com/fxml">
+    <top>
+        <HBox alignment="CENTER" spacing="10">
+            <padding>
+                <Insets top="10" right="10" left="10" bottom="10"/>
+            </padding>
+            <Text text="Cafe 94 Manager Report"/>
+        </HBox>
+    </top>
+    <left>
+        <VBox alignment="CENTER_LEFT" spacing="10">
+            <padding>
+                <Insets left="20" right="15" top="10" bottom="10"/>
+            </padding>
+            <Button text="Connect"
+                    fx:id="btnConnect" onAction="#connectSQL"/>
+            <Button text="Today's Sitting"
+                    fx:id="btnTodaysSitting" onAction="#showTodaySitting" disable="true"/>
+            <Button text="Load Current Menu"
+                    fx:id="btnShowMenu" onAction="#showCurrentMenu" disable="true"/>
+            <Button text="Load Staff"
+                    fx:id="btnStaff" disable="true" onAction="#showStaff"/>
+            <Button text="Exit"
+                    fx:id="btnExit" onAction="#closeCW"/>
+        </VBox>
+    </left>
+    <center>
+            <TableView fx:id="tblData">
+                <columns>
+                    <TableColumn fx:id="columnOne"/>
+                    <TableColumn fx:id="columnTwo"/>
+                    <TableColumn fx:id="columnThree"/>
+                    <TableColumn fx:id="columnFour"/>
+                    <TableColumn fx:id="columnFive"/>
+                    <TableColumn fx:id="columnSix"/>
+                </columns>
+            </TableView>
+    </center>
+    <right>
+        <VBox alignment="TOP_RIGHT" spacing="10">
+            <padding>
+                <Insets right="15" left="15" bottom="15" top="15"/>
+            </padding>
+            <Label text="Total Sitting Today"/>
+            <Label text="0" fx:id="cSittingText"/>
+        </VBox>
+    </right>
+    <bottom>
+        <HBox alignment="CENTER_RIGHT" spacing="10">
+            <padding>
+                <Insets bottom="20" top="30" left="30" right="30"/>
+            </padding>
+            <Label text="SQL Database Connection: Inactive"
+                   fx:id="sqlConnectionText"/>
+            <Circle fx:id="circleConnection" fill="RED" radius="5"/>
+        </HBox>
+    </bottom>
+</BorderPane>
