@@ -1,4 +1,4 @@
-package sample;
+package cafe94;
 
 /**
  * [DatabaseHandler]
