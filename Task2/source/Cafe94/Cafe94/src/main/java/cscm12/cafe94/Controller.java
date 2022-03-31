@@ -39,32 +39,15 @@ public class Controller implements Initializable {
      */
 
     /** These are the buttons and the choice boxes for Driver.fxml*/
-    @FXML
-    private Button deliverOrderButton;
-    @FXML
-    private ChoiceBox completedOrdersListDel;
-    @FXML
-    private Text completeOrdersTextDel;
+   
 
     /** These are the buttons and the choice boxes for Waiter.fxml*/
-    @FXML
-    private ChoiceBox completedOrdersListTab;
-    @FXML
-    private ChoiceBox unbookedTablesList;
-    @FXML
-    private Button bookTableButton;
-    @FXML
-    private Button serveOrderButtonTab;
 
     /** These are the buttons and the choice boxes for Waiter.fxml*/
     @FXML
     private Button setSpecialButton;
     @FXML
     private ChoiceBox setSpecialList;
-    @FXML
-    private ChoiceBox selectOrder;
-    @FXML
-    private Button completeOrderButton;
 
     /** These are the buttons and the choice boxes for StaffLogin.fxml, Manager.fxml and  ManageStaff.fxml*/
     @FXML
