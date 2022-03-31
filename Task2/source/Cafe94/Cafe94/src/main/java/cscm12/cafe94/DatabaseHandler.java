@@ -57,7 +57,7 @@ public class DatabaseHandler {
      * Add new entry to table.
      * @param tableName The specified table to be updated
      * @param values The values of the new entry in SQL syntax.
-     * @param CONSTRAINT_ERROR A unique error from violating constraint rules specific to that transaction.
+     * @param CONSTRAINT_ERROR A custom error from violating constraint rules specific to that transaction.
      */
     public static void newEntry(String tableName, String values, String CONSTRAINT_ERROR){
         try {
