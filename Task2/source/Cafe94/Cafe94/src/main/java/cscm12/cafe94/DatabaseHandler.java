@@ -62,9 +62,13 @@ public class DatabaseHandler {
      * @param values The values of the new entry in SQL syntax.
      * @param CONSTRAINT_ERROR A unique error from violating constraint rules specific to that transaction.
      */
-    public static void newEntry(String tableName, String values, String CONSTRAINT_ERROR) {
-        String query = "INSERT " + tableName + " VALUES (" + values + ")";
-        tableUpdater(query, CONSTRAINT_ERROR);
+    public static void newEntry(String tableName, String values, String CONSTRAINT_ERROR){
+        try {
+            String query = "INSERT " + tableName + " VALUES (" + values + ")";
+            tableUpdater(query, CONSTRAINT_ERROR);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -78,9 +82,13 @@ public class DatabaseHandler {
      */
     public static void editEntry(String tableName, String column, String identifier, String values,
                           String CONSTRAINT_ERROR) {
-        String query = "UPDATE " + tableName + " SET VALUES (" + values + ") WHERE " +
-                column + " = '" + identifier + "'";
-        tableUpdater(query, CONSTRAINT_ERROR);
+        try {
+            String query = "UPDATE " + tableName + " SET VALUES (" + values + ") WHERE " +
+                    column + " = '" + identifier + "'";
+            tableUpdater(query, CONSTRAINT_ERROR);
+        } catch (Exception e) {
+            System.out.println("Input error.");
+        }
     }
 
     /**
@@ -93,9 +101,13 @@ public class DatabaseHandler {
      */
     public static void deleteEntry(String tableName, String column, String identifier,
                           String CONSTRAINT_ERROR) {
-        String query = "DELETE FROM " + tableName + " WHERE " +
-                column + " = '" + identifier + "'";
-        tableUpdater(query, CONSTRAINT_ERROR);
+        try {
+            String query = "DELETE FROM " + tableName + " WHERE " +
+                    column + " = '" + identifier + "'";
+            tableUpdater(query, CONSTRAINT_ERROR);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
 
