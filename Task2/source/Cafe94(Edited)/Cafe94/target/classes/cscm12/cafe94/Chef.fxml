@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cscm12.cafe94.Controller">
+   <children>
+      <Button fx:id="completeOrder" layoutX="74.0" layoutY="161.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="195.0" text="Complete Order" textAlignment="CENTER" />
+      <Button layoutX="203.0" layoutY="340.0" mnemonicParsing="false" onAction="#switchToStaffLogin" prefHeight="25.0" prefWidth="195.0" text="Logout" />
+      <ChoiceBox fx:id="selectOrder" layoutX="74.0" layoutY="122.0" prefHeight="25.0" prefWidth="195.0" />
+      <Text fx:id="titleChef" layoutX="255.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chef" textAlignment="CENTER" wrappingWidth="89.251953125">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Text fx:id="prepareOrderText" layoutX="127.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prepare Order" textAlignment="CENTER" wrappingWidth="89.251953125" />
+      <Text fx:id="chooseSpecialText" layoutX="385.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose Special" textAlignment="CENTER" wrappingWidth="89.251953125" />
+      <ChoiceBox fx:id="setSpecialList" layoutX="332.0" layoutY="122.0" prefHeight="25.0" prefWidth="195.0" />
+      <Button fx:id="setSpecialButton" layoutX="332.0" layoutY="161.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="195.0" text="Set Special" textAlignment="CENTER" />
+   </children>
+</Pane>

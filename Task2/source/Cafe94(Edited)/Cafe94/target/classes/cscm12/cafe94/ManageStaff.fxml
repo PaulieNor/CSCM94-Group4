@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cscm12.cafe94.Controller">
+    <children>
+        <ToolBar layoutY="440.0" prefHeight="40.0" prefWidth="720.0">
+            <items>
+                <Button fx:id="staffHomepageButton" mnemonicParsing="false" onAction="#switchToManager" prefHeight="26.0" prefWidth="54.0" text="Home" />
+                <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="54.0" text="Table" />
+                <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="54.0" text="Event" />
+                <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="54.0" text="Report" />
+                <Button mnemonicParsing="false" onAction="#switchToStaffLogin" text="Logout" />
+            </items>
+        </ToolBar>
+        <Pane layoutX="1.0" layoutY="74.0" prefHeight="366.0" prefWidth="533.0">
+            <children>
+                <TableView fx:id="staffTable" layoutX="4.0" layoutY="5.0" prefHeight="355.0" prefWidth="527.0">
+                    <columns>
+                        <TableColumn fx:id="fieldStaffFName" editable="false" prefWidth="83.20001220703125" sortable="false" text="Name" />
+                        <TableColumn fx:id="fieldStaffLName" editable="false" prefWidth="92.79998779296875" sortable="false" text="Surname" />
+                        <TableColumn fx:id="fieldStaffType" editable="false" prefWidth="63.20001220703125" sortable="false" text="Role" />
+                        <TableColumn fx:id="fieldHoursToWork" editable="false" prefWidth="64.79998779296875" sortable="false" text="Hours" />
+                        <TableColumn fx:id="fieldStaffUsername" editable="false" prefWidth="81.60003662109375" sortable="false" text="Username" />
+                        <TableColumn fx:id="fieldStaffPassword" editable="false" prefWidth="136.0" sortable="false" text="Password" />
+                    </columns>
+                </TableView>
+            </children>
+        </Pane>
+        <Pane layoutX="521.0" layoutY="74.0" prefHeight="366.0" prefWidth="199.0">
+            <children>
+                <TextField fx:id="newStaffFName" layoutX="25.0" layoutY="41.0" promptText="First Name" />
+                <TextField fx:id="newStaffLName" layoutX="25.0" layoutY="74.0" promptText="Last Name" />
+                <TextField fx:id="newStaffType" layoutX="25.0" layoutY="106.0" prefHeight="25.0" prefWidth="88.0" promptText="Role" />
+                <TextField fx:id="newHoursToWork" layoutX="120.0" layoutY="106.0" prefHeight="25.0" prefWidth="54.0" promptText="Hours" />
+                <TextField fx:id="newStaffUsername" layoutX="24.0" layoutY="137.0" prefHeight="25.0" prefWidth="149.0" promptText="Username" />
+                <TextField fx:id="newStaffPassword" layoutX="25.0" layoutY="169.0" promptText="Password" />
+                <Button fx:id="insertStaffButton" layoutX="25.0" layoutY="206.0" mnemonicParsing="false" onAction="#ManageStaffButtonActionEvents" prefHeight="26.0" prefWidth="54.0" text="Insert" />
+                <Button fx:id="updateStaffButton" layoutX="120.0" layoutY="206.0" mnemonicParsing="false" onAction="#ManageStaffButtonActionEvents" prefHeight="26.0" prefWidth="54.0" text="Edit" />
+                <Button fx:id="deleteStaffButton" layoutX="120.0" layoutY="241.0" mnemonicParsing="false" onAction="#ManageStaffButtonActionEvents" prefHeight="26.0" prefWidth="54.0" text="Delete" />
+                <Label layoutX="24.0" layoutY="-1.0" text="Manage Staff">
+                    <font>
+                        <Font name="System Bold" size="24.0" />
+                    </font>
+                </Label>
+            </children>
+        </Pane>
+    </children>
+</AnchorPane>
