@@ -11,6 +11,7 @@ import java.time.LocalTime;
  */
 public class Booking {
 
+    private int bookingID;
     private int custID;
     private int numberOfGuests;
     private int tableID;
@@ -24,6 +25,14 @@ public class Booking {
         this.tableID = tableID;
         this.bookingTime = bookingTime;
         this.bookingDate = bookingDate;
+    }
+
+    public void setBookingID(int bookingID) {
+        this.bookingID = bookingID;
+    }
+
+    public int getBookingID() {
+        return bookingID;
     }
 
     public int getCustID(){
@@ -75,11 +84,29 @@ public class Booking {
     public void uploadBooking(){
         DatabaseHandler handler = new DatabaseHandler();
         try {
-            handler.newEntry("Bookings", "CustomerUserID=" + custID +
-                    ", numberOfGuests=" + numberOfGuests +
-                    ", tableID=" + tableID +
-                    ", bookingTime=" + bookingTime +
-                    ", bookingDate=" + bookingDate,
+            handler.newEntry("Bookings", "CustomerUserID='" + custID +
+                    "', numberOfGuests='" + numberOfGuests +
+                    "', tableID='" + tableID +
+                    "', bookingTime='" + bookingTime +
+                    "', bookingDate='" + bookingDate,
+                    "Database Error. Entries may be in incorrect format.");
+        } catch (NullPointerException e){
+            System.out.println("A field is empty.");
+        }
+    }
+
+    /**
+     * [editBooking]
+     * Edits the database booking entry with the same bookingID, using values in Booking object.
+     */
+    public void editBooking(){
+        DatabaseHandler handler = new DatabaseHandler();
+        try {
+            handler.editEntry("Bookings", "bookingID",
+                        "bookingID='" + bookingID,
+                            "', CustomerUserID='" + custID +  "', numberOfGuests='" + numberOfGuests +
+                            "', tableID='" + tableID + "', bookingTime='" + bookingTime +
+                            "', bookingDate='" + bookingDate,
                     "Database Error. Entries may be in incorrect format.");
         } catch (NullPointerException e){
             System.out.println("A field is empty.");

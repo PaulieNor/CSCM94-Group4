@@ -12,10 +12,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
 
-
-
 public class DatabaseHandler {
-
 
     /**
      * [database]
@@ -109,8 +106,6 @@ public class DatabaseHandler {
             e.printStackTrace();
         }
     }
-
-
 
         /**
          * [sqlCall]
