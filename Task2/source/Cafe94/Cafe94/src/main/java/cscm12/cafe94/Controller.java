@@ -110,7 +110,7 @@ public class Controller implements Initializable {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             StaffDatabase = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/staffdatabase", "root", "cleardog50");
+                    "jdbc:mysql://localhost:3306/staffdatabase", "root", ""); 
             return StaffDatabase;
         } catch (Exception e) {
             e.printStackTrace();
