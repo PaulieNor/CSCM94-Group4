@@ -23,7 +23,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage){
         try {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("StaffLogin.fxml")));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Cafe94.fxml")));
             Scene scene = new Scene(root);
             stage.setTitle("Cafe94");
             stage.setScene(scene);
