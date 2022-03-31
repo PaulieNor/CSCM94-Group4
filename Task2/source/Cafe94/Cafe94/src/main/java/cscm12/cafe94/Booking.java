@@ -18,8 +18,9 @@ public class Booking {
     private LocalTime bookingTime;
     private LocalDate bookingDate;
 
-    public Booking(int custID, int numberOfGuests, int tableID,
+    public Booking(int bookingID, int custID, int numberOfGuests, int tableID,
                    LocalTime bookingTime, LocalDate bookingDate) {
+        this.bookingID = bookingID;
         this.custID = custID;
         this.numberOfGuests = numberOfGuests;
         this.tableID = tableID;

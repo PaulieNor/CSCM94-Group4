@@ -72,9 +72,9 @@ public class DatabaseHandler {
      * [editEntry]
      * Used to made edits to entries on the table.
      * @param tableName The specified table to be updated
+     * @param column The column to search for the identifier.
+     * @param identifier The identifier(s) of the entry to edit in SQL syntax.
      * @param values The values of the new entry in SQL syntax.
-     * @param column The column to search.
-     * @param identifier The identifier(s) of the entry to edit.
      * @param CONSTRAINT_ERROR A unique error from violating constraint rules specific to that transaction.
      */
     public static void editEntry(String tableName, String column, String identifier, String values,
