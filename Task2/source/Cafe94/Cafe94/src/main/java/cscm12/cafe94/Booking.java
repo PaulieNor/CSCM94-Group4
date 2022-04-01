@@ -11,6 +11,8 @@ import java.time.LocalTime;
  */
 public class Booking {
 
+    // lol
+
     private int bookingID;
     private int custID;
     private int numberOfGuests;
