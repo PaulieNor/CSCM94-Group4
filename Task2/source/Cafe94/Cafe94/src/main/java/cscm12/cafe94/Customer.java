@@ -1,8 +1,8 @@
 package cscm12.cafe94;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-
+/**
+ * Contains customer information, uploads to database.
+ */
 public class Customer {
 
     private int custID;
@@ -77,7 +77,7 @@ public class Customer {
     }
 
     /**
-     * Edits the database booking entry with the same CustomerUserID, using values in Booking object.
+     * Edits the database customer entry with the same CustomerUserID, using values in Customer object.
      */
     public void editBooking(){
         DatabaseHandler handler = new DatabaseHandler();
