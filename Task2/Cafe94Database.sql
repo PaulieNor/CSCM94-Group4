@@ -306,24 +306,27 @@ DROP TABLE IF EXISTS MenuItems;
 ---
 --- Populate table with trial data.
 ---
-INSERT INTO MenuItems (ItemName, ItemType, Price, TimeToMake) VALUES 
-('Chicken Burger', 'Main', 10.00, 20),
-('Veggie Burger', 'Main', 8.00, 25),
-('Salmon Fillet', 'Main', 14.00, 15),
-('Meatballs', 'Main', 5.00, 18),
-('Lentil Soup', 'Main', 6.00, 5),
-('Chips', 'Side', 3.00, 8),
-('Salad', 'Side', 4.00, 5),
-('Bread and Butter', 'Side', 2.50, 2),
-('Mash Potato', 'Side', 3.50, 6),
-('Fruit Salad', 'Side', 3.20, 8),
-('Coca Cola', 'Drink', 2.50, 2),
-('Water', 'Drink', 1.00, 2),
-('Coffee', 'Drink', 4.20, 5),
-('Tea', 'Drink', 2.50, 4),
-('Wine', 'Drink', 5.60, 2), --Future scope: maybe seperate drinks and add customer age check BOOLEAN (18+).
-('Beer', 'Drink', 4.80, 2),
-('Long Island Iced Tea', 'Drink', 7.30, 6);
+INSERT INTO MenuItems (ItemName, ItemType, Price, TimeToMake, IsVegetarian) VALUES 
+('Chicken Burger', 'Main', 10.00, 20, 0),
+('Veggie Burger', 'Main', 8.00, 25, 1),
+('Salmon Fillet', 'Main', 14.00, 15, 0),
+('Meatballs', 'Main', 5.00, 18, 0),
+('Lentil Soup', 'Main', 6.00, 5, 1),
+('NO MAIN', 'Main', 0.00, 0, 1), -- No main option. 
+('Chips', 'Side', 3.00, 8, 1),
+('Salad', 'Side', 4.00, 5, 1), 
+('Bread and Butter', 'Side', 2.50, 2, 1),
+('Mash Potato', 'Side', 3.50, 6, 1),
+('Fruit Salad', 'Side', 3.20, 8, 1),
+('NO SIDE', 'Side', 0.00, 0, 1), -- No side option. 
+('Coca Cola', 'Drink', 2.50, 2, 1),
+('Water', 'Drink', 1.00, 2, 1),
+('Coffee', 'Drink', 4.20, 5, 1),
+('Tea', 'Drink', 2.50, 4, 1),
+('Wine', 'Drink', 5.60, 2, 1), -- Future scope: maybe seperate drinks and add customer age check BOOLEAN (18+).
+('Beer', 'Drink', 4.80, 2, 1),
+('Long Island Iced Tea', 'Drink', 7.30, 6, 1),
+('NO DRINK', 'Drink', 0.00, 0, 1); -- No drink option. 
 
 
 ---
@@ -379,7 +382,6 @@ SELECT * FROM CafeTables;
 ---
 --- BOOKING DATA
 --- @Author James and (Patrick?) -> Will require collaboration/pair programming. 
---- This has not been implemented yet. 
 ---
 
 
