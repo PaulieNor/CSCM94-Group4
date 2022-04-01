@@ -8,7 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 /**
- *"StaffDatabaseHandler" interfaces with the database for St
+ *"StaffDatabaseHandler" interfaces with the database for Staff interactions.
  *
  * @author Sumi Sunuwar
  * @version 1.0
