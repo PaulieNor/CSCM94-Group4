@@ -1,7 +1,7 @@
 ---
 --- @Cafe94 Database
 --- @Authors: Group 4 -> James McMillan finalised this database. 
---- @Version: 1.1
+--- @Version: 1.0
 ---
 
 ----------------------------------------------------------------
@@ -24,6 +24,22 @@ CREATE TABLE Staff (
     StaffPassword varchar(255) NOT NULL, --Possibly make more secure, hash?
     HoursToWork INT NOT NULL
 );
+
+---
+--- Generate views for staff data.
+---
+
+CREATE VIEW MostHoursWorked AS 
+SELECT StaffFirst_Name, StaffLast_Name, StaffType, HoursToWork
+FROM Staff
+WHERE HoursToWork = (SELECT MAX(HoursToWork) FROM Staff)
+LIMIT 1;
+
+
+DROP VIEW mosthoursworked; 
+
+SELECT * FROM mosthoursworked; 
+
 
 ---
 --- Dumping data for the staff table. 
@@ -130,9 +146,13 @@ CREATE TABLE DeliveryOrders (
     DeliveryOrderID INT AUTO_INCREMENT NOT NULL PRIMARY KEY, 
     DeliveryCustomerID INT NOT NULL,
     DeliveryAddress varchar(255) NOT NULL,
-    DeliveryMain ENUM('Chicken Burger', 'Veggie Burger', 'Salmon Fillet', 'Meatballs', 'Lentil Soup') NOT NULL,
-    DeliverySide ENUM('Chips', 'Salad', 'Bread and Butter', 'Mash Potato', 'Fruit salad') NOT NULL, 
-    DeliveryDrink ENUM('Coca Cola', 'Water', 'Coffee', 'Tea', 'Wine', 'Beer', 'Long Island Iced Tea') NOT NULL, 
+    DeliveryOrderCompleted BOOLEAN NOT NULL, 
+    DeliveryMain INT NOT NULL, 
+    DeliverySide INT NOT NULL,
+    DeliveryDrink INT NOT NULL,
+    FOREIGN KEY (DeliveryMain) REFERENCES MenuItems(MenuItemID),
+    FOREIGN KEY (DeliverySide) REFERENCES MenuItems(MenuItemID),
+    FOREIGN KEY (DeliveryDrink) REFERENCES MenuItems(MenuItemID) 
     -- FOREIGN KEY(StaffType) REFERENCES Staff(StaffType), foreign key, I am trying to assign delivery driver here.
     EstimatedDeliveryTime INT -- for now an int, but will become SUM of item weights. (In minutes).
 ); 
@@ -142,17 +162,17 @@ CREATE TABLE DeliveryOrders (
 ---
 
 INSERT INTO DeliveryOrders (DeliveryCustomerID, DeliveryAddress, 
-DeliveryMain, DeliverySide, DeliveryDrink, EstimatedDeliveryTime) VALUES
-(1, 'SA14 8XT', 'Salmon Fillet', 'Chips', 'Coca Cola', 45),
-(2, 'TW20 0ED', 'Chicken Burger', 'Fruit Salad', 'Water', 55),
-(3, 'TW20 0ER', 'Veggie Burger', 'Salad', 'Coca Cola', 30),
-(4, 'SA1 3LS', 'Meatballs', 'Mash Potato', 'Water', 40),
-(5, 'SA14 9CD', 'Lentil Soup', 'Bread and Butter', 'Coffee', 35),
-(6, 'SA14 4RD', 'Salmon Fillet', 'Mash Potato', 'Coca Cola', 45),
-(7, 'SA15 3XQ', 'Chicken Burger', 'Chips', 'Tea', 55),
-(8, 'SA1 3WT', 'Meatballs', 'Chips', 'Beer', 40),
-(9, 'SA15 8XW', 'Salmon Fillet', 'Salad', 'Wine', 25),
-(10, 'TW20 4ER', 'Veggie Burger', 'Chips', 'Long Island Iced Tea', 30);
+DeliveryOrderCompleted, DeliveryMain, DeliverySide, DeliveryDrink, EstimatedDeliveryTime) VALUES
+(1, 'SA14 8XT', 0, 'Salmon Fillet', 'Chips', 'Coca Cola', 45),
+(2, 'TW20 0ED', 0, 'Chicken Burger', 'Fruit Salad', 'Water', 55),
+(3, 'TW20 0ER', 0, 'Veggie Burger', 'Salad', 'Coca Cola', 30),
+(4, 'SA1 3LS', 0, 'Meatballs', 'Mash Potato', 'Water', 40),
+(5, 'SA14 9CD', 0, 'Lentil Soup', 'Bread and Butter', 'Coffee', 35),
+(6, 'SA14 4RD', 0, 'Salmon Fillet', 'Mash Potato', 'Coca Cola', 45),
+(7, 'SA15 3XQ', 0, 'Chicken Burger', 'Chips', 'Tea', 55),
+(8, 'SA1 3WT', 0, 'Meatballs', 'Chips', 'Beer', 40),
+(9, 'SA15 8XW', 0, 'Salmon Fillet', 'Salad', 'Wine', 25),
+(10, 'TW20 4ER', 0, 'Veggie Burger', 'Chips', 'Long Island Iced Tea', 30);
 
 
 DROP TABLE IF EXISTS `DeliveryOrders`;
@@ -171,26 +191,30 @@ CREATE TABLE SitDownOrders (
     SitDownOrderID INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     SitDownCustomerID INT NOT NULL,
     TableNumber INT NOT NULL,
-    SitDownMain ENUM ('Chicken Burger', 'Veggie Burger', 'Salmon Fillet', 'Meatballs', 'Lentil Soup') NOT NULL, 
-    SitDownSide ENUM ('Chips', 'Salad', 'Bread and Butter', 'Mash Potato', 'Fruit salad') NOT NULL,
-    SitDownDrink ENUM ('Coca Cola', 'Water', 'Coffee', 'Tea', 'Wine', 'Beer', 'Long Island Iced Tea') NOT NULL
+    SitDownCompletedOrder BOOLEAN NOT NULL, 
+    SitDownMain INT NOT NULL, 
+    SitDownSide INT NOT NULL,
+    SitDownDrink INT NOT NULL,
+    FOREIGN KEY (SitDownMain) REFERENCES MenuItems(MenuItemID),
+    FOREIGN KEY (SitDownSide) REFERENCES MenuItems(MenuItemID),
+    FOREIGN KEY (SitDownDrink) REFERENCES MenuItems(MenuItemID) 
 ); 
 
 ---
 --- SitDownOrders data dump. 
 ---
 INSERT INTO SitDownOrders (SitDownCustomerID, TableNumber, 
-SitDownMain, SitDownSide, SitDownDrink) VALUES
-(1, 4, 'Chicken Burger', 'Chips', 'Long Island Iced Tea'),
-(2, 4, 'Veggie Burger', 'Salad', 'Coca Cola'),
-(3, 3, 'Salmon Fillet', 'Mash Potato', 'Water'),
-(4, 6, 'Lentil Soup', 'Bread and Butter', 'Tea'),
-(5, 2, 'Veggie Burger', 'Chips', 'Water'),
-(6, 1, 'Meatballs', 'Fruit Salad', 'Beer'),
-(7, 1, 'Salmon Fillet', 'Salad', 'Wine'),
-(8, 1, 'Lentil Soup', 'Salad', 'Water'),
-(9, 4, 'Meatballs', 'Chips', 'Coca Cola'),
-(10, 4, 'Meatballs', 'Mash Potato', 'Wine');
+SitDownOrderCompleted, SitDownMain, SitDownSide, SitDownDrink) VALUES
+(1, 4, 0, 'Chicken Burger', 'Chips', 'Long Island Iced Tea'),
+(2, 4, 0, 'Veggie Burger', 'Salad', 'Coca Cola'),
+(3, 3, 0, 'Salmon Fillet', 'Mash Potato', 'Water'),
+(4, 6, 0, 'Lentil Soup', 'Bread and Butter', 'Tea'),
+(5, 2, 0, 'Veggie Burger', 'Chips', 'Water'),
+(6, 1, 0, 'Meatballs', 'Fruit Salad', 'Beer'),
+(7, 1, 0, 'Salmon Fillet', 'Salad', 'Wine'),
+(8, 1, 0, 'Lentil Soup', 'Salad', 'Water'),
+(9, 4, 0, 'Meatballs', 'Chips', 'Coca Cola'),
+(10, 4, 0, 'Meatballs', 'Mash Potato', 'Wine');
 
 
 ---
@@ -209,7 +233,7 @@ SitDownMain,
 SitDownSide,
 SitDownDrink
 FROM SitDownOrders WHERE SitDownCustomerID = -- I am trying to create a view for particular tables here.
-
+;
 
 ---
 --- TakeawayOrders table structure. 
@@ -220,9 +244,13 @@ CREATE TABLE TakeawayOrders (
     TakeawayOrderID INT AUTO_INCREMENT NOT NULL PRIMARY KEY, 
     TakeawayCustomerID INT NOT NULL, 
     PickUpTime DATETIME NOT NULL, 
-    TakeawayMain ENUM ('Chicken Burger', 'Veggie Burger', 'Salmon Fillet', 'Meatballs', 'Lentil Soup') NOT NULL, 
-    TakeawaySide ENUM ('Chips', 'Salad', 'Bread and Butter', 'Mash Potato', 'Fruit salad') NOT NULL,
-    TakeawayDrink ENUM ('Coca Cola', 'Water', 'Coffee', 'Tea', 'Wine', 'Beer', 'Long Island Iced Tea') NOT NULL
+    TakeawayOrderCompleted BOOLEAN NOT NULL, 
+    TakeawayMain INT NOT NULL, 
+    TakeawaySide INT NOT NULL,
+    TakeawayDrink INT NOT NULL,
+    FOREIGN KEY (TakeawayMain) REFERENCES MenuItems(MenuItemID),
+    FOREIGN KEY (TakeawaySide) REFERENCES MenuItems(MenuItemID),
+    FOREIGN KEY (TakeawayDrink) REFERENCES MenuItems(MenuItemID) 
 ); 
 
 DROP TABLE IF EXISTS TakeawayOrders; 
@@ -232,18 +260,18 @@ DROP TABLE IF EXISTS TakeawayOrders;
 --- Datetime in format YYYY-MM-DD HH:MM:SS
 ---
 
-INSERT INTO TakeawayOrders (TakeawayCustomerID, PickUpTime, 
+INSERT INTO TakeawayOrders (TakeawayCustomerID, PickUpTime, TakeawayOrderCompleted,
 TakeawayMain, TakeawaySide, TakeawayDrink) VALUES
-(1, '2022-02-05 12:00:00', 'Chicken Burger', 'Chips', 'Water'),
-(2, '2022-02-05 13:00:00', 'Meatballs', 'Salad', 'Wine'),
-(3, '2022-02-05 13:00:00', 'Salmon Fillet', 'Mash Potato', 'Beer'),
-(4, '2022-02-05 13:30:00', 'Salmon Fillet', 'Salad', 'Water'),
-(5, '2022-02-05 14:15:00', 'Lentil Soup', 'Salad', 'Wine'),
-(6, '2022-02-05 11:30:00', 'Veggie Burger', 'Fruit Salad', 'Wine'),
-(7, '2022-02-05 14:35:00', 'Chicken Burger', 'Chips', 'Coca Cola'),
-(8, '2022-02-06 15:15:00', 'Veggie Burger', 'Chips', 'Beer'),
-(9, '2022-02-06 15:30:00', 'Lentil Soup', 'Salad', 'Tea'),
-(10, '2022-02-06 12:30:00', 'Salmon Fillet', 'Chips', 'Beer'); 
+(1, '2022-02-05 12:00:00', 0, 3, 6, 14),
+(2, '2022-02-05 13:00:00', 0, 4, 7, 12),
+(3, '2022-02-05 13:00:00', 0, 5, 9, 14),
+(4, '2022-02-05 13:30:00', 0, 5, 7, 14),
+(5, '2022-02-05 14:15:00', 0, 1, 9, 15),
+(6, '2022-02-05 11:30:00', 0, 3, 6, 12),
+(7, '2022-02-05 14:35:00', 0, 2, 6, 14),
+(8, '2022-02-06 15:15:00', 0, 3, 7, 14),
+(9, '2022-02-06 15:30:00', 0, 4, 8, 14),
+(10, '2022-02-06 12:30:00', 0, 5, 7, 14); 
 
 
 ---
@@ -266,7 +294,8 @@ CREATE TABLE MenuItems (
     ItemName VARCHAR(255) NOT NULL,
     ItemType ENUM('Main', 'Side', 'Drink') NOT NULL, 
     Price DOUBLE NOT NULL, -- £GBP
-    TimeToMake INT NOT NULL -- in MINUTES, a weight, this can be summed in the orders table through a relation producing delivery time.
+    TimeToMake INT NOT NULL, -- in MINUTES, a weight, this can be summed in the orders table through a relation producing delivery time.
+    IsVegetarian BOOLEAN NOT NULL
 );
 
 ---
@@ -314,7 +343,8 @@ SELECT * FROM MenuItems;
 ---
 CREATE TABLE CafeTables (
     TableID VARCHAR(255) NOT NULL PRIMARY KEY, -- Decided against auto_increment, as this is more static and "controllable" data. 
-    NumberOfSeats INT NOT NULL
+    NumberOfSeats INT NOT NULL,
+    IsAvailable BOOLEAN NOT NULL
 ); --Total capacity would go here as a SUM of NumberOfSeats or a query, but not needed for Coursework 2. 
 
 ---
@@ -325,18 +355,18 @@ DROP TABLE IF EXISTS CafeTables;
 ---
 --- Data dump for cafe tables, this is perhaps more rigid for version 1.0 as cafe has set amount of tables.
 ---
-INSERT INTO CafeTables (TableID, NumberOfSeats) VALUES
-('Table1', 2),
-('Table2', 2),
-('Table3', 2),
-('Table4', 2),
-('Table5', 4),
-('Table6', 4),
-('Table7', 4),
-('Table8', 4),
-('Table9', 8),
-('Table10', 8),
-('Table11', 10);
+INSERT INTO CafeTables (TableID, NumberOfSeats, IsAvailable) VALUES
+('Table1', 2, 0),
+('Table2', 2, 1),
+('Table3', 2, 1),
+('Table4', 2, 0),
+('Table5', 4, 0),
+('Table6', 4, 0),
+('Table7', 4, 0),
+('Table8', 4, 1),
+('Table9', 8, 1),
+('Table10', 8, 1),
+('Table11', 10, 1);
 
 
 ---
@@ -351,3 +381,35 @@ SELECT * FROM CafeTables;
 --- @Author James and (Patrick?) -> Will require collaboration/pair programming. 
 --- This has not been implemented yet. 
 ---
+
+
+---
+--- Booking table structure. 
+---
+DROP TABLE BookingTables;
+CREATE TABLE BookingTables(
+    BookingID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    BookingTime DATETIME NOT NULL,
+    CustomerID INT NOT NULL,
+    NumberGuests INT NOT NULL,
+    TableID VARCHAR(255) NOT NULL,
+    FOREIGN KEY (TableID) REFERENCES CafeTables(TableID)
+);
+
+INSERT INTO BookingTables(BookingTime, CustomerID, NumberGuests,TableID)
+        VALUES
+        ('2022-04-14 12:30:00', 1, 4, 'Table8'),
+        ('2022-04-15 13:30:00', 2, 2, 'Table2'),
+        ('2022-04-15 14:30:00', 3, 2, 'Table3'),
+        ('2022-04-15 17:00:00', 4, 2, 'Table2'),
+        ('2022-04-16 12:30:00', 5, 10, 'Table11'),
+        ('2022-04-16 13:45:00', 6, 8, 'Table9'),
+        ('2022-04-16 14:30:00', 7, 4, 'Table8');
+
+SELECT * FROM BookingTables;
+
+CREATE VIEW AvailableTables AS 
+SELECT * FROM CafeTables 
+WHERE IsAvailable = 1;
+
+SELECT * FROM availabletables;
