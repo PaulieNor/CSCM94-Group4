@@ -71,7 +71,7 @@ public class Customer {
         DatabaseHandler handler = new DatabaseHandler();
         try {
             handler.editEntry("Customers", "CustomerUserID",
-                    "bookingID='" + custID,
+                    "CustomerUserID='" + custID,
                     "CustomerFirstName='" + firstName +
                             "', CustomerLastName='" + lastName +
                             "', CustomerStreetAdd='" + address +
