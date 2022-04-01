@@ -4,14 +4,11 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 /**
- * [Booking]
  * Class for managing customer sit-in bookings.
  * @author Paul Norman
  * @version 1.0
  */
 public class Booking {
-
-    // loll
 
     private int bookingID;
     private int custID;
@@ -81,7 +78,6 @@ public class Booking {
     }
 
     /**
-     * [uploadBooking]
      * Adds values in Booking object to database.
      */
     public void uploadBooking(){
@@ -99,7 +95,6 @@ public class Booking {
     }
 
     /**
-     * [editBooking]
      * Edits the database booking entry with the same bookingID, using values in Booking object.
      */
     public void editBooking(){
@@ -107,9 +102,11 @@ public class Booking {
         try {
             handler.editEntry("Bookings", "bookingID",
                         "bookingID='" + bookingID,
-                            "', CustomerUserID='" + custID +  "', numberOfGuests='" + numberOfGuests +
-                            "', tableID='" + tableID + "', bookingTime='" + bookingTime +
-                            "', bookingDate='" + bookingDate,
+                              "', CustomerUserID='" + custID +
+                                    "', numberOfGuests='" + numberOfGuests +
+                                    "', tableID='" + tableID +
+                                    "', bookingTime='" + bookingTime +
+                                    "', bookingDate='" + bookingDate + "'",
                     "Database Error. Entries may be in incorrect format.");
         } catch (NullPointerException e){
             System.out.println("A field is empty.");

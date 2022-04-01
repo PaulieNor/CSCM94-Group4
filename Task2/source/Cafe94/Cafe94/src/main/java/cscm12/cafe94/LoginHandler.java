@@ -3,17 +3,15 @@ package cscm12.cafe94;
 import java.sql.*;
 
 /**
- * [LoginHandler]
  * Makes login calls to Database, returns whether login was successful and the staff role to the frontend.
  * @author Sumi Sunuwar, Paul Norman
  * @version 1.0
  */
-
 public class LoginHandler extends DatabaseHandler {
 
     /**
-     * [loginStatus]
-     * Compares inputed variables to database usernames and passwords, returns whether login is successful.
+     * Compares inputed variables to database usernames and passwords,
+     * and returns whether login is successful.
      * @param username Inputted username string.
      * @param password Inputted password string.
      * @return If login was successful returns true, otherwise false.
@@ -42,9 +40,7 @@ public class LoginHandler extends DatabaseHandler {
             }
     }
 
-
     /**
-     * [staffType]
      * Gets the staff type of the user for scene changing purposes.
      * @param username Inputted username string.
      * @return String containing the staff type, otherwise returns string containing "empty".
