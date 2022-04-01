@@ -11,7 +11,7 @@ import java.time.LocalTime;
  */
 public class Booking {
 
-    // lol
+    // loll
 
     private int bookingID;
     private int custID;
