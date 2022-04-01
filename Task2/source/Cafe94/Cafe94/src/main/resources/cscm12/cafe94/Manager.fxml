@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cscm12.cafe94.StaffHomepage">
+   <children>
+      <Label layoutX="27.0" layoutY="22.0" prefHeight="35.0" prefWidth="110.0" text="Welcome">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="27.0" layoutY="65.0" prefHeight="18.0" prefWidth="70.0" text="First Name:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label layoutX="27.0" layoutY="119.0" prefHeight="18.0" prefWidth="91.0" text="Weekly Hours:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label layoutX="27.0" layoutY="101.0" prefHeight="18.0" prefWidth="91.0" text="Daily Hours:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label fx:id="staffFName" layoutX="96.0" layoutY="65.0" prefHeight="18.0" prefWidth="70.0" />
+      <Label fx:id="staffLName" layoutX="96.0" layoutY="83.0" prefHeight="18.0" prefWidth="70.0" />
+      <Label fx:id="staffHoursToWork" layoutX="118.0" layoutY="119.0" prefHeight="18.0" prefWidth="91.0" />
+      <Label fx:id="staffHoursToWorkDay" layoutX="104.0" layoutY="101.0" prefHeight="18.0" prefWidth="18.0" />
+      <ToolBar layoutY="440.0" prefHeight="40.0" prefWidth="720.0">
+        <items>
+            <Button fx:id="staffManageStaffButton" mnemonicParsing="false" onAction="#switchToManageStaff" prefHeight="26.0" prefWidth="54.0" text="Staff" />
+            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="54.0" text="Report" />
+            <Button fx:id="staffLogoutButton" mnemonicParsing="false" onAction="#switchToStaffLogin" text="Logout" />
+        </items>
+      </ToolBar>
+      <Label fx:id="staffType" layoutX="137.0" layoutY="22.0" prefHeight="35.0" prefWidth="110.0">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="27.0" layoutY="83.0" prefHeight="18.0" prefWidth="70.0" text="Last Name:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
