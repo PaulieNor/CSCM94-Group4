@@ -1,5 +1,8 @@
 package cscm12.cafe94;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 public class Customer {
 
     private int custID;
@@ -7,6 +10,15 @@ public class Customer {
     private String lastName;
     private String address;
     private String postcode;
+
+    public Customer(int custID, String firstName, String lastName,
+                   String address, String postcode) {
+        this.custID = custID;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.postcode = postcode;
+    }
 
     public int getCustID() {
         return custID;
