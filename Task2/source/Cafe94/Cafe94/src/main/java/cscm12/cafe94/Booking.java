@@ -89,7 +89,7 @@ public class Booking {
                     "', numberOfGuests='" + numberOfGuests +
                     "', tableID='" + tableID +
                     "', bookingTime='" + bookingTime +
-                    "', bookingDate='" + bookingDate,
+                    "', bookingDate='" + bookingDate + "'",
                     "Database Error. Entries may be in incorrect format.");
         } catch (NullPointerException e){
             System.out.println("A field is empty.");
