@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Text layoutX="172.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Order Complete">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Text>
+      <TextField fx:id="takeawayName" layoutX="226.0" layoutY="120.0" />
+      <TextField fx:id="takeawayTime" layoutX="226.0" layoutY="167.0" />
+      <Text layoutX="172.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" />
+      <Text layoutX="156.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pickup Time:" />
+      <Text layoutX="172.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Main:" />
+      <TextField fx:id="takeawayMain" layoutX="226.0" layoutY="208.0" />
+      <Text layoutX="172.0" layoutY="262.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Side:" />
+      <TextField fx:id="takeawaySide" layoutX="226.0" layoutY="245.0" />
+      <Text layoutX="172.0" layoutY="302.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Drink:" />
+      <TextField fx:id="takeawayDrink" layoutX="226.0" layoutY="285.0" />
+   </children>
+</Pane>

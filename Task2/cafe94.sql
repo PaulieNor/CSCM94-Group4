@@ -142,10 +142,10 @@ SELECT * FROM Customers;
 ---
 
 CREATE TABLE DeliveryOrders (
-    DeliveryOrderID INT NOT NULL IDENTITY(1,1) PRIMARY KEY, 
+    DeliveryOrderID INT AUTO_INCREMENT NOT NULL PRIMARY KEY, 
     DeliveryCustomerID INT NOT NULL,
     DeliveryAddress varchar(255) NOT NULL,
-    DeliveryOrderCompleted BIT NOT NULL, -- MySQL server bit is boolean. 
+    DeliveryOrderCompleted BOOLEAN NOT NULL, 
     DeliveryMain INT NOT NULL, 
     DeliverySide INT NOT NULL,
     DeliveryDrink INT NOT NULL,
@@ -153,6 +153,7 @@ CREATE TABLE DeliveryOrders (
     FOREIGN KEY (DeliverySide) REFERENCES MenuItems(MenuItemID),
     FOREIGN KEY (DeliveryDrink) REFERENCES MenuItems(MenuItemID),
     -- FOREIGN KEY(StaffType) REFERENCES Staff(StaffType), foreign key, I am trying to assign delivery driver here.
+    EstimatedDeliveryTime INT -- for now an int, but will become SUM of item weights. (In minutes).
 ); 
 
 ---
@@ -160,17 +161,17 @@ CREATE TABLE DeliveryOrders (
 ---
 
 INSERT INTO DeliveryOrders (DeliveryCustomerID, DeliveryAddress, 
-DeliveryOrderCompleted, DeliveryMain, DeliverySide, DeliveryDrink) VALUES
-(1, 'SA14 8XT', 0, 3, 6, 11),
-(2, 'TW20 0ED', 0, 1, 10, 12),
-(3, 'TW20 0ER', 0, 2, 7, 11),
-(4, 'SA1 3LS', 0, 4, 9, 12),
-(5, 'SA14 9CD', 0, 5, 8, 13),
-(6, 'SA14 4RD', 0, 3, 9, 11),
-(7, 'SA15 3XQ', 0, 1, 6, 14),
-(8, 'SA1 3WT', 0, 4, 6, 16),
-(9, 'SA15 8XW', 0, 3, 7, 15),
-(10, 'TW20 4ER', 0, 2, 6, 17);
+DeliveryOrderCompleted, DeliveryMain, DeliverySide, DeliveryDrink, EstimatedDeliveryTime) VALUES
+(1, 'SA14 8XT', 0, 3, 6, 11, 45),
+(2, 'TW20 0ED', 0, 1, 10, 12, 55),
+(3, 'TW20 0ER', 0, 2, 7, 11, 30),
+(4, 'SA1 3LS', 0, 4, 9, 12, 40),
+(5, 'SA14 9CD', 0, 5, 8, 13, 35),
+(6, 'SA14 4RD', 0, 3, 9, 11, 45),
+(7, 'SA15 3XQ', 0, 1, 6, 14, 55),
+(8, 'SA1 3WT', 0, 4, 6, 16, 40),
+(9, 'SA15 8XW', 0, 3, 7, 15, 25),
+(10, 'TW20 4ER', 0, 2, 6, 17, 30);
 
 
 
@@ -233,13 +234,31 @@ INNER JOIN DeliveryOrders ON MenuItems.MenuItemID = DeliveryOrders.DeliveryDrink
 ---
 SELECT * FROM DeliveryTicketsDrinks; 
 
+
+---
+--- SitDownOrders table structure. 
+---
+
+CREATE TABLE SitDownOrders (
+    SitDownOrderID INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    SitDownCustomerID INT NOT NULL,
+    TableNumber INT NOT NULL,
+    SitDownCompletedOrder BOOLEAN NOT NULL, 
+    SitDownMain INT NOT NULL, 
+    SitDownSide INT NOT NULL,
+    SitDownDrink INT NOT NULL,
+    FOREIGN KEY (SitDownMain) REFERENCES MenuItems(MenuItemID),
+    FOREIGN KEY (SitDownSide) REFERENCES MenuItems(MenuItemID),
+    FOREIGN KEY (SitDownDrink) REFERENCES MenuItems(MenuItemID) 
+); 
+
+
 ---
 --- Delivery Order wait time check, having issues -> Need to aggregate this somehow. 
 --- Same idea with creating a query for total price. 
 ---
 --- Daisy can maybe try and build a view that shows total wait time. Will discuss on Sunday. 
 ---
-
 create VIEW DeliveryOrderMainWaits as
 SELECT 
 DeliveryOrderID,
@@ -252,44 +271,22 @@ GROUP BY DeliveryOrderID;
 SELECT * FROM DeliveryOrderMainWaits;
 
 
-
-
----
---- SitDownOrders table structure. 
----
-
-CREATE TABLE SitDownOrders (
-    SitDownOrderID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
-    SitDownCustomerID INT NOT NULL,
-    TableNumber INT NOT NULL,
-    SitDownCompletedOrder BIT NOT NULL, --Boolean becomes bit. 
-    SitDownMain INT NOT NULL, 
-    SitDownSide INT NOT NULL,
-    SitDownDrink INT NOT NULL,
-    FOREIGN KEY (SitDownMain) REFERENCES MenuItems(MenuItemID),
-    FOREIGN KEY (SitDownSide) REFERENCES MenuItems(MenuItemID),
-    FOREIGN KEY (SitDownDrink) REFERENCES MenuItems(MenuItemID) 
-); 
-
-
 ---
 --- SitDownOrders data dump. Food items, will soon be able 
 --- to be numerical item_id but join will show item name. 
 ---
 INSERT INTO SitDownOrders (SitDownCustomerID, TableNumber, 
-SitDownCompletedOrder, SitDownMain, SitDownSide, SitDownDrink) VALUES
-(1, 4, 0, 1, 7, 19),
-(2, 4, 0, 2, 8, 13),
-(3, 3, 0, 3, 10, 14),
-(4, 6, 0, 5, 9, 16),
-(5, 2, 0, 2, 7, 14),
-(6, 1, 0, 4, 11, 18),
-(7, 1, 0, 3, 8, 17),
-(8, 1, 0, 5, 8, 14),
-(9, 4, 0, 4, 7, 13),
-(10, 4, 0, 4, 10, 17);
-
-
+SitDownOrderCompleted, SitDownMain, SitDownSide, SitDownDrink) VALUES
+(1, 4, 0, 'Chicken Burger', 'Chips', 'Long Island Iced Tea'),
+(2, 4, 0, 'Veggie Burger', 'Salad', 'Coca Cola'),
+(3, 3, 0, 'Salmon Fillet', 'Mash Potato', 'Water'),
+(4, 6, 0, 'Lentil Soup', 'Bread and Butter', 'Tea'),
+(5, 2, 0, 'Veggie Burger', 'Chips', 'Water'),
+(6, 1, 0, 'Meatballs', 'Fruit Salad', 'Beer'),
+(7, 1, 0, 'Salmon Fillet', 'Salad', 'Wine'),
+(8, 1, 0, 'Lentil Soup', 'Salad', 'Water'),
+(9, 4, 0, 'Meatballs', 'Chips', 'Coca Cola'),
+(10, 4, 0, 'Meatballs', 'Mash Potato', 'Wine');
 
 
 ---
@@ -307,7 +304,7 @@ TableNumber,
 SitDownMain,
 SitDownSide,
 SitDownDrink
-FROM SitDownOrders ORDER BY TableNumber OFFSET 0 ROWS;
+FROM SitDownOrders ORDER BY TableNumber;
 
 
 ---
@@ -316,18 +313,16 @@ FROM SitDownOrders ORDER BY TableNumber OFFSET 0 ROWS;
 SELECT * FROM sitdownorderfortable; 
 
 
-
-
 ---
 --- TakeawayOrders table structure. 
 ---
 
 
 CREATE TABLE TakeawayOrders (
-    TakeawayOrderID INT NOT NULL IDENTITY(1,1) PRIMARY KEY, 
+    TakeawayOrderID INT AUTO_INCREMENT NOT NULL PRIMARY KEY, 
     TakeawayCustomerID INT NOT NULL, 
     PickUpTime DATETIME NOT NULL, 
-    TakeawayOrderCompleted BIT NOT NULL, -- Boolean becomes bit. 
+    TakeawayOrderCompleted BOOLEAN NOT NULL, 
     TakeawayMain INT NOT NULL, 
     TakeawaySide INT NOT NULL,
     TakeawayDrink INT NOT NULL,
@@ -425,12 +420,12 @@ SELECT * FROM TakeawayTicketsDrinks;
 ---
 
 CREATE TABLE MenuItems (
-    MenuItemID INT NOT NULL IDENTITY(1,1) PRIMARY KEY, 
+    MenuItemID INT AUTO_INCREMENT NOT NULL PRIMARY KEY, 
     ItemName VARCHAR(255) NOT NULL,
     ItemType VARCHAR(100) NOT NULL CHECK (ItemType IN('Main', 'Side', 'Drink')), 
-    Price FLOAT NOT NULL, -- £GBP, SQL server not playing nice with DOUBLE type, so best change to FLOAT. 
+    Price DOUBLE NOT NULL, -- £GBP
     TimeToMake INT NOT NULL, -- in MINUTES, a weight, this can be summed in the orders table through a relation producing delivery time.
-    IsVegetarian BIT NOT NULL
+    IsVegetarian BOOLEAN NOT NULL
 );
 
 
@@ -465,6 +460,11 @@ INSERT INTO MenuItems (ItemName, ItemType, Price, TimeToMake, IsVegetarian) VALU
 --- Test to see everything works, show table.
 ---
 SELECT * FROM MenuItems; 
+
+--- FIX for boolean issue. 
+ALTER TABLE MenuItems 
+ADD COLUMN IsVegetarian BOOLEAN
+AFTER TimeToMake; 
 
 
 ---
@@ -507,10 +507,10 @@ SELECT * FROM SimpleMenu;
 --- Table structure, for tables table (try saying that fast). 
 ---
 CREATE TABLE CafeTables (
-    TableID VARCHAR(255) NOT NULL PRIMARY KEY, 
+    TableID VARCHAR(255) NOT NULL PRIMARY KEY, -- Decided against auto_increment, as this is more static and "controllable" data. 
     NumberOfSeats INT NOT NULL,
-    IsAvailable BIT NOT NULL --Boolean goes to bit.
-); 
+    IsAvailable BOOLEAN NOT NULL
+); --Total capacity would go here as a SUM of NumberOfSeats or a query, but not needed for Coursework 2. 
 
 
 
@@ -548,8 +548,9 @@ SELECT * FROM CafeTables;
 ---
 --- Booking table structure. 
 ---
+DROP TABLE BookingTables;
 CREATE TABLE BookingTables(
-    BookingID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+    BookingID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     BookingTime DATETIME NOT NULL,
     CustomerID INT NOT NULL,
     NumberGuests INT NOT NULL,
@@ -574,8 +575,4 @@ SELECT * FROM CafeTables
 WHERE IsAvailable = 1;
 
 SELECT * FROM availabletables;
-
-
-
-
 
