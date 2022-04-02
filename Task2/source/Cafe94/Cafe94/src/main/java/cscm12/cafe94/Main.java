@@ -24,13 +24,13 @@ public class Main extends Application {
             stage.setTitle("Cafe94");
             stage.setScene(scene);
             stage.show();
-        }catch(Exception e){
+        }catch (NullPointerException n){
+            System.out.println("1");
+        } catch(Exception e){
                 e.printStackTrace();
             }
         }
 
 
-    public static void main(String[] args) {
-        launch(args);
-    }
+    public static void main(String[] args) { launch(args); }
 }
