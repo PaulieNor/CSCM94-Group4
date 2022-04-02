@@ -24,8 +24,6 @@ public class Main extends Application {
             stage.setTitle("Cafe94");
             stage.setScene(scene);
             stage.show();
-        }catch (NullPointerException n){
-            System.out.println("1");
         } catch(Exception e){
                 e.printStackTrace();
             }
