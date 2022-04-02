@@ -54,6 +54,18 @@ public class StaffLoginController {
                     fxml = ("Manager.fxml");
                     staffSession = resultSet.getString("StaffUsername");
                 }
+                else if (resultSet.getString("StaffType").equals("Chef")) {
+                    fxml = ("Chef.fxml");
+                    staffSession = resultSet.getString("StaffUsername");
+                }
+                else if (resultSet.getString("StaffType").equals("Driver")) {
+                    fxml = ("Driver.fxml");
+                    staffSession = resultSet.getString("StaffUsername");
+                }
+                else if (resultSet.getString("StaffType").equals("Waiter")) {
+                    fxml = ("Waiter.fxml");
+                    staffSession = resultSet.getString("StaffUsername");
+                }
             }
             statement.close();
             connect.close();
