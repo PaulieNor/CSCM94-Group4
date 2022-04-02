@@ -19,63 +19,30 @@ import java.sql.*;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-/**[ManageStaff]
+/**  [ManageStaff]
  * Responsible for filling up with staff information.
  * @author Sumi Sunuwar
  * @version 1.1*/
 public class StaffController implements Initializable {
-
-    /**[Field Variables]
-     * These are for setting up stages to be displayed in the application. */
     private Stage stage;
     private Scene scene;
     private Parent root;
 
-    /**[TextField]
-     * Text boxes to fill appropriate information to edit, delete or add staff. */
     @FXML
-    private TextField newStaffFName;
+    private TextField newStaffFName, newStaffLName, newStaffType,
+            newHoursToWork, newStaffUsername, newStaffPassword;
     @FXML
-    private TextField newStaffLName;
-    @FXML
-    private TextField newStaffType;
-    @FXML
-    private TextField newHoursToWork;
-    @FXML
-    private TextField newStaffUsername;
-    @FXML
-    private TextField newStaffPassword;
-
-    /**[Button]
-     * Buttons to execute sql queries to edit, delete or add staff. */
-    @FXML
-    private Button insertStaffButton;
-    @FXML
-    private Button updateStaffButton;
-    @FXML
-    private Button deleteStaffButton;
+    private Button insertStaffButton, updateStaffButton, deleteStaffButton;
     @FXML
     private TableView<Staff> staffTable;
-
-    /**[TableColumn]
-     * Fills staff table with string formatted staff class objects from sql. */
     @FXML
-    private TableColumn<Staff, String> fieldStaffFName;
-    @FXML
-    private TableColumn<Staff, String> fieldStaffLName;
-    @FXML
-    private TableColumn<Staff, String> fieldStaffType;
+    private TableColumn<Staff, String> fieldStaffFName, fieldStaffLName,
+            fieldStaffType, fieldStaffUsername, fieldStaffPassword;
     @FXML
     private TableColumn<Staff, Number> fieldHoursToWork;
-    @FXML
-    private TableColumn<Staff, String> fieldStaffUsername;
-    @FXML
-    private TableColumn<Staff, String> fieldStaffPassword;
 
-    /**[getManageStaffTable]
+    /**  [getManageStaffTable]
      * This is a method is used to extract the data from the SQL database.
-     * This is so that it's formatted into a list of staff objects.
-     * This will be used for @getStaffTable in @switchToManageStaff.
      * @return returns staff list for table*/
     public ObservableList<Staff> getManageStaffTable() {
         ObservableList<Staff> staffList = FXCollections.observableArrayList();
@@ -106,7 +73,7 @@ public class StaffController implements Initializable {
 
     /**[getStaffTable]
      * This is a method is used to get the extracted SQL data.
-     * This is for @switchToManageStaff.*/
+     * This is for @switchToManageStaff. */
     public void getStaffTable() {
         ObservableList<Staff> staff = getManageStaffTable();
         try {
@@ -124,8 +91,6 @@ public class StaffController implements Initializable {
 
     /**[staffTableSQLCommand]
      * This is a method is used to execute SQL queries in the staff table.
-     * Mainly used for @newStaff, @editStaff and @deleteStaff buttons.
-     * This is for @switchToManageStaff.
      * @param staff takes in a staff data to manipulate */
     private void staffTableSQLCommand(String staff) {
         DatabaseHandler staffDatabase = new DatabaseHandler();
@@ -142,7 +107,7 @@ public class StaffController implements Initializable {
 
     /**[newStaff]
      * Adds new staff data and updates table in @switchToManageStaff.
-     * The username is the primary key, no duplicates allowed.*/
+     * The username is the primary key, no duplicates allowed. */
     private void newStaff() {
         String staff = "INSERT Staff VALUES ('" + newStaffUsername.getText() + "',  '"
                 + newStaffType.getText() + "','" + newStaffFName.getText() + "','" + newStaffLName.getText()
@@ -163,7 +128,7 @@ public class StaffController implements Initializable {
     }
 
     /**[deleteStaff]
-     * Deletes staff data and updates table in @switchToManageStaff.*/
+     * Deletes staff data and updates table in @switchToManageStaff. */
     private void deleteStaff() {
         String staff = "DELETE FROM Staff WHERE StaffUsername = '" + newStaffUsername.getText() + "'";
         staffTableSQLCommand(staff);
@@ -172,7 +137,7 @@ public class StaffController implements Initializable {
 
     /**[ManageStaffButtonActionEvents]
      * If and else for action events when using the @switchToManageStaff table buttons.
-     * @param event is a trigger for button presses*/
+     * @param event is a trigger for button presses. */
     @FXML
     private void ManageStaffButtonActionEvents(ActionEvent event) {
         if (event.getSource() == insertStaffButton) {
@@ -188,7 +153,8 @@ public class StaffController implements Initializable {
 
     /**[switchToStaffLogin]
      * Switches to staffs login page.
-     * @param event is to trigger fxml swap. */
+     * @param event is to trigger fxml swap.
+     * @throws IOException for errors. */
     @FXML
     public void switchToStaffLogin(ActionEvent event) throws IOException {
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("StaffLogin.fxml")));
@@ -199,11 +165,25 @@ public class StaffController implements Initializable {
     }
 
     /**[switchToManager]
-     Switches to Managers page.
-     @param event is to trigger fxml swap. */
+     * Switches to Managers page.
+     * @param event is to trigger fxml swap.
+     * @throws IOException for errors. */
     @FXML
     public void switchToManager(ActionEvent event) throws IOException {
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Manager.fxml")));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    /**[switchToManager]
+     * Switches to Manager Report page.
+     * @param event is to trigger fxml swap.
+     * @throws IOException for errors.  */
+    @FXML
+    public void switchToManagerReport(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("ManagerReport.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

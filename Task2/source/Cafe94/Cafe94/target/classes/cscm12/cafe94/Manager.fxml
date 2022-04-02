@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cscm12.cafe94.StaffHomepage">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cscm12.cafe94.StaffHomepageController">
    <children>
       <Label layoutX="27.0" layoutY="22.0" prefHeight="35.0" prefWidth="110.0" text="Welcome">
          <font>
@@ -32,7 +32,7 @@
       <ToolBar layoutY="440.0" prefHeight="40.0" prefWidth="720.0">
         <items>
             <Button fx:id="staffManageStaffButton" mnemonicParsing="false" onAction="#switchToManageStaff" prefHeight="26.0" prefWidth="54.0" text="Staff" />
-            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="54.0" text="Report" />
+            <Button fx:id="staffManageReportButton" mnemonicParsing="false" onAction="#switchToManagerReport" prefHeight="26.0" prefWidth="54.0" text="Report" />
             <Button fx:id="staffLogoutButton" mnemonicParsing="false" onAction="#switchToStaffLogin" text="Logout" />
         </items>
       </ToolBar>
