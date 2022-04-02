@@ -19,16 +19,20 @@ import java.sql.*;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-/**
- * [ManageStaff]
+/**[ManageStaff]
  * Responsible for filling up with staff information.
  * @author Sumi Sunuwar
  * @version 1.1*/
 public class StaffController implements Initializable {
+
+    /**[Field Variables]
+     * These are for setting up stages to be displayed in the application. */
     private Stage stage;
     private Scene scene;
     private Parent root;
 
+    /**[TextField]
+     * Text boxes to fill appropriate information to edit, delete or add staff. */
     @FXML
     private TextField newStaffFName;
     @FXML
@@ -41,6 +45,9 @@ public class StaffController implements Initializable {
     private TextField newStaffUsername;
     @FXML
     private TextField newStaffPassword;
+
+    /**[Button]
+     * Buttons to execute sql queries to edit, delete or add staff. */
     @FXML
     private Button insertStaffButton;
     @FXML
@@ -49,6 +56,9 @@ public class StaffController implements Initializable {
     private Button deleteStaffButton;
     @FXML
     private TableView<Staff> staffTable;
+
+    /**[TableColumn]
+     * Fills staff table with string formatted staff class objects from sql. */
     @FXML
     private TableColumn<Staff, String> fieldStaffFName;
     @FXML
@@ -62,8 +72,7 @@ public class StaffController implements Initializable {
     @FXML
     private TableColumn<Staff, String> fieldStaffPassword;
 
-    /**
-     * [getManageStaffTable]
+    /**[getManageStaffTable]
      * This is a method is used to extract the data from the SQL database.
      * This is so that it's formatted into a list of staff objects.
      * This will be used for @getStaffTable in @switchToManageStaff.
@@ -95,8 +104,7 @@ public class StaffController implements Initializable {
         return staffList;
     }
 
-    /**
-     * [getStaffTable]
+    /**[getStaffTable]
      * This is a method is used to get the extracted SQL data.
      * This is for @switchToManageStaff.*/
     public void getStaffTable() {
@@ -114,8 +122,7 @@ public class StaffController implements Initializable {
         }
     }
 
-    /**
-     * [staffTableSQLCommand]
+    /**[staffTableSQLCommand]
      * This is a method is used to execute SQL queries in the staff table.
      * Mainly used for @newStaff, @editStaff and @deleteStaff buttons.
      * This is for @switchToManageStaff.
@@ -133,8 +140,7 @@ public class StaffController implements Initializable {
         }
     }
 
-    /**
-     * [newStaff]
+    /**[newStaff]
      * Adds new staff data and updates table in @switchToManageStaff.
      * The username is the primary key, no duplicates allowed.*/
     private void newStaff() {
@@ -145,8 +151,7 @@ public class StaffController implements Initializable {
         getStaffTable();
     }
 
-    /**
-     * [editStaff]
+    /**[editStaff]
      * Edits current staff's data and updates table in @switchToManageStaff.*/
     private void editStaff() {
         String staff = "UPDATE Staff SET StaffType = '" + newStaffType.getText() + "', StaffFirst_Name = '" +
@@ -157,8 +162,7 @@ public class StaffController implements Initializable {
         getStaffTable();
     }
 
-    /**
-     * [deleteStaff]
+    /**[deleteStaff]
      * Deletes staff data and updates table in @switchToManageStaff.*/
     private void deleteStaff() {
         String staff = "DELETE FROM Staff WHERE StaffUsername = '" + newStaffUsername.getText() + "'";
@@ -166,26 +170,25 @@ public class StaffController implements Initializable {
         getStaffTable();
     }
 
-    /**
-     * [ManageStaffButtonActionEvents]
+    /**[ManageStaffButtonActionEvents]
      * If and else for action events when using the @switchToManageStaff table buttons.
-     * @param e is a trigger for button presses*/
+     * @param event is a trigger for button presses*/
     @FXML
-    private void ManageStaffButtonActionEvents(ActionEvent e) {
-        if (e.getSource() == insertStaffButton) {
+    private void ManageStaffButtonActionEvents(ActionEvent event) {
+        if (event.getSource() == insertStaffButton) {
             newStaff();
-        } else if (e.getSource() == updateStaffButton) {
+        } else if (event.getSource() == updateStaffButton) {
             editStaff();
-        } else if (e.getSource() == deleteStaffButton) {
+        } else if (event.getSource() == deleteStaffButton) {
             deleteStaff();
         } else {
             System.out.println("Null e.getSource() if else case.");
         }
     }
 
-    /**   [switchToStaffLogin]
-     Switches to staffs login page.
-     @param event is to trigger fxml swap */
+    /**[switchToStaffLogin]
+     * Switches to staffs login page.
+     * @param event is to trigger fxml swap. */
     @FXML
     public void switchToStaffLogin(ActionEvent event) throws IOException {
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("StaffLogin.fxml")));
@@ -195,9 +198,9 @@ public class StaffController implements Initializable {
         stage.show();
     }
 
-    /**   [switchToManager]
+    /**[switchToManager]
      Switches to Managers page.
-     @param event is to trigger fxml swap */
+     @param event is to trigger fxml swap. */
     @FXML
     public void switchToManager(ActionEvent event) throws IOException {
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Manager.fxml")));
@@ -207,6 +210,10 @@ public class StaffController implements Initializable {
         stage.show();
     }
 
+    /**[initialize]
+     * Switches to Managers page.
+     * @param location location of the method.
+     * @param resources resources of the method. */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         getStaffTable();

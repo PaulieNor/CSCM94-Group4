@@ -1,18 +1,13 @@
 package cscm12.cafe94;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 
-/**
- * [ManageStaff]
+/**[ManageStaff]
  * Manage staff class is responsible for being the blank slate for staff information.
  * It receives and fills itself with SQL database for staff objects.
- * The data is used by @getManageStaffTable and @getStaffTable in the Controller class.
- *
+ * The data is used by @getManageStaffTable and @getStaffTable in the Controller class. *
  * @author Sumi Sunuwar
- * @version 1.1*/
+ * @version 1.1 */
 public class Staff{
     private SimpleStringProperty staffFName;
     private SimpleStringProperty staffLName;
@@ -21,9 +16,14 @@ public class Staff{
     private SimpleStringProperty staffUsername;
     private SimpleStringProperty staffPassword;
 
-    /**
-     * [ManageStaff]
-     * Constructor to create staff objects from the api or manipulate them.*/
+    /**[ManageStaff]
+     * Constructor to create staff objects from the api or manipulate them.
+     * @param staffFName Staff's first name.
+     * @param staffLName Staff's last name.
+     * @param staffType Staff's work position.
+     * @param hoursToWork Staff's weekly hours to work.
+     * @param staffUsername Staff's login username.
+     * @param staffPassword Staff's login password. */
     public Staff(String staffFName, String staffLName, String staffType, int hoursToWork,
                        String staffUsername, String staffPassword) {
         this.staffFName = new SimpleStringProperty(staffFName);
@@ -34,8 +34,7 @@ public class Staff{
         this.staffPassword = new SimpleStringProperty(staffPassword);
     }
 
-    /**
-     * [Getters and Setters]
+    /**[Getters and Setters]
      * Used to fill up the constructor as ManageStaffs field variables are private.*/
     public String getStaffFName() {
         return staffFName.get();
