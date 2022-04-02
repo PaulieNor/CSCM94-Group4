@@ -1,14 +1,9 @@
 Login:
 
-Uses MariaDB.
-Login: jamesmcmillanwork
-Password: passporttwo 
-
-Currently there are placeholder fields in the tables that when I get some assistance I will be able to use foreign keys more and have them reference each other.
-
-For example, order tables have a foreign key from menu when working out delivery time etc.
+database name: cafe94
+address: cafe94.database.windows.net
 
 
-
-
-
+Uses MY SQL SERVER.
+Login: adminCafe
+Password: cscm94Group4

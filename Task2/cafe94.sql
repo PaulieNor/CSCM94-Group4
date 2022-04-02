@@ -15,30 +15,30 @@
 ---
 --- Staff table structure. 
 ---
-
 CREATE TABLE Staff (
     StaffUsername varchar(255) NOT NULL,
-    StaffType varchar(15) NOT NULL 
-	CHECK (StaffType in("Manager", "Chef", "Waiter", "DeliveryDriver")),
+    StaffType varchar(40) NOT NULL CHECK (StaffType IN('Manager', 'Chef', 'Waiter', 'DeliveryDriver')),
     StaffFirst_Name varchar(255) NOT NULL, 
     StaffLast_Name varchar(255) NOT NULL, 
     StaffPassword varchar(255) NOT NULL, --Possibly make more secure, hash?
     HoursToWork INT NOT NULL
 );
 
+
 ---
 --- Generate views for staff data.
 ---
 
 CREATE VIEW MostHoursWorked AS 
-SELECT StaffFirst_Name, StaffLast_Name, StaffType, HoursToWork
+SELECT TOP 1 
+StaffFirst_Name, StaffLast_Name, StaffType, HoursToWork
 FROM Staff
-WHERE HoursToWork = (SELECT MAX(HoursToWork) FROM Staff)
-LIMIT 1;
+WHERE HoursToWork = (SELECT MAX(HoursToWork) FROM Staff); 
+--LIMIT 1;
 
 
 SELECT * FROM mosthoursworked; 
-
+ 
 
 ---
 --- Dumping data for the staff table. 
@@ -96,16 +96,16 @@ CREATE TABLE Customers (
 ---
 INSERT INTO Customers (CustomerUserID, CustomerFirstName, 
 CustomerLastName, CustomerStreetAdd, CustomerPostCode) VALUES 
-("SC", "Simon", "Cook", "56 Harvest Road", "SA1 3LS"),
-("TT", "Tim", "Thomas", "128 Maes Ty Wyn", "SA14 3LS"),
-("TO", "Tom", "Owen", "22 Pentre Road", "SA1 3SQ"),
-("SH", "Sally", "Harris", "54 Zoo Lane", "SA15 3ET"),
-("AC", "Archie", "Charlston", "21 Mangolia Street", "SA14 3QD"),
-("WS", "Willow", "Sarah", "102 Maes Geraint", "SA14 8XQ"),
-("AO", "Annie", "Olivia", "123 Metro Station", "SA1 C1D"),
-("OT", "Oliver", "Twist", "56 Heol Goring", "SA15 3LK"),
-("CB", "Charles", "Babbish", "129 Severn Ave", "SA1 2QS"),
-("MH", "Mark", "Hamill", "117 Knightsbridge Ave", "TW20 0EX");
+('SC', 'Simon', 'Cook', '56 Harvest Road', 'SA1 3LS'),
+('TT', 'Tim', 'Thomas', '128 Maes Ty Wyn', 'SA14 3LS'),
+('TO', 'Tom', 'Owen', '22 Pentre Road', 'SA1 3SQ'),
+('SH', 'Sally', 'Harris', '54 Zoo Lane', 'SA15 3ET'),
+('AC', 'Archie', 'Charlston', '21 Mangolia Street', 'SA14 3QD'),
+('WS', 'Willow', 'Sarah', '102 Maes Geraint', 'SA14 8XQ'),
+('AO', 'Annie', 'Olivia', '123 Metro Station', 'SA1 C1D'),
+('OT', 'Oliver', 'Twist', '56 Heol Goring', 'SA15 3LK'),
+('CB', 'Charles', 'Babbish', '129 Severn Ave', 'SA1 2QS'),
+('MH', 'Mark', 'Hamill', '117 Knightsbridge Ave', 'TW20 0EX');
 
 
 
@@ -142,18 +142,17 @@ SELECT * FROM Customers;
 ---
 
 CREATE TABLE DeliveryOrders (
-    DeliveryOrderID INT IDENTITY NOT NULL PRIMARY KEY, 
+    DeliveryOrderID INT NOT NULL IDENTITY(1,1) PRIMARY KEY, 
     DeliveryCustomerID INT NOT NULL,
     DeliveryAddress varchar(255) NOT NULL,
-    DeliveryOrderCompleted BOOLEAN NOT NULL, 
+    DeliveryOrderCompleted BIT NOT NULL, -- MySQL server bit is boolean. 
     DeliveryMain INT NOT NULL, 
     DeliverySide INT NOT NULL,
     DeliveryDrink INT NOT NULL,
-    FOREIGN KEY (DeliveryMain) REFERENCES [MenuItems].[MenuItemID],
-    FOREIGN KEY (DeliverySide) REFERENCES [MenuItems].[MenuItemID],
-    FOREIGN KEY (DeliveryDrink) REFERENCES [MenuItems].[MenuItemID],
+    FOREIGN KEY (DeliveryMain) REFERENCES MenuItems(MenuItemID),
+    FOREIGN KEY (DeliverySide) REFERENCES MenuItems(MenuItemID),
+    FOREIGN KEY (DeliveryDrink) REFERENCES MenuItems(MenuItemID),
     -- FOREIGN KEY(StaffType) REFERENCES Staff(StaffType), foreign key, I am trying to assign delivery driver here.
-    EstimatedDeliveryTime INT -- for now an int, but will become SUM of item weights. (In minutes).
 ); 
 
 ---
@@ -161,17 +160,17 @@ CREATE TABLE DeliveryOrders (
 ---
 
 INSERT INTO DeliveryOrders (DeliveryCustomerID, DeliveryAddress, 
-DeliveryOrderCompleted, DeliveryMain, DeliverySide, DeliveryDrink, EstimatedDeliveryTime) VALUES
-(1, "SA14 8XT", 0, 3, 6, 11, 45),
-(2, "TW20 0ED", 0, 1, 10, 12, 55),
-(3, "TW20 0ER", 0, 2, 7, 11, 30),
-(4, "SA1 3LS", 0, 4, 9, 12, 40),
-(5, "SA14 9CD", 0, 5, 8, 13, 35),
-(6, "SA14 4RD", 0, 3, 9, 11, 45),
-(7, "SA15 3XQ", 0, 1, 6, 14, 55),
-(8, "SA1 3WT", 0, 4, 6, 16, 40),
-(9, "SA15 8XW", 0, 3, 7, 15, 25),
-(10, "TW20 4ER", 0, 2, 6, 17, 30);
+DeliveryOrderCompleted, DeliveryMain, DeliverySide, DeliveryDrink) VALUES
+(1, 'SA14 8XT', 0, 3, 6, 11),
+(2, 'TW20 0ED', 0, 1, 10, 12),
+(3, 'TW20 0ER', 0, 2, 7, 11),
+(4, 'SA1 3LS', 0, 4, 9, 12),
+(5, 'SA14 9CD', 0, 5, 8, 13),
+(6, 'SA14 4RD', 0, 3, 9, 11),
+(7, 'SA15 3XQ', 0, 1, 6, 14),
+(8, 'SA1 3WT', 0, 4, 6, 16),
+(9, 'SA15 8XW', 0, 3, 7, 15),
+(10, 'TW20 4ER', 0, 2, 6, 17);
 
 
 
@@ -234,31 +233,13 @@ INNER JOIN DeliveryOrders ON MenuItems.MenuItemID = DeliveryOrders.DeliveryDrink
 ---
 SELECT * FROM DeliveryTicketsDrinks; 
 
-
----
---- SitDownOrders table structure. 
----
-
-CREATE TABLE SitDownOrders (
-    SitDownOrderID INT IDENTITY NOT NULL PRIMARY KEY,
-    SitDownCustomerID INT NOT NULL,
-    TableNumber INT NOT NULL,
-    SitDownCompletedOrder BOOLEAN NOT NULL, 
-    SitDownMain INT NOT NULL, 
-    SitDownSide INT NOT NULL,
-    SitDownDrink INT NOT NULL,
-    FOREIGN KEY (SitDownMain) REFERENCES MenuItems(MenuItemID),
-    FOREIGN KEY (SitDownSide) REFERENCES MenuItems(MenuItemID),
-    FOREIGN KEY (SitDownDrink) REFERENCES MenuItems(MenuItemID) 
-); 
-
-
 ---
 --- Delivery Order wait time check, having issues -> Need to aggregate this somehow. 
 --- Same idea with creating a query for total price. 
 ---
 --- Daisy can maybe try and build a view that shows total wait time. Will discuss on Sunday. 
 ---
+
 create VIEW DeliveryOrderMainWaits as
 SELECT 
 DeliveryOrderID,
@@ -271,22 +252,44 @@ GROUP BY DeliveryOrderID;
 SELECT * FROM DeliveryOrderMainWaits;
 
 
+
+
+---
+--- SitDownOrders table structure. 
+---
+
+CREATE TABLE SitDownOrders (
+    SitDownOrderID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+    SitDownCustomerID INT NOT NULL,
+    TableNumber INT NOT NULL,
+    SitDownCompletedOrder BIT NOT NULL, --Boolean becomes bit. 
+    SitDownMain INT NOT NULL, 
+    SitDownSide INT NOT NULL,
+    SitDownDrink INT NOT NULL,
+    FOREIGN KEY (SitDownMain) REFERENCES MenuItems(MenuItemID),
+    FOREIGN KEY (SitDownSide) REFERENCES MenuItems(MenuItemID),
+    FOREIGN KEY (SitDownDrink) REFERENCES MenuItems(MenuItemID) 
+); 
+
+
 ---
 --- SitDownOrders data dump. Food items, will soon be able 
 --- to be numerical item_id but join will show item name. 
 ---
 INSERT INTO SitDownOrders (SitDownCustomerID, TableNumber, 
-SitDownOrderCompleted, SitDownMain, SitDownSide, SitDownDrink) VALUES
-(1, 4, 0, "Chicken Burger", "Chips", "Long Island Iced Tea"),
-(2, 4, 0, "Veggie Burger", "Salad", "Coca Cola"),
-(3, 3, 0, "Salmon Fillet", "Mash Potato", "Water"),
-(4, 6, 0, "Lentil Soup", "Bread and Butter", "Tea"),
-(5, 2, 0, "Veggie Burger", "Chips", "Water"),
-(6, 1, 0, "Meatballs", "Fruit Salad", "Beer"),
-(7, 1, 0, "Salmon Fillet", "Salad", "Wine"),
-(8, 1, 0, "Lentil Soup", "Salad", "Water"),
-(9, 4, 0, "Meatballs", "Chips", "Coca Cola"),
-(10, 4, 0, "Meatballs", "Mash Potato", "Wine");
+SitDownCompletedOrder, SitDownMain, SitDownSide, SitDownDrink) VALUES
+(1, 4, 0, 1, 7, 19),
+(2, 4, 0, 2, 8, 13),
+(3, 3, 0, 3, 10, 14),
+(4, 6, 0, 5, 9, 16),
+(5, 2, 0, 2, 7, 14),
+(6, 1, 0, 4, 11, 18),
+(7, 1, 0, 3, 8, 17),
+(8, 1, 0, 5, 8, 14),
+(9, 4, 0, 4, 7, 13),
+(10, 4, 0, 4, 10, 17);
+
+
 
 
 ---
@@ -304,7 +307,7 @@ TableNumber,
 SitDownMain,
 SitDownSide,
 SitDownDrink
-FROM SitDownOrders ORDER BY TableNumber;
+FROM SitDownOrders ORDER BY TableNumber OFFSET 0 ROWS;
 
 
 ---
@@ -313,16 +316,18 @@ FROM SitDownOrders ORDER BY TableNumber;
 SELECT * FROM sitdownorderfortable; 
 
 
+
+
 ---
 --- TakeawayOrders table structure. 
 ---
 
 
 CREATE TABLE TakeawayOrders (
-    TakeawayOrderID INT IDENTITY NOT NULL PRIMARY KEY, 
+    TakeawayOrderID INT NOT NULL IDENTITY(1,1) PRIMARY KEY, 
     TakeawayCustomerID INT NOT NULL, 
     PickUpTime DATETIME NOT NULL, 
-    TakeawayOrderCompleted BOOLEAN NOT NULL, 
+    TakeawayOrderCompleted BIT NOT NULL, -- Boolean becomes bit. 
     TakeawayMain INT NOT NULL, 
     TakeawaySide INT NOT NULL,
     TakeawayDrink INT NOT NULL,
@@ -339,16 +344,16 @@ CREATE TABLE TakeawayOrders (
 
 INSERT INTO TakeawayOrders (TakeawayCustomerID, PickUpTime, TakeawayOrderCompleted,
 TakeawayMain, TakeawaySide, TakeawayDrink) VALUES
-(1, 2022-02-05 12:00:00, 0, 3, 6, 14),
-(2, 2022-02-05 13:00:00, 0, 4, 7, 12),
-(3, 2022-02-05 13:00:00, 0, 5, 9, 14),
-(4, 2022-02-05 13:30:00, 0, 5, 7, 14),
-(5, 2022-02-05 14:15:00, 0, 1, 9, 15),
-(6, 2022-02-05 11:30:00, 0, 3, 6, 12),
-(7, 2022-02-05 14:35:00, 0, 2, 6, 14),
-(8, 2022-02-06 15:15:00, 0, 3, 7, 14),
-(9, 2022-02-06 15:30:00, 0, 4, 8, 14),
-(10, 2022-02-06 12:30:00, 0, 5, 7, 14); 
+(1, '2022-02-05 12:00:00', 0, 3, 6, 14),
+(2, '2022-02-05 13:00:00', 0, 4, 7, 12),
+(3, '2022-02-05 13:00:00', 0, 5, 9, 14),
+(4, '2022-02-05 13:30:00', 0, 5, 7, 14),
+(5, '2022-02-05 14:15:00', 0, 1, 9, 15),
+(6, '2022-02-05 11:30:00', 0, 3, 6, 12),
+(7, '2022-02-05 14:35:00', 0, 2, 6, 14),
+(8, '2022-02-06 15:15:00', 0, 3, 7, 14),
+(9, '2022-02-06 15:30:00', 0, 4, 8, 14),
+(10, '2022-02-06 12:30:00', 0, 5, 7, 14); 
 
 
 ---
@@ -420,12 +425,12 @@ SELECT * FROM TakeawayTicketsDrinks;
 ---
 
 CREATE TABLE MenuItems (
-    MenuItemID INT IDENTITY NOT NULL PRIMARY KEY, 
+    MenuItemID INT NOT NULL IDENTITY(1,1) PRIMARY KEY, 
     ItemName VARCHAR(255) NOT NULL,
-    ItemType VARCHAR(10) NOT NULL CHECK (ItemType IN("Main", "Side", "Drink")), 
-    Price DOUBLE NOT NULL, -- £GBP
+    ItemType VARCHAR(100) NOT NULL CHECK (ItemType IN('Main', 'Side', 'Drink')), 
+    Price FLOAT NOT NULL, -- £GBP, SQL server not playing nice with DOUBLE type, so best change to FLOAT. 
     TimeToMake INT NOT NULL, -- in MINUTES, a weight, this can be summed in the orders table through a relation producing delivery time.
-    IsVegetarian BOOLEAN NOT NULL
+    IsVegetarian BIT NOT NULL
 );
 
 
@@ -434,37 +439,32 @@ CREATE TABLE MenuItems (
 --- Populate table with trial data.
 ---
 INSERT INTO MenuItems (ItemName, ItemType, Price, TimeToMake, IsVegetarian) VALUES 
-("Chicken Burger", "Main", 10.00, 20, 0),
-("Veggie Burger", "Main", 8.00, 25, 1),
-("Salmon Fillet", "Main", 14.00, 15, 0),
-("Meatballs", "Main", 5.00, 18, 0),
-("Lentil Soup", "Main", 6.00, 5, 1),
-("NO MAIN", "Main", 0.00, 0, 1), -- No main option. 
-("Chips", "Side", 3.00, 8, 1),
-("Salad", "Side", 4.00, 5, 1), 
-("Bread and Butter", "Side", 2.50, 2, 1),
-("Mash Potato", "Side", 3.50, 6, 1),
-("Fruit Salad", "Side", 3.20, 8, 1),
-("NO SIDE", "Side", 0.00, 0, 1), -- No side option. 
-("Coca Cola", "Drink", 2.50, 2, 1),
-('Water', "Drink", 1.00, 2, 1),
-('Coffee', "Drink", 4.20, 5, 1),
-("Tea", "Drink", 2.50, 4, 1),
-("Wine", "Drink", 5.60, 2, 1), -- Future scope: maybe seperate drinks and add customer age check BOOLEAN (18+).
-("Beer", "Drink", 4.80, 2, 1),
-("Long Island Iced Tea", "Drink", 7.30, 6, 1),
-("NO DRINK", "Drink", 0.00, 0, 1); -- No drink option. 
+('Chicken Burger', 'Main', 10.00, 20, 0),
+('Veggie Burger', 'Main', 8.00, 25, 1),
+('Salmon Fillet', 'Main', 14.00, 15, 0),
+('Meatballs', 'Main', 5.00, 18, 0),
+('Lentil Soup', 'Main', 6.00, 5, 1),
+('NO MAIN', 'Main', 0.00, 0, 1), -- No main option. 
+('Chips', 'Side', 3.00, 8, 1),
+('Salad', 'Side', 4.00, 5, 1), 
+('Bread and Butter', 'Side', 2.50, 2, 1),
+('Mash Potato', 'Side', 3.50, 6, 1),
+('Fruit Salad', 'Side', 3.20, 8, 1),
+('NO SIDE', 'Side', 0.00, 0, 1), -- No side option. 
+('Coca Cola', 'Drink', 2.50, 2, 1),
+('Water', 'Drink', 1.00, 2, 1),
+('Coffee', 'Drink', 4.20, 5, 1),
+('Tea', 'Drink', 2.50, 4, 1),
+('Wine', 'Drink', 5.60, 2, 1), -- Future scope: maybe seperate drinks and add customer age check BOOLEAN (18+).
+('Beer', 'Drink', 4.80, 2, 1),
+('Long Island Iced Tea', 'Drink', 7.30, 6, 1),
+('NO DRINK', 'Drink', 0.00, 0, 1); -- No drink option. 
 
 
 ---
 --- Test to see everything works, show table.
 ---
 SELECT * FROM MenuItems; 
-
---- FIX for boolean issue. 
-ALTER TABLE MenuItems 
-ADD COLUMN IsVegetarian BOOLEAN
-AFTER TimeToMake; 
 
 
 ---
@@ -507,10 +507,10 @@ SELECT * FROM SimpleMenu;
 --- Table structure, for tables table (try saying that fast). 
 ---
 CREATE TABLE CafeTables (
-    TableID VARCHAR(255) NOT NULL PRIMARY KEY, -- Decided against auto_increment, as this is more static and "controllable" data. 
+    TableID VARCHAR(255) NOT NULL PRIMARY KEY, 
     NumberOfSeats INT NOT NULL,
-    IsAvailable BOOLEAN NOT NULL
-); --Total capacity would go here as a SUM of NumberOfSeats or a query, but not needed for Coursework 2. 
+    IsAvailable BIT NOT NULL --Boolean goes to bit.
+); 
 
 
 
@@ -518,17 +518,17 @@ CREATE TABLE CafeTables (
 --- Data dump for cafe tables, this is perhaps more rigid for version 1.0 as cafe has set amount of tables.
 ---
 INSERT INTO CafeTables (TableID, NumberOfSeats, IsAvailable) VALUES
-("Table1", 2, 0),
-("Table2", 2, 1),
-("Table3", 2, 1),
-("Table4", 2, 0),
-("Table5", 4, 0),
-("Table6", 4, 0),
-("Table7", 4, 0),
-("Table8", 4, 1),
-("Table9", 8, 1),
-("Table10", 8, 1),
-("Table11", 10, 1);
+('Table1', 2, 0),
+('Table2', 2, 1),
+('Table3', 2, 1),
+('Table4', 2, 0),
+('Table5', 4, 0),
+('Table6', 4, 0),
+('Table7', 4, 0),
+('Table8', 4, 1),
+('Table9', 8, 1),
+('Table10', 8, 1),
+('Table11', 10, 1);
 
 
 ---
@@ -548,25 +548,24 @@ SELECT * FROM CafeTables;
 ---
 --- Booking table structure. 
 ---
-DROP TABLE BookingTables;
 CREATE TABLE BookingTables(
-    BookingID INT NOT NULL IDENTITY PRIMARY KEY,
+    BookingID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
     BookingTime DATETIME NOT NULL,
     CustomerID INT NOT NULL,
     NumberGuests INT NOT NULL,
     TableID VARCHAR(255) NOT NULL,
-    FOREIGN KEY (TableID) REFERENCES [CafeTables].[TableID]
+    FOREIGN KEY (TableID) REFERENCES CafeTables(TableID)
 );
 
 INSERT INTO BookingTables(BookingTime, CustomerID, NumberGuests,TableID)
         VALUES
-        (2022-04-14 12:30:00, 1, 4, "Table8"),
-        (2022-04-15 13:30:00, 2, 2, "Table2"),
-        (2022-04-15 14:30:00, 3, 2, "Table3"),
-        (2022-04-15 17:00:00, 4, 2, "Table2"),
-        (2022-04-16 12:30:00, 5, 10, "Table11"),
-        (2022-04-16 13:45:00, 6, 8, "Table9"),
-        (2022-04-16 14:30:00, 7, 4, "Table8");
+        ('2022-04-14 12:30:00', 1, 4, 'Table8'),
+        ('2022-04-15 13:30:00', 2, 2, 'Table2'),
+        ('2022-04-15 14:30:00', 3, 2, 'Table3'),
+        ('2022-04-15 17:00:00', 4, 2, 'Table2'),
+        ('2022-04-16 12:30:00', 5, 10, 'Table11'),
+        ('2022-04-16 13:45:00', 6, 8, 'Table9'),
+        ('2022-04-16 14:30:00', 7, 4, 'Table8');
 
 SELECT * FROM BookingTables;
 
@@ -575,3 +574,8 @@ SELECT * FROM CafeTables
 WHERE IsAvailable = 1;
 
 SELECT * FROM availabletables;
+
+
+
+
+
