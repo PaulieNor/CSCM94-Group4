@@ -16,8 +16,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Objects;
 import java.util.ResourceBundle;
-
-import static cscm12.cafe94.StaffLogin.staffSession;
+import static cscm12.cafe94.StaffLoginController.staffSession;
 
 /**[StaffHomepage]
  * Class which handles staffs custom homepage with functions based on their role.
