@@ -183,6 +183,18 @@ public class StaffController implements Initializable {
         stage.show();
     }
 
+    /**   [switchToManager]
+     Switches to Cafe94 report page.
+     @param event is to trigger fxml swap */
+    @FXML
+    public void switchToManagerReport(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("ManagerReport.fxml")));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         getStaffTable();
