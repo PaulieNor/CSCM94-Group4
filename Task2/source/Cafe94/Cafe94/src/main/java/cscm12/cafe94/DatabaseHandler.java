@@ -15,11 +15,28 @@ import java.sql.*;
 public class DatabaseHandler {
 
     /**
-     * [database]
      * Connects to database.
      * @author Paul Norman
      * @return database object containing the connection.
      */
+    public static Connection database() {
+        Connection database = null;
+        try {
+            String url = "jdbc:sqlserver://cafe94.database.windows.net:1433;"
+                    + "database=cafe94;"
+                    + "user=adminCafe@cafe94;"
+                    + "password=cscm94Group4;"
+                    + "encrypt=true;"
+                    + "trustServerCertificate=true;"
+                    + "loginTimeout=30;";
+            Connection con = DriverManager.getConnection(url);
+            return database;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    /*
     public static Connection database() {
         Connection database;
         try {
@@ -31,7 +48,7 @@ public class DatabaseHandler {
             e.printStackTrace();
             return null;
         }
-    }
+    }*/
 
     /**
      * [tableUpdater]
