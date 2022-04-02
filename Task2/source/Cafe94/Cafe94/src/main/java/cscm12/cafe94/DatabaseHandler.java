@@ -20,7 +20,6 @@ public class DatabaseHandler {
      * @return database object containing the connection.
      */
     public static Connection database() {
-        Connection database = null;
         try {
             String url = "jdbc:sqlserver://cafe94.database.windows.net:1433;"
                     + "database=cafe94;"
@@ -30,8 +29,10 @@ public class DatabaseHandler {
                     + "trustServerCertificate=true;"
                     + "loginTimeout=30;";
             Connection con = DriverManager.getConnection(url);
-            return database;
+            System.out.print("Logged in");
+            return con;
         } catch (Exception e) {
+            System.out.print("Logged in");
             e.printStackTrace();
             return null;
         }
@@ -58,9 +59,18 @@ public class DatabaseHandler {
      */
     private static void tableUpdater(String update, String CONSTRAINT_ERROR) {
         Connection connect = database();
+        if (connect == null){
+            System.out.println("Null");
+        }
         try {
+            System.out.println("connecting");
             Statement statement = connect.createStatement();
-            statement.executeUpdate(update);
+            if (statement == null){
+                System.out.println("null");
+            }
+            System.out.println("Statement made");
+            statement.execute(update);
+            System.out.println("updated");
         } catch (SQLIntegrityConstraintViolationException e) {
             System.out.println(CONSTRAINT_ERROR);
         } catch (Exception ex) {
