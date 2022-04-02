@@ -15,7 +15,6 @@
 ---
 --- Staff table structure. 
 ---
-
 CREATE TABLE Staff (
     StaffUsername varchar(255) NOT NULL,
     StaffType varchar(40) NOT NULL CHECK (StaffType IN('Manager', 'Chef', 'Waiter', 'DeliveryDriver')),
@@ -31,10 +30,11 @@ CREATE TABLE Staff (
 ---
 
 CREATE VIEW MostHoursWorked AS 
-SELECT StaffFirst_Name, StaffLast_Name, StaffType, HoursToWork
+SELECT TOP 1 
+StaffFirst_Name, StaffLast_Name, StaffType, HoursToWork
 FROM Staff
-WHERE HoursToWork = (SELECT MAX(HoursToWork) FROM Staff)
-LIMIT 1;
+WHERE HoursToWork = (SELECT MAX(HoursToWork) FROM Staff); 
+--LIMIT 1;
 
 
 SELECT * FROM mosthoursworked; 
@@ -575,3 +575,4 @@ SELECT * FROM CafeTables
 WHERE IsAvailable = 1;
 
 SELECT * FROM availabletables;
+
