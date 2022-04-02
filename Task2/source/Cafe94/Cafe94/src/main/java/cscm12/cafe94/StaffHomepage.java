@@ -23,7 +23,6 @@ import static cscm12.cafe94.StaffLogin.staffSession;
 /**
  * [StaffHomepage]
  * Class which handles staffs custom homepage with functions based on their role.
- *
  * @author Sumi Sunuwar
  * @version 1.1
  */

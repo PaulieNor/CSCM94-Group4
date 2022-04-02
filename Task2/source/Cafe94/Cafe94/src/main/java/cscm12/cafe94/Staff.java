@@ -1,6 +1,9 @@
 package cscm12.cafe94;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 /**
  * [ManageStaff]
@@ -9,7 +12,7 @@ import javafx.beans.property.SimpleStringProperty;
  * The data is used by @getManageStaffTable and @getStaffTable in the Controller class.
  *
  * @author Sumi Sunuwar
- * @version 1.0*/
+ * @version 1.1*/
 public class Staff{
     private SimpleStringProperty staffFName;
     private SimpleStringProperty staffLName;
