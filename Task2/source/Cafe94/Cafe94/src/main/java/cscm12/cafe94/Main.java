@@ -14,7 +14,8 @@ public class Main extends Application {
 
     /**[start]
      * Main place stage, this is used as the beginning page.
-     * Can be used to plug in the direct FXML page if you don't want to login all the time. */
+     * Can be used to plug in the direct FXML page if you don't want to login all the time.
+     * @param stage */
     @Override
     public void start(Stage stage){
         try {
