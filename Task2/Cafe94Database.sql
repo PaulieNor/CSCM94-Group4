@@ -1,6 +1,6 @@
 ---
 --- @Cafe94 Database
---- @Authors: Group 4 -> James McMillan finalised this database. 
+--- @Authors: Group 4 -> James McMillan and Patrick Rose finalised this database. 
 --- @Version: 1.0
 ---
 
@@ -35,8 +35,6 @@ FROM Staff
 WHERE HoursToWork = (SELECT MAX(HoursToWork) FROM Staff)
 LIMIT 1;
 
-
-DROP VIEW mosthoursworked; 
 
 SELECT * FROM mosthoursworked; 
 
@@ -152,7 +150,7 @@ CREATE TABLE DeliveryOrders (
     DeliveryDrink INT NOT NULL,
     FOREIGN KEY (DeliveryMain) REFERENCES MenuItems(MenuItemID),
     FOREIGN KEY (DeliverySide) REFERENCES MenuItems(MenuItemID),
-    FOREIGN KEY (DeliveryDrink) REFERENCES MenuItems(MenuItemID) 
+    FOREIGN KEY (DeliveryDrink) REFERENCES MenuItems(MenuItemID),
     -- FOREIGN KEY(StaffType) REFERENCES Staff(StaffType), foreign key, I am trying to assign delivery driver here.
     EstimatedDeliveryTime INT -- for now an int, but will become SUM of item weights. (In minutes).
 ); 
@@ -163,24 +161,77 @@ CREATE TABLE DeliveryOrders (
 
 INSERT INTO DeliveryOrders (DeliveryCustomerID, DeliveryAddress, 
 DeliveryOrderCompleted, DeliveryMain, DeliverySide, DeliveryDrink, EstimatedDeliveryTime) VALUES
-(1, 'SA14 8XT', 0, 'Salmon Fillet', 'Chips', 'Coca Cola', 45),
-(2, 'TW20 0ED', 0, 'Chicken Burger', 'Fruit Salad', 'Water', 55),
-(3, 'TW20 0ER', 0, 'Veggie Burger', 'Salad', 'Coca Cola', 30),
-(4, 'SA1 3LS', 0, 'Meatballs', 'Mash Potato', 'Water', 40),
-(5, 'SA14 9CD', 0, 'Lentil Soup', 'Bread and Butter', 'Coffee', 35),
-(6, 'SA14 4RD', 0, 'Salmon Fillet', 'Mash Potato', 'Coca Cola', 45),
-(7, 'SA15 3XQ', 0, 'Chicken Burger', 'Chips', 'Tea', 55),
-(8, 'SA1 3WT', 0, 'Meatballs', 'Chips', 'Beer', 40),
-(9, 'SA15 8XW', 0, 'Salmon Fillet', 'Salad', 'Wine', 25),
-(10, 'TW20 4ER', 0, 'Veggie Burger', 'Chips', 'Long Island Iced Tea', 30);
+(1, 'SA14 8XT', 0, 3, 6, 11, 45),
+(2, 'TW20 0ED', 0, 1, 10, 12, 55),
+(3, 'TW20 0ER', 0, 2, 7, 11, 30),
+(4, 'SA1 3LS', 0, 4, 9, 12, 40),
+(5, 'SA14 9CD', 0, 5, 8, 13, 35),
+(6, 'SA14 4RD', 0, 3, 9, 11, 45),
+(7, 'SA15 3XQ', 0, 1, 6, 14, 55),
+(8, 'SA1 3WT', 0, 4, 6, 16, 40),
+(9, 'SA15 8XW', 0, 3, 7, 15, 25),
+(10, 'TW20 4ER', 0, 2, 6, 17, 30);
 
 
-DROP TABLE IF EXISTS `DeliveryOrders`;
 
 ---
 --- Deliver order table check.
 ---
 SELECT * FROM DeliveryOrders;
+
+
+
+---
+--- Chef can VIEW delivery orders with all relevant information presented. 
+--- View to see mains on order for delivery. 
+---
+CREATE VIEW DeliveryTicketsMains AS
+SELECT 
+ItemName, DeliveryOrders.DeliveryMain
+FROM MenuItems
+INNER JOIN DeliveryOrders ON MenuItems.MenuItemID = DeliveryOrders.DeliveryMain;
+
+
+
+
+---
+--- View checks for delivery mains with less confusing food items thanks to join.
+---
+SELECT * FROM DeliveryTicketsMains; 
+
+
+
+---
+--- View to see side dishes on order for delivery. 
+---
+CREATE VIEW DeliveryTicketsSides AS
+SELECT 
+ItemName, DeliveryOrders.DeliverySide
+FROM MenuItems
+INNER JOIN DeliveryOrders ON MenuItems.MenuItemID = DeliveryOrders.DeliverySide; 
+
+---
+--- Check view for delivery sides. Data is present and behaving. 
+---
+SELECT * FROM DeliveryTicketsSides; 
+
+
+
+---
+--- View to see delivery drinks orders.
+---
+CREATE VIEW DeliveryTicketsDrinks AS
+SELECT
+ItemName, DeliveryOrders.DeliveryDrink
+FROM MenuItems
+INNER JOIN DeliveryOrders ON MenuItems.MenuItemID = DeliveryOrders.DeliveryDrink; 
+
+
+
+---
+--- Check to see that delivery drinks active order list view is behaving data wise. 
+---
+SELECT * FROM DeliveryTicketsDrinks; 
 
 
 ---
@@ -200,8 +251,28 @@ CREATE TABLE SitDownOrders (
     FOREIGN KEY (SitDownDrink) REFERENCES MenuItems(MenuItemID) 
 ); 
 
+
 ---
---- SitDownOrders data dump. 
+--- Delivery Order wait time check, having issues -> Need to aggregate this somehow. 
+--- Same idea with creating a query for total price. 
+---
+--- Daisy can maybe try and build a view that shows total wait time. Will discuss on Sunday. 
+---
+create VIEW DeliveryOrderMainWaits as
+SELECT 
+DeliveryOrderID,
+MenuItems.TimeToMake
+from DeliveryOrders
+join MenuItems on DeliveryOrders.DeliveryMain = MenuItems.MenuItemID
+GROUP BY DeliveryOrderID;
+
+
+SELECT * FROM DeliveryOrderMainWaits;
+
+
+---
+--- SitDownOrders data dump. Food items, will soon be able 
+--- to be numerical item_id but join will show item name. 
 ---
 INSERT INTO SitDownOrders (SitDownCustomerID, TableNumber, 
 SitDownOrderCompleted, SitDownMain, SitDownSide, SitDownDrink) VALUES
@@ -228,12 +299,18 @@ SELECT * FROM SitDownOrders;
 ---
 CREATE VIEW sitDownOrderForTable AS 
 SELECT 
-SitDownOrderID,
+TableNumber, 
 SitDownMain,
 SitDownSide,
 SitDownDrink
-FROM SitDownOrders WHERE SitDownCustomerID = -- I am trying to create a view for particular tables here.
-;
+FROM SitDownOrders ORDER BY TableNumber;
+
+
+---
+--- View check, sit down orders.
+---
+SELECT * FROM sitdownorderfortable; 
+
 
 ---
 --- TakeawayOrders table structure. 
@@ -253,7 +330,6 @@ CREATE TABLE TakeawayOrders (
     FOREIGN KEY (TakeawayDrink) REFERENCES MenuItems(MenuItemID) 
 ); 
 
-DROP TABLE IF EXISTS TakeawayOrders; 
 
 ---
 --- Data dump for takeaway orders. 
@@ -281,12 +357,65 @@ TakeawayMain, TakeawaySide, TakeawayDrink) VALUES
 SELECT * FROM TakeawayOrders; 
 
 
+---
+--- View to see takeaway Mains orders.
+---
+CREATE VIEW TakeawayTicketsMains AS
+SELECT
+ItemName, TakeawayOrders.TakeawayMain
+FROM MenuItems
+INNER JOIN TakeawayOrders ON MenuItems.MenuItemID = TakeawayOrders.TakeawayMain; 
+
+
+
+---
+--- Check to see that takeaway mains active order list view is behaving data wise. 
+---
+SELECT * FROM TakeawayTicketsMains; 
+
+
+
+---
+--- View to see takaway sides orders.
+---
+CREATE VIEW TakeawayTicketsSides AS
+SELECT
+ItemName, TakeawayOrders.TakeawaySide
+FROM MenuItems
+INNER JOIN TakeawayOrders ON MenuItems.MenuItemID = TakeawayOrders.TakeawaySide; 
+
+
+
+---
+--- Check takeaway sides, data conformity on view. 
+---
+SELECT * FROM TakeawayTicketsSides; 
+
+
+
+---
+--- View to see takaway drinks orders.
+---
+CREATE VIEW TakeawayTicketsDrinks AS
+SELECT
+ItemName, TakeawayOrders.TakeawayDrink
+FROM MenuItems
+INNER JOIN TakeawayOrders ON MenuItems.MenuItemID = TakeawayOrders.TakeawayDrink; 
+
+
+
+---
+--- Check takeaway drinks, data conformity on view. 
+---
+SELECT * FROM TakeawayTicketsDrinks; 
+
+
 ----------------------------------------------------------------
 
 
 ---
 --- MENU DATA
---- @Author: Daisy 
+--- @Author: Daisy and James 
 ---
 
 CREATE TABLE MenuItems (
@@ -298,10 +427,7 @@ CREATE TABLE MenuItems (
     IsVegetarian BOOLEAN NOT NULL
 );
 
----
---- Just in case of edits, drop table tor re-create.
----
-DROP TABLE IF EXISTS MenuItems; 
+
 
 ---
 --- Populate table with trial data.
@@ -334,6 +460,41 @@ INSERT INTO MenuItems (ItemName, ItemType, Price, TimeToMake, IsVegetarian) VALU
 ---
 SELECT * FROM MenuItems; 
 
+--- FIX for boolean issue. 
+ALTER TABLE MenuItems 
+ADD COLUMN IsVegetarian BOOLEAN
+AFTER TimeToMake; 
+
+
+---
+--- View to see whether an item is veggie. Basically a veggie menu. 
+---
+CREATE VIEW IsAnItemVeggie AS
+SELECT
+ItemName, ItemType, Price
+FROM MenuItems
+WHERE MenuItems.IsVegetarian = 1; -- This might need a fix. 
+
+---
+--- Check for data conformity and behaviour in veggie view. 
+---
+SELECT * FROM IsAnItemVeggie; 
+
+
+---
+--- Simple menu view
+---
+CREATE VIEW SimpleMenu AS
+SELECT
+ItemName, ItemType, Price 
+FROM MenuItems; 
+
+---
+--- Check the above view is behaving.
+---
+SELECT * FROM SimpleMenu; 
+
+
 ----------------------------------------------------------------
 
 ---
@@ -350,10 +511,7 @@ CREATE TABLE CafeTables (
     IsAvailable BOOLEAN NOT NULL
 ); --Total capacity would go here as a SUM of NumberOfSeats or a query, but not needed for Coursework 2. 
 
----
---- Just in case of mistake, drop table to edit then CREATE again. 
----
-DROP TABLE IF EXISTS CafeTables; 
+
 
 ---
 --- Data dump for cafe tables, this is perhaps more rigid for version 1.0 as cafe has set amount of tables.
@@ -382,6 +540,7 @@ SELECT * FROM CafeTables;
 ---
 --- BOOKING DATA
 --- @Author James and (Patrick?) -> Will require collaboration/pair programming. 
+--- This has not been implemented yet. 
 ---
 
 
