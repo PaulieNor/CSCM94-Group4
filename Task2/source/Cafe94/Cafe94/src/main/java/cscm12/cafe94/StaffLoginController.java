@@ -1,4 +1,5 @@
 package cscm12.cafe94;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,7 +13,8 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.Objects;
 
-/**  [StaffLogin]
+/**
+ * [StaffLogin]
  * Responsible for logging in staff to their correct homepage.
  * @author Sumi Sunuwar
  * @version 1.1*/
@@ -20,17 +22,19 @@ public class StaffLoginController {
     private Stage stage;
     private Scene scene;
     private Parent root;
-    public static String staffSession;
 
     @FXML
     private TextField staffLoginUsername;
     @FXML
     private PasswordField staffLoginPassword;
+    public static String staffSession;
 
-    /**  [switchToStaffAccount]
-     * Switches staff to their homepage FXML filled with their info.
+    /**
+     * [switchToStaffAccount]
+     * Loggs staff into to their appropriate staff role homepage FXML.
+     * Stores the unique username using @getStaffHomeInfo.
      * @param event triggers upon button is pressed.
-     * @throws IOException for errors. */
+     */
     @FXML
     public void switchToStaffAccount(ActionEvent event) throws IOException {
         DatabaseHandler staffDatabase = new DatabaseHandler();

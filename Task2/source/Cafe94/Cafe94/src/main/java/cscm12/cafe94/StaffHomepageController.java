@@ -18,19 +18,32 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 import static cscm12.cafe94.StaffLoginController.staffSession;
 
-/**  [StaffHomepage]
+/**[StaffHomepage]
  * Class which handles staffs custom homepage with functions based on their role.
  * @author Sumi Sunuwar
  * @version 1.1 */
 public class StaffHomepageController implements Initializable {
+
+    /**[Field Variables]
+     * These are for setting up stages to be displayed in the application. */
     private Stage stage;
     private Scene scene;
     private Parent root;
 
+    /**[TextField]
+     * Text boxes to fill appropriate information to edit, delete or add staff. */
     @FXML
-    private Label staffType, staffFName, staffLName, staffHoursToWork, staffHoursToWorkDay;
+    private Label staffType;
+    @FXML
+    private Label staffFName;
+    @FXML
+    private Label staffLName;
+    @FXML
+    private Label staffHoursToWork;
+    @FXML
+    private Label staffHoursToWorkDay;
 
-    /**  [getStaffHomeInfo]
+    /**[getStaffHomeInfo]
      This method is used to get the staff homepage information.
      This includes the staffs first name, surname, hours and the staff type. */
     public void getStaffHomeInfo() {
@@ -60,7 +73,7 @@ public class StaffHomepageController implements Initializable {
         }
     }
 
-    /**  [switchToStaffLogin]
+    /**   [switchToStaffLogin]
      Switches to staffs login page.
      @param event triggers button to go to the fxml upon clicking. */
     @FXML
@@ -72,10 +85,23 @@ public class StaffHomepageController implements Initializable {
         stage.show();
     }
 
+    /**  [switchToManager]
+     Switches to managers page.
+     This page gives access to @switchToManager and @switchToManageStaff.
+     @param event triggers button to go to the fxml upon clicking. */
+    @FXML
+    public void switchToManager(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Manager.fxml")));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
     /**  [switchToManageStaff]
      Switches to manage staff page.
-     @param event is to trigger fxml swap.
-     @throws IOException for errors. */
+     This page gives access to @getStaffTable, @newStaff, @editStaff and @deleteStaff.
+     @param event triggers button to go to the fxml upon clicking. */
     @FXML
     public void switchToManageStaff(ActionEvent event) throws IOException {
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("ManageStaff.fxml")));
@@ -85,20 +111,7 @@ public class StaffHomepageController implements Initializable {
         stage.show();
     }
 
-    /**  [switchToManagerReport]
-     Switches to Manager Report page.
-     @param event is to trigger fxml swap.
-     @throws IOException for errors. */
-    @FXML
-    public void switchToManagerReport(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("ManagerReport.fxml")));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    /**  [initialize]
+    /**[initialize]
      Switches to Managers page.
      @param location location of the method.
      @param resources resources of the method. */
