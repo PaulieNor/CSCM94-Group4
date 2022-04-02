@@ -59,15 +59,9 @@ public class DatabaseHandler {
      */
     private static void tableUpdater(String update, String CONSTRAINT_ERROR) {
         Connection connect = database();
-        if (connect == null){
-            System.out.println("Null");
-        }
         try {
             System.out.println("connecting");
             Statement statement = connect.createStatement();
-            if (statement == null){
-                System.out.println("null");
-            }
             System.out.println("Statement made");
             statement.execute(update);
             System.out.println("updated");
@@ -88,7 +82,8 @@ public class DatabaseHandler {
      */
     public static void newEntry(String tableName, String values, String CONSTRAINT_ERROR){
         try {
-            String query = "INSERT " + tableName + " VALUES (" + values + ")";
+            String query = "INSERT INTO " + tableName + " VALUES (" + values + ");";
+            System.out.println(query);
             tableUpdater(query, CONSTRAINT_ERROR);
         } catch (Exception e){
             e.printStackTrace();
@@ -107,8 +102,9 @@ public class DatabaseHandler {
     public static void editEntry(String tableName, String column, String identifier, String values,
                           String CONSTRAINT_ERROR) {
         try {
-            String query = "UPDATE " + tableName + " SET VALUES (" + values + ") WHERE " +
+            String query = "UPDATE " + tableName + " SET " + values + " WHERE " +
                     column + " = '" + identifier + "'";
+            System.out.println(query);
             tableUpdater(query, CONSTRAINT_ERROR);
         } catch (Exception e) {
             System.out.println("Input error.");
