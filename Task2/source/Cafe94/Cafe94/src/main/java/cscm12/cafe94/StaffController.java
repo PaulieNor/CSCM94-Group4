@@ -30,43 +30,21 @@ public class StaffController implements Initializable {
     private Parent root;
 
     @FXML
-    private TextField newStaffFName;
+    private TextField newStaffFName, newStaffLName, newStaffType,
+            newHoursToWork, newStaffUsername, newStaffPassword;
     @FXML
-    private TextField newStaffLName;
-    @FXML
-    private TextField newStaffType;
-    @FXML
-    private TextField newHoursToWork;
-    @FXML
-    private TextField newStaffUsername;
-    @FXML
-    private TextField newStaffPassword;
-    @FXML
-    private Button insertStaffButton;
-    @FXML
-    private Button updateStaffButton;
-    @FXML
-    private Button deleteStaffButton;
+    private Button insertStaffButton, updateStaffButton, deleteStaffButton;
     @FXML
     private TableView<Staff> staffTable;
     @FXML
-    private TableColumn<Staff, String> fieldStaffFName;
-    @FXML
-    private TableColumn<Staff, String> fieldStaffLName;
-    @FXML
-    private TableColumn<Staff, String> fieldStaffType;
+    private TableColumn<Staff, String> fieldStaffFName, fieldStaffLName,
+            fieldStaffType, fieldStaffUsername, fieldStaffPassword;
     @FXML
     private TableColumn<Staff, Number> fieldHoursToWork;
-    @FXML
-    private TableColumn<Staff, String> fieldStaffUsername;
-    @FXML
-    private TableColumn<Staff, String> fieldStaffPassword;
 
     /**
      * [getManageStaffTable]
      * This is a method is used to extract the data from the SQL database.
-     * This is so that it's formatted into a list of staff objects.
-     * This will be used for @getStaffTable in @switchToManageStaff.
      * @return returns staff list for table*/
     public ObservableList<Staff> getManageStaffTable() {
         ObservableList<Staff> staffList = FXCollections.observableArrayList();
@@ -117,8 +95,6 @@ public class StaffController implements Initializable {
     /**
      * [staffTableSQLCommand]
      * This is a method is used to execute SQL queries in the staff table.
-     * Mainly used for @newStaff, @editStaff and @deleteStaff buttons.
-     * This is for @switchToManageStaff.
      * @param staff takes in a staff data to manipulate */
     private void staffTableSQLCommand(String staff) {
         DatabaseHandler staffDatabase = new DatabaseHandler();
@@ -201,6 +177,18 @@ public class StaffController implements Initializable {
     @FXML
     public void switchToManager(ActionEvent event) throws IOException {
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Manager.fxml")));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    /**   [switchToManager]
+     Switches to Cafe94 report page.
+     @param event is to trigger fxml swap */
+    @FXML
+    public void switchToManagerReport(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("ManagerReport.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
