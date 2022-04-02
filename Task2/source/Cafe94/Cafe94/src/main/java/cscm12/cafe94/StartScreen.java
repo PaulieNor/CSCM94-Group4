@@ -12,6 +12,11 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Objects;
 
+/**
+ * @Author Ryan Noscoe
+ * @Version v1.0
+ */
+
 public class StartScreen {
     /**[Field Variables]
      * These are for setting up stages to be displayed in the application. */
