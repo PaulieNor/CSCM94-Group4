@@ -88,7 +88,8 @@ CREATE TABLE Customers (
     CustomerFirstName varchar(255) NOT NULL,
     CustomerLastName varchar(255) NOT NULL, 
     CustomerStreetAdd varchar(255) NOT NULL,
-    CustomerPostCode varchar(255) NOT NULL
+    CustomerPostCode varchar(255) NOT NULL,
+    CustomerReferenceNumber int NOT NULL AUTO_INCREMENT
 );
 
 --- 
