@@ -575,3 +575,51 @@ SELECT * FROM CafeTables
 WHERE IsAvailable = 1;
 
 SELECT * FROM availabletables;
+
+
+----- Paul's SQL views KITCHEN TICKETS ----
+CREATE VIEW vSitDownTicket AS 
+SELECT 
+TableNumber as reference_number, 
+SitDownMain as Main,
+SitDownSide as Side,
+SitDownDrink as Drink,
+"In house" as order_type
+FROM SitDownOrders WHERE SitDownCompletedOrder = 0;
+
+CREATE VIEW vTakeawayTicket AS 
+SELECT 
+TakeawayOrderID as reference_number, 
+TakeawayMain as Main,
+TakeawaySide as Side,
+TakeawayDrink as Drink,
+"Takeaway" as order_type
+FROM TakeawayOrders WHERE TakeawayOrderCompleted = 0;
+
+CREATE VIEW vDeliveryTicket AS 
+SELECT 
+TableNumber as reference_number, 
+DeliveryMain as Main,
+DeliverySide as Side,
+DeliveryDrink as Drink,
+"Delivery" as order_type,
+FROM DeliveryOrders WHERE DeliveryOrderCompleted=0;
+
+
+CREATE VIEW vUnionTicket AS
+SELECT * FROM [dbo].[vTakeawayTicket]
+UNION
+SELECT * FROM [dbo].[vSitDownTicket]
+UNION 
+SELECT * FROM [dbo].[vDeliveryTicket];
+
+CREATE VIEW vKitchenTickets AS
+SELECT u.reference_number, u.order_type, m.ItemName as 'Main', 
+s.ItemName as 'Side', d.ItemName as 'Drink'
+FROM [dbo].[vUnionTicket] as u
+INNER JOIN [dbo].[MenuItems] as m
+ON u.Main=m.MenuItemID
+INNER JOIN [dbo].[MenuItems] as s
+ON u.Side=s.MenuItemID
+INNER JOIN [dbo].[MenuItems] as d
+ON u.Drink=d.MenuItemID;

@@ -11,15 +11,25 @@ import java.sql.*;
  * Database connector class.
  */
 
-public class DBConnector {
+public class DBConnector extends DatabaseHandler{
+
 
     public static Connection getConnection() throws SQLException {
-        String username = "root";
-        String password = "";
-        String url = "jdbc:mysql://localhost:3306/cafe";
-        Connection con = DriverManager.getConnection(url, username, password);
-
-        return con;
+        Connection database = null;
+        try {
+            String url = "jdbc:sqlserver://cafe94.database.windows.net:1433;"
+                    + "database=cafe94;"
+                    + "user=adminCafe@cafe94;"
+                    + "password=cscm94Group4;"
+                    + "encrypt=true;"
+                    + "trustServerCertificate=true;"
+                    + "loginTimeout=30;";
+            Connection con = DriverManager.getConnection(url);
+            return con;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 }
