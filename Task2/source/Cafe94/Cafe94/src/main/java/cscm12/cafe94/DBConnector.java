@@ -12,7 +12,6 @@ import java.sql.*;
  */
 
 public class DBConnector {
-
     public static Connection getConnection() throws SQLException {
         String username = "root";
         String password = "";
@@ -21,5 +20,4 @@ public class DBConnector {
 
         return con;
     }
-
 }
