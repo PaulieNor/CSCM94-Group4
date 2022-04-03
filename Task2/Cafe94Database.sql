@@ -668,6 +668,7 @@ TakeawayOrderID as reference_number,
 TakeawayMain as Main,
 TakeawaySide as Side,
 TakeawayDrink as Drink,
+TakeawayOrderCompleted as IsCompleted,
 'Takeaway' as order_type FROM [dbo].[TakeawayOrders] 
 UNION ALL
 SELECT 
@@ -676,6 +677,7 @@ SitDownOrderID as reference_number,
 SitDownMain as Main,
 SitDownSide as Side,
 SitDownDrink as Drink,
+SitDownCompletedOrder as IsCompleted,
 'In house' as order_type
 FROM [dbo].[SitDownOrders]
 UNION ALL
@@ -685,6 +687,7 @@ DeliveryOrderID as reference_number,
 DeliveryMain as Main,
 DeliverySide as Side,
 DeliveryDrink as Drink,
+DeliveryOrderCompleted as IsCompleted,
 'Delivery' as order_type
 FROM [dbo].[DeliveryOrders];
 
