@@ -8,7 +8,7 @@ package cscm12.cafe94;
 public class FoodItem {
 
 
-    private int foodID;
+    private String foodID;
     private String itemName;
     private String itemType;
     private float price;
@@ -16,7 +16,7 @@ public class FoodItem {
     private boolean isVegetarian;
     private boolean isSpecial;
 
-    public FoodItem(int foodID, String itemName, float price, int timeToMake,
+    public FoodItem(String foodID, String itemName, float price, int timeToMake,
                     boolean isVegetarian, boolean isSpecial){
         if (itemName.toLowerCase().contains("side")){
             this.itemName = "Side";
@@ -33,8 +33,6 @@ public class FoodItem {
         this.isSpecial = isSpecial;
     }
 
-
-
     public void uploadItem(){
         DatabaseHandler handler = new DatabaseHandler();
         try {
@@ -50,8 +48,4 @@ public class FoodItem {
             System.out.println("A field is empty.");
         }
     }
-
-
-
-
 }

@@ -16,7 +16,7 @@ public class DatabaseHandler {
     /**
      * Connects to database.
      * @author Paul Norman
-     * @return <code>Connection</code> object containing the connection.
+     * @return <code>Connection</code> object pointing to the cloud database connection.
      */
     public static Connection database() {
         try {
@@ -55,7 +55,7 @@ public class DatabaseHandler {
      * @param update A valid SQL update to the Cafe94 database.
      * @param CONSTRAINT_ERROR A unique error from violating constraint rules specific to that transaction.
      */
-    private static void tableUpdater(String update, String CONSTRAINT_ERROR) {
+    public static void tableUpdater(String update, String CONSTRAINT_ERROR) {
         Connection connect = database();
         try {
             System.out.println("connecting");
