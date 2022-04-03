@@ -32,4 +32,18 @@ public class DBConnector extends DatabaseHandler{
         }
     }
 
+    /*
+    public static Connection database() {
+        Connection database;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            database = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/CAFE94database", "root", "");
+            return database;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }*/
+
 }

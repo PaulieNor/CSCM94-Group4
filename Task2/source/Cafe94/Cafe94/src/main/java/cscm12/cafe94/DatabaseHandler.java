@@ -24,7 +24,7 @@ public class DatabaseHandler {
                     + "database=cafe94;"
                     + "user=adminCafe@cafe94;"
                     + "password=cscm94Group4;"
-                    + "encrypt=true;"
+                    + "encrypt=false;"
                     + "trustServerCertificate=true;"
                     + "loginTimeout=60;";
             Connection con = DriverManager.getConnection(url);
