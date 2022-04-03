@@ -641,7 +641,7 @@ ON u.Side=s.MenuItemID
 INNER JOIN [dbo].[MenuItems] as d
 ON u.Drink=d.MenuItemID;
 
-CREATE VIEW vDeliveryTicket AS SELECT u.DeliveryOrderID, u.order_type as OrderType, m.ItemName as 'Main', 
+CREATE VIEW vDriverTicket AS SELECT u.DeliveryOrderID, u.order_type as OrderType, m.ItemName as 'Main', 
 s.ItemName as 'Side', d.ItemName as 'Drink'
 FROM (SELECT
 TakeawayOrderID, 
@@ -657,7 +657,7 @@ ON u.Side=s.MenuItemID
 INNER JOIN [dbo].[MenuItems] as d
 ON u.Drink=d.MenuItemID;
 
-
+-- Similar call vCollectionTicket for Takeaways.
 
 --- Finance sheet
 
