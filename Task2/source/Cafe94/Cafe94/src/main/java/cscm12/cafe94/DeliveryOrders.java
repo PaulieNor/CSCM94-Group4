@@ -17,17 +17,20 @@ public class DeliveryOrders{
     private int main;
     private int side;
     private int drink;
+    private int deliveryCustomerID;
 
-    public DeliveryOrders(int waitTime, String address, int main, int side, int drink){
+
+    public DeliveryOrders(int waitTime, String address, int main, int side, int drink, int deliveryCustomerID){
         this.waitTime = waitTime;
         this.address = address;
         this.main = main;
         this.side = side;
         this.drink = drink;
+        this.deliveryCustomerID = deliveryCustomerID;
     }
 
     /**
-     * [submitDelieryOrder]
+     * [submitDeliveryOrder]
      * Adds the values of the DeliveryOrders object to the database.
      */
     public void submitDeliveryOrder(){
@@ -37,7 +40,7 @@ public class DeliveryOrders{
             handler.newEntry("DeliveryOrders", "mainID='" + main +
                             "', sideID='" + side +
                             "', drinkID='" + drink +
-                            "', custID = '" + custID + "'",
+                            "', DeliveryCustomerID='" + deliveryCustomerID + "'",
                     "Database Error. Entries may be in incorrect format.");
         }catch (NullPointerException e){
             System.out.println("A field is empty.");
@@ -53,8 +56,8 @@ public class DeliveryOrders{
         DatabaseHandler handler = new DatabaseHandler();
         try{
             handler.tableUpdater("UPDATE DeliveryOrders" +
-                            "SET DeliveryOrderCompleted = true" +
-                            "WHERE DeliveryOrderID = " + orderID + ";",
+                            "SET DeliveryOrderCompleted = 'true'" +
+                            "WHERE DeliveryOrderID = '" + orderID + "';",
                     "Query may be incorrectly formatted");
         } catch (NullPointerException e){
             System.out.println("A field is empty");
@@ -85,6 +88,9 @@ public class DeliveryOrders{
     }
     public int getDrink(){
         return this.drink;
+    }
+    public int getDeliveryCustomerID(){
+        return this.deliveryCustomerID;
     }
 
     //Setters
@@ -120,7 +126,7 @@ public class DeliveryOrders{
         } catch (Exception e) {
         e.printStackTrace();
     }
-        this.waitTime = totalWait;
+        this.waitTime = totalWait + 15;
     }
 
     public void setAddress(String address){
@@ -134,5 +140,9 @@ public class DeliveryOrders{
     }
     public void setDrink(int drink){
         this.drink = drink;
+    }
+
+    public void setDeliveryCustomerID(int deliveryCustomerID){
+        this.deliveryCustomerID = deliveryCustomerID;
     }
 }

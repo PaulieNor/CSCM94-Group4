@@ -1,5 +1,8 @@
 package cscm12.cafe94;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,12 +11,15 @@ import java.sql.Statement;
 
 /**
  * [Orders]
- * Class for recieving and displaying orders.
+ * Class for receiving and displaying orders.
  * @author Patrick Rose
  * @version 1.0
  */
 public class Orders {
 
+
+    public Orders(int main, int side, int drink, String order_type, int reference_number) {
+    }
 
     public static void main(String[] args) {
     }
@@ -26,23 +32,30 @@ public class Orders {
      * Gets all orders that are yet to be completed to display to the chef.
      */
 
-    public void showIncomplete() {
+    public ObservableList<Orders> showIncomplete() {
         DatabaseHandler handler = new DatabaseHandler();
         Connection connect = handler.database();
+        ObservableList<Orders> outstandingOrders = FXCollections.observableArrayList();
         try {
             Statement statement = connect.createStatement();
-            String sql = "SELECT * FROM vMasterOrderSheet WHERE COMPLETED = 0";
+            String sql = "SELECT * FROM vMasterOrderSheet WHERE COMPLETED = '0'";
             PreparedStatement checkDatabase = connect.prepareStatement(sql);
-            ResultSet resultSet = checkDatabase.executeQuery(); // What you should return.
-            // Do stuff.
+            ResultSet resultSet = checkDatabase.executeQuery();
+            Orders orders;
             while (resultSet.next()){
-                // TO DO
+                orders = new Orders(resultSet.getInt("Main"),
+                                    resultSet.getInt("Side"),
+                                    resultSet.getInt("Drink"),
+                                    resultSet.getString("order_type"),
+                                    resultSet.getInt("reference_number"));
+                    outstandingOrders.add(orders);
             }
             statement.close();
             connect.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return outstandingOrders;
     }
 
     /**

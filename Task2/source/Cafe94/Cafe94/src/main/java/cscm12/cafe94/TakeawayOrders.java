@@ -15,12 +15,14 @@ public class TakeawayOrders{
     private int main;
     private int side;
     private int drink;
+    private int takeawayCustomerID;
 
-    public TakeawayOrders(int waitTime,int main, int side, int drink){
+    public TakeawayOrders(int waitTime,int main, int side, int drink, int takeawayCustomerID){
         this.waitTime = waitTime;
         this.main = main;
         this.side = side;
         this.drink = drink;
+        this.takeawayCustomerID = takeawayCustomerID;
     }
 
     /**
@@ -34,7 +36,7 @@ public class TakeawayOrders{
             handler.newEntry("TakeawayOrders", "mainID='" + main +
                             "', sideID='" + side +
                             "', drinkID='" + drink +
-                            "', custID='" + custID + "'",
+                            "', TakeawayCustomerID='" + "'",
                     "Database Error. Entries may be in incorrect format.");
         }catch (NullPointerException e){
             System.out.println("A field is empty.");
@@ -47,7 +49,7 @@ public class TakeawayOrders{
      * @param orderID
      */
 
-    public void markTakeawayyOrderCompleted(int orderID){
+    public void markTakeawayOrderCompleted(int orderID){
         DatabaseHandler handler = new DatabaseHandler();
         try{
             handler.tableUpdater("UPDATE TakeawayOrders" +
@@ -74,6 +76,9 @@ public class TakeawayOrders{
 
     public int getWaitTime(){
         return this.waitTime;
+    }
+    public int getTakeawayCustomerID(){
+        return this.takeawayCustomerID;
     }
 
     //Setters
@@ -125,6 +130,8 @@ public class TakeawayOrders{
         this.drink = drink;
     }
 
-
+    public void setTakeawayCustomerID(int takeawayCustomerID){
+        this.takeawayCustomerID = takeawayCustomerID;
+    }
 
 }

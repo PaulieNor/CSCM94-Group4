@@ -11,12 +11,14 @@ public class SitInOrders {
     private int main;
     private int side;
     private int drink;
+    private int sitInCustomerID;
 
-    public SitInOrders(int main, int side, int drink, int tableNum) {
+    public SitInOrders(int main, int side, int drink, int tableNum, int sitInCustomerID) {
         this.tableNum = tableNum;
         this.main = main;
         this.side = side;
         this.drink = drink;
+        this.sitInCustomerID = sitInCustomerID;
     }
     /**
      * [submitSitInOrder]
@@ -30,7 +32,7 @@ public class SitInOrders {
                     "mainID='" + main +
                             "', sideID='" + side +
                             "', drinkID='" + drink +
-                            "', DeliveryCustomerID= '" + custID + "'",
+                            "', SitInCustomerID='" + sitInCustomerID +"'",
                     "Database Error. Entries may be in incorrect format.");
         }catch (NullPointerException e){
             System.out.println("A field is empty.");
@@ -67,6 +69,9 @@ public class SitInOrders {
     public int getTableNum(){
         return this.tableNum;
     }
+    public int getSitInCustomerID(){
+        return this.sitInCustomerID;
+    }
 
     //Setters
     public void setTableNum(int tableNum) {
@@ -80,5 +85,8 @@ public class SitInOrders {
     }
     public void setDrink(int drink){
         this.drink = drink;
+    }
+    public void setSitInCustomerID(int sitInCustomerID){
+        this.sitInCustomerID = sitInCustomerID;
     }
 }
