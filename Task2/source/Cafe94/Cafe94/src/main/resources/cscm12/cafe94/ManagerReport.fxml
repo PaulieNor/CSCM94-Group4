@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.shape.Circle?>
-<BorderPane fx:controller="cscm12.cafe94.ManagerReportController"
+<BorderPane fx:controller="cscm12.cafe94.ReportController"
             xmlns:fx="http://javafx.com/fxml">
     <top>
         <HBox alignment="CENTER" spacing="10">
@@ -24,11 +24,13 @@
                     fx:id="btnConnect" onAction="#connectSQL"/>
             <Button text="Current Menu"
                     fx:id="btnMenu" onAction="#showMenu" disable="true"/>
-            <Button text="Load Items Ordered"
-                    fx:id="btnShowItems" onAction="#showItemsOrdered" disable="true"/>
+            <Button text="Table Bookings"
+                    fx:id="btnShowBookings" onAction="#showBookings" disable="true"/>
+            <Button text="Customers"
+                    fx:id="btnShowCustomers" onAction="#showCustomers" disable="true"/>
             <Button text="Load Orders"
                     fx:id="btnOrders" disable="true" onAction="#showOrders"/>
-            <Button text="Homepage"
+            <Button text="Home"
                     fx:id="btnHomepage" onAction="#returnToHomepage"/>
         </VBox>
     </left>

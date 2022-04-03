@@ -14,12 +14,13 @@ import java.sql.SQLException;
 
 public class ReportHandler {
 
-    //SQL queries for table view
-    static String queryItemOrdered = "SELECT * FROM items_ordered";
+    //SQL queries for tblData.
+    static String queryBookings = "SELECT * FROM bookingtables";
     static String queryOrders = "SELECT * FROM orders";
-    static String queryMenu = "SELECT * FROM menu";
+    static String queryMenu = "SELECT * FROM menuitems";
+    static String queryCustomers = "SELECT * FROM customers";
 
-    //SQL queries for labels
+    //SQL queries for labels.
     static String queryTS = "SELECT SUM(quantity) FROM items_ordered";
     static String queryTotalCost = "SELECT SUM(Total) from vFinanceSheet";
     static String queryMPI = "select menu_id, SUM(quantity) from items_ordered " +
@@ -41,21 +42,22 @@ public class ReportHandler {
      * @throws SQLException
      */
 
-    public static void getDataOrderedItems(Connection con, ObservableList data,
+    public static void getBookings(Connection con, ObservableList data,
                                     TableView tblData) throws SQLException {
 
         try {
-            ResultSet resultSet = con.createStatement().executeQuery(queryItemOrdered);
+            ResultSet resultSet = con.createStatement().executeQuery(queryBookings);
 
             while (resultSet.next()) {
                 data.add(new ReportTableView(resultSet.getString(1),
                         resultSet.getString(2), resultSet.getString(3),
-                        resultSet.getString(4), resultSet.getString(5)));
+                        resultSet.getString(4), resultSet.getString(5),
+                        resultSet.getString(1)));
             }
             tblData.setItems(data);
         } catch (SQLException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("An error has occured (getDataOrderedItems): \r\n" + e.toString());
+            alert.setContentText("An error has occured (getBookings): \r\n" + e.toString());
             alert.show();
         }
     }
@@ -69,7 +71,7 @@ public class ReportHandler {
      */
 
     public static void getDataMenu (Connection con, ObservableList data,
-                               TableView tblData) throws SQLException {
+                                    TableView tblData) throws SQLException {
 
         try {
             ResultSet resultSet = con.createStatement().executeQuery(queryMenu);
@@ -77,13 +79,42 @@ public class ReportHandler {
             while (resultSet.next()) {
                 data.add(new ReportTableView(resultSet.getString(1),
                         resultSet.getString(2), resultSet.getString(3),
-                        resultSet.getString(1), resultSet.getString(1)));
+                        resultSet.getString(4), resultSet.getString(5),
+                        resultSet.getString(6)));
             }
             tblData.setItems(data);
         }
         catch (SQLException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText("An error has occcured (getDataMenu): \r\n" + e.toString());
+            alert.show();
+        }
+    }
+
+    /**
+     * Collects data on customers.
+     * @param con
+     * @param data
+     * @param tblData
+     * @throws SQLException
+     */
+    public static void getDataCustomers (Connection con, ObservableList data,
+                                    TableView tblData) throws SQLException {
+
+        try {
+            ResultSet resultSet = con.createStatement().executeQuery(queryCustomers);
+
+            while (resultSet.next()) {
+                data.add(new ReportTableView(resultSet.getString(1),
+                        resultSet.getString(2), resultSet.getString(3),
+                        resultSet.getString(4), resultSet.getString(5),
+                        resultSet.getString(6)));
+            }
+            tblData.setItems(data);
+        }
+        catch (SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("An error has occcured (getCustomers): \r\n" + e.toString());
             alert.show();
         }
     }
@@ -104,7 +135,8 @@ public class ReportHandler {
             while (resultSet.next()) {
                 data.add(new ReportTableView(resultSet.getString(1),
                         resultSet.getString(2), resultSet.getString(3),
-                        resultSet.getString(4), resultSet.getString(5)));
+                        resultSet.getString(4), resultSet.getString(5),
+                        resultSet.getString(5)));
             }
             tblData.setItems(data);
         }

@@ -24,20 +24,20 @@ import static javafx.scene.paint.Color.*;
  * @Version v1.5
  */
 
-public class ManagerReportController {
+public class ReportController {
     @FXML
     private Label txtSQLConnection, lblSitting, lblTotalCost,
             lblPopularItem, lblTopCustomer;
     @FXML
     private Circle circleConnection;
     @FXML
-    private javafx.scene.control.Button btnHomepage, btnMenu,
-            btnShowItems, btnOrders, btnConnect;
+    private javafx.scene.control.Button btnMenu, btnShowCustomers,
+            btnShowBookings, btnOrders, btnConnect;
     @FXML
     private TableView<ReportTableView> tblData;
     @FXML
     private TableColumn<ReportTableView, String> columnOne, columnTwo, columnThree,
-    columnFour, columnFive;
+    columnFour, columnFive, columnSix;
 
     Connection con = null;
 
@@ -76,17 +76,18 @@ public class ManagerReportController {
      */
 
     @FXML
-    protected void showItemsOrdered(ActionEvent e) throws SQLException {
-        columnOne.setText("ID");
-        columnTwo.setText("Menu ID");
-        columnThree.setText("Order ID");
-        columnFour.setText("Customer ID");
-        columnFive.setText("Quantity");
+    protected void showBookings(ActionEvent e) throws SQLException {
+        columnOne.setText("Booking ID");
+        columnTwo.setText("Booking Time");
+        columnThree.setText("Customer ID");
+        columnFour.setText("No. of Guests");
+        columnFive.setText("Table ID");
+        columnSix.setText(null);
 
         tblData.getItems().clear();
         tblData.setColumnResizePolicy(tblData.CONSTRAINED_RESIZE_POLICY);
-        setCellTableOne();
-        ReportHandler.getDataOrderedItems(con, data, tblData);
+        setCellTableFive();
+        ReportHandler.getBookings(con, data, tblData);
     }
 
     /**
@@ -105,7 +106,7 @@ public class ManagerReportController {
 
         tblData.getItems().clear();
         tblData.setColumnResizePolicy(tblData.CONSTRAINED_RESIZE_POLICY);
-        setCellTableOne();
+        setCellTableSix();
         ReportHandler.getOrders(con, data, tblData);
     }
 
@@ -117,16 +118,32 @@ public class ManagerReportController {
 
     @FXML
     protected void showMenu (ActionEvent e) throws SQLException {
-        columnOne.setText("Menu ID");
-        columnTwo.setText("Item Cost (£)");
-        columnThree.setText("Item Wait Time");
-        columnFour.setText(null);
-        columnFive.setText(null);
+        columnOne.setText("Menu Item ID");
+        columnTwo.setText("Item Name");
+        columnThree.setText("Item Type");
+        columnFour.setText("Price (£)");
+        columnFive.setText("Waiting Time");
+        columnSix.setText("Vegetarian");
 
         tblData.getItems().clear();
         tblData.setColumnResizePolicy(tblData.CONSTRAINED_RESIZE_POLICY);
-        setCellTableTwo();
+        setCellTableSix();
         ReportHandler.getDataMenu(con, data, tblData);
+    }
+
+    @FXML
+    protected void showCustomers (ActionEvent e) throws SQLException {
+        columnOne.setText("Customer Reference Number");
+        columnTwo.setText("Customer ID");
+        columnThree.setText("First Name");
+        columnFour.setText("Surname");
+        columnFive.setText("Address");
+        columnSix.setText("Postcode");
+
+        tblData.getItems().clear();
+        tblData.setColumnResizePolicy(tblData.CONSTRAINED_RESIZE_POLICY);
+        setCellTableSix();
+        ReportHandler.getDataCustomers(con, data, tblData);
     }
 
     @FXML
@@ -157,16 +174,38 @@ public class ManagerReportController {
 
     private void enableButtons () {
 
-        btnShowItems.setDisable(false);
+        btnShowBookings.setDisable(false);
         btnMenu.setDisable(false);
         btnOrders.setDisable(false);
+        btnShowCustomers.setDisable(false);
+
+    }
+
+    /**
+     * Assigns columns value for data to points at (6 columns).
+     */
+    private void setCellTableSix () {
+
+        columnOne.setCellValueFactory(new PropertyValueFactory<>("columnOne"));
+        columnTwo.setCellValueFactory(new PropertyValueFactory<>("columnTwo"));
+        columnThree.setCellValueFactory(new PropertyValueFactory<>("columnThree"));
+        columnFour.setCellValueFactory(new PropertyValueFactory<>("columnFour"));
+        columnFive.setCellValueFactory(new PropertyValueFactory<>("columnFive"));
+        columnSix.setCellValueFactory(new PropertyValueFactory<>("columnSix"));
+
+        columnOne.setSortable(false);
+        columnTwo.setSortable(false);
+        columnThree.setSortable(false);
+        columnFour.setSortable(false);
+        columnFive.setSortable(false);
+        columnSix.setSortable(false);
 
     }
 
     /**
      * Assigns columns value for data to points at (5 columns).
      */
-    private void setCellTableOne () {
+    private void setCellTableFive () {
 
         columnOne.setCellValueFactory(new PropertyValueFactory<>("columnOne"));
         columnTwo.setCellValueFactory(new PropertyValueFactory<>("columnTwo"));
@@ -174,31 +213,14 @@ public class ManagerReportController {
         columnFour.setCellValueFactory(new PropertyValueFactory<>("columnFour"));
         columnFive.setCellValueFactory(new PropertyValueFactory<>("columnFive"));
 
-        columnOne.setSortable(false);
-        columnTwo.setSortable(false);
-        columnThree.setSortable(false);
-        columnFour.setSortable(false);
-        columnFive.setSortable(false);
-
-    }
-
-    /**
-     * Assigns columns value for data to points at (3 columns).
-     */
-    private void setCellTableTwo () {
-
-        columnOne.setCellValueFactory(new PropertyValueFactory<>("columnOne"));
-        columnTwo.setCellValueFactory(new PropertyValueFactory<>("columnTwo"));
-        columnThree.setCellValueFactory(new PropertyValueFactory<>("columnThree"));
-
-        columnFour.setCellValueFactory(null);
-        columnFive.setCellValueFactory(null);
+        columnSix.setCellValueFactory(null);
 
         columnOne.setSortable(false);
         columnTwo.setSortable(false);
         columnThree.setSortable(false);
         columnFour.setSortable(false);
         columnFive.setSortable(false);
+        columnSix.setSortable(false);
 
     }
 
