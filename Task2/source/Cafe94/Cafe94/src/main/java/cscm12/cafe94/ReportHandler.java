@@ -21,11 +21,17 @@ public class ReportHandler {
 
     //SQL queries for labels
     static String queryTS = "SELECT SUM(quantity) FROM items_ordered";
-    static String queryTotalCost = "SELECT ROUND(SUM(total_cost), 2) FROM order_costs";
+    static String queryTotalCost = "SELECT SUM(Total) from vFinanceSheet";
     static String queryMPI = "select menu_id, SUM(quantity) from items_ordered " +
             "GROUP BY menu_id ORDER BY quantity ASC";
-    static String queryTopCustomer = "SELECT * FROM items_ordered " +
-            "GROUP BY cust_id ASC";
+    static String queryTopCustomer = "SELECT c.CustomerUserID FROM Customers as c " +
+            "INNER JOIN ( " +
+            "SELECT TOP 1 " +
+            "customer_id, COUNT(customer_id) AS 'value_occurrence' " +
+            "FROM vMasterOrderSheet " +
+            "GROUP BY customer_id " +
+            "ORDER BY 'value_occurrence' DESC) as mos " +
+            "ON c.CustomerReferenceNumber=mos.customer_id";
 
     /**
      * Collects data on ordered items.
@@ -49,7 +55,7 @@ public class ReportHandler {
             tblData.setItems(data);
         } catch (SQLException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("An error has occcured (getDataOrderedItems): \r\n" + e.toString());
+            alert.setContentText("An error has occured (getDataOrderedItems): \r\n" + e.toString());
             alert.show();
         }
     }
@@ -124,7 +130,7 @@ public class ReportHandler {
             ResultSet resultSet = con.createStatement().executeQuery(queryTopCustomer);
 
             while(resultSet.next()) {
-                topCustomer += resultSet.getInt(4);
+                topCustomer += resultSet.getString(1);
             }
 
         }
