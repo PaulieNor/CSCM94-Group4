@@ -26,7 +26,7 @@ public class Orders {
      * Gets all orders that are yet to be completed to display to the chef.
      */
 
-    public void showIncomplete() throws IOException{
+    public void showIncomplete() {
         DatabaseHandler handler = new DatabaseHandler();
         Connection connect = handler.database();
         try {
@@ -57,8 +57,8 @@ public class Orders {
         double total = 0.0;
         try {
             Statement statement = connect.createStatement();
-            String sql = "SELECT Total FROM vFinanceSheet WHERE reference_number = "
-                    + referenceNumber;
+            String sql = "SELECT Total FROM vFinanceSheet WHERE reference_number = '"
+                    + referenceNumber + "'";
             PreparedStatement checkDatabase = connect.prepareStatement(sql);
             ResultSet resultSet = checkDatabase.executeQuery();
             total = resultSet.getDouble("Total");
