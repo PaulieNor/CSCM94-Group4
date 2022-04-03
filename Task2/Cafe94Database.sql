@@ -623,3 +623,77 @@ INNER JOIN [dbo].[MenuItems] as s
 ON u.Side=s.MenuItemID
 INNER JOIN [dbo].[MenuItems] as d
 ON u.Drink=d.MenuItemID;
+
+-- Service Views
+CREATE VIEW vWaiterTicket as SELECT u.TableNumber, u.order_type as OrderType, m.ItemName as 'Main', 
+s.ItemName as 'Side', d.ItemName as 'Drink'
+FROM (SELECT 
+TableNumber as TableNumber, 
+SitDownMain as Main,
+SitDownSide as Side,
+SitDownDrink as Drink,
+'In house' as order_type
+FROM SitDownOrders WHERE SitDownCompletedOrder = 1 AND IsServed = 0) as u
+INNER JOIN [dbo].[MenuItems] as m
+ON u.Main=m.MenuItemID
+INNER JOIN [dbo].[MenuItems] as s
+ON u.Side=s.MenuItemID
+INNER JOIN [dbo].[MenuItems] as d
+ON u.Drink=d.MenuItemID;
+
+CREATE VIEW vDeliveryTicket AS SELECT u.DeliveryOrderID, u.order_type as OrderType, m.ItemName as 'Main', 
+s.ItemName as 'Side', d.ItemName as 'Drink'
+FROM (SELECT
+TakeawayOrderID, 
+TakeawayMain as Main,
+TakeawaySide as Side,
+TakeawayDrink as Drink,
+'Takeaway' as order_type
+FROM TakeawayOrders WHERE TakeawayOrderCompleted = 1 AND IsCollected = 0) as u
+INNER JOIN [dbo].[MenuItems] as m
+ON u.Main=m.MenuItemID
+INNER JOIN [dbo].[MenuItems] as s
+ON u.Side=s.MenuItemID
+INNER JOIN [dbo].[MenuItems] as d
+ON u.Drink=d.MenuItemID;
+
+
+
+--- Finance sheet
+
+CREATE VIEW vMasterOrderSheet AS SELECT
+TakeawayCustomerID as customer_id,
+TakeawayOrderID as reference_number, 
+TakeawayMain as Main,
+TakeawaySide as Side,
+TakeawayDrink as Drink,
+'Takeaway' as order_type FROM [dbo].[TakeawayOrders] 
+UNION ALL
+SELECT 
+SitDownCustomerID as customer_id,
+SitDownOrderID as reference_number, 
+SitDownMain as Main,
+SitDownSide as Side,
+SitDownDrink as Drink,
+'In house' as order_type
+FROM [dbo].[SitDownOrders]
+UNION ALL
+SELECT 
+DeliveryCustomerID as customer_id,
+DeliveryOrderID as reference_number, 
+DeliveryMain as Main,
+DeliverySide as Side,
+DeliveryDrink as Drink,
+'Delivery' as order_type
+FROM [dbo].[DeliveryOrders];
+
+CREATE VIEW vFinanceSheet AS
+SELECT u.reference_number, u.order_type, m.Price as 'Main', 
+s.Price as 'Side', d.Price as 'Drink', m.Price+s.Price+d.Price as 'Total'
+FROM [dbo].[vUnionTicket] as u
+INNER JOIN [dbo].[MenuItems] as m
+ON u.Main=m.MenuItemID
+INNER JOIN [dbo].[MenuItems] as s
+ON u.Side=s.MenuItemID
+INNER JOIN [dbo].[MenuItems] as d
+ON u.Drink=d.MenuItemID;
