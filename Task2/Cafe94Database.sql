@@ -690,7 +690,7 @@ FROM [dbo].[DeliveryOrders];
 CREATE VIEW vFinanceSheet AS
 SELECT u.reference_number, u.order_type, m.Price as 'Main', 
 s.Price as 'Side', d.Price as 'Drink', m.Price+s.Price+d.Price as 'Total'
-FROM [dbo].[vUnionTicket] as u
+FROM [dbo].[vMasterOrderSheet] as u
 INNER JOIN [dbo].[MenuItems] as m
 ON u.Main=m.MenuItemID
 INNER JOIN [dbo].[MenuItems] as s
