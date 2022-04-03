@@ -20,13 +20,13 @@ public class DatabaseHandler {
      */
     public static Connection database() {
         try {
-            String url = "jdbc:sqlserver://cafe94.database.windows.net:1433;"
-                    + "database=cafe94;"
-                    + "user=adminCafe@cafe94;"
-                    + "password=cscm94Group4;"
-                    + "encrypt=false;"
-                    + "trustServerCertificate=true;"
-                    + "loginTimeout=60;";
+            String url = "jdbc:sqlserver://cafe94.database.windows.net:1433;database=cafe94" +
+                    ";user=adminCafe@cafe94;" +
+                    "password=cscm94Group4;" +
+                    "encrypt=false;" +
+                    "trustServerCertificate=false;" +
+                    "hostNameInCertificate=*.database.windows.net;" +
+                    "loginTimeout=60;;";
             Connection con = DriverManager.getConnection(url);
             System.out.println("Connection established.");
             return con;
