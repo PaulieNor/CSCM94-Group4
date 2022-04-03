@@ -66,11 +66,8 @@ public class Customer {
     public void uploadCustomer(){
         DatabaseHandler handler = new DatabaseHandler();
         try {
-            System.out.println(custID +
-                    "', '" + firstName +
-                    "', "+ lastName +
-                    "', '" + address +
-                    "', '" + postcode + "'");
+            System.out.println(custID + "', '" + firstName + "', "+ lastName +  "', " +
+                                "'" + address + "', '" + postcode + "'");
             handler.newEntry("Customers", "'"+ custID +
                             "', '" + firstName +
                             "', '"+ lastName +
