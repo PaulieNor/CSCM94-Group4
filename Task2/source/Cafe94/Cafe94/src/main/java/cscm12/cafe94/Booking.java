@@ -1,12 +1,14 @@
 package cscm12.cafe94;
 
+import javax.xml.crypto.Data;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 /**
  * Class for managing customer sit-in bookings.
  * @author Paul Norman
- * @version 1.0
+ * @version 1.1
  */
 public class Booking {
 
@@ -14,21 +16,14 @@ public class Booking {
     private int custID;
     private int numberOfGuests;
     private int tableID;
-    private LocalTime bookingTime;
-    private LocalDate bookingDate;
+    private LocalDateTime bookingDate;
 
-    public Booking(int bookingID, int custID, int numberOfGuests, int tableID,
-                   LocalTime bookingTime, LocalDate bookingDate) {
+    public Booking(int bookingID, int custID, int numberOfGuests, int tableID, String bookingDate) {
         this.bookingID = bookingID;
         this.custID = custID;
         this.numberOfGuests = numberOfGuests;
         this.tableID = tableID;
-        this.bookingTime = bookingTime;
-        this.bookingDate = bookingDate;
-    }
-
-    public void setBookingID(int bookingID) {
-        this.bookingID = bookingID;
+        this.bookingDate = LocalDateTime.parse(bookingDate);
     }
 
     public int getBookingID() {
@@ -47,15 +42,15 @@ public class Booking {
         return tableID;
     }
 
-    public LocalDate getBookingDate() {
+    public LocalDateTime getBookingDate() {
         return bookingDate;
     }
 
-    public LocalTime getBookingTime() {
-        return bookingTime;
-    }
-
     // Setters
+
+    public void setBookingID(int bookingID) {
+        this.bookingID = bookingID;
+    }
 
     public void setCustID(int custID) {
         this.custID = custID;
@@ -69,11 +64,7 @@ public class Booking {
         this.tableID = tableID;
     }
 
-    public void setBookingTime(LocalTime bookingTime) {
-        this.bookingTime = bookingTime;
-    }
-
-    public void setBookingDate(LocalDate bookingDate) {
+    public void setBookingDate(LocalDateTime bookingDate) {
         this.bookingDate = bookingDate;
     }
 
@@ -86,7 +77,6 @@ public class Booking {
             handler.newEntry("Bookings", "CustomerUserID='" + custID +
                     "', numberOfGuests='" + numberOfGuests +
                     "', tableID='" + tableID +
-                    "', bookingTime='" + bookingTime +
                     "', bookingDate='" + bookingDate + "'",
                     "Database Error. Entries may be in incorrect format.");
         } catch (NullPointerException e){
@@ -105,11 +95,23 @@ public class Booking {
                               "', CustomerUserID='" + custID +
                                     "', numberOfGuests='" + numberOfGuests +
                                     "', tableID='" + tableID +
-                                    "', bookingTime='" + bookingTime +
                                     "', bookingDate='" + bookingDate + "'",
                     "Database Error. Entries may be in incorrect format.");
         } catch (NullPointerException e){
             System.out.println("A field is empty.");
         }
     }
+
+    /** Checks datebase if there are other bookings less an hour before or after the requested slot.
+     *
+     * @return <code>boolean</code>, true for no other books and false otherwise.
+     */
+    public boolean checkTimeslot(){
+        DatabaseHandler handler = new DatabaseHandler();
+        // TODO
+        return false;
+
+    }
+
+
 }
