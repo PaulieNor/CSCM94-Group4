@@ -34,11 +34,12 @@ public class StaffLoginController {
      * Loggs staff into to their appropriate staff role homepage FXML.
      * Stores the unique username using @getStaffHomeInfo.
      * @param event triggers upon button is pressed.
+     * @throws SQLException for errors.
      */
     @FXML
-    public void switchToStaffAccount(ActionEvent event) throws IOException {
-        DatabaseHandler staffDatabase = new DatabaseHandler();
-        Connection connect = staffDatabase.database();
+    public void switchToStaffAccount(ActionEvent event) throws IOException, SQLException {
+        DBConnector staffDatabase = new DBConnector();
+        Connection connect = staffDatabase.getConnection();
         String fxml = "";
 
         try {

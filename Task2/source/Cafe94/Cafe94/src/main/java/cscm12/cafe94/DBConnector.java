@@ -10,7 +10,6 @@ import java.sql.*;
  *
  * Database connector class.
  */
-
 public class DBConnector {
     public static Connection getConnection() throws SQLException {
         String username = "root";
