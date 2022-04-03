@@ -17,19 +17,18 @@ public class Main extends Application {
      * Can be used to plug in the direct FXML page if you don't want to login all the time.
      * @param stage */
     @Override
-    public void start(Stage stage){
+    public void start(Stage stage) {
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Cafe94.fxml")));
             Scene scene = new Scene(root);
             stage.setTitle("Cafe94");
             stage.setScene(scene);
             stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch(Exception e){
+                e.printStackTrace();
+            }
         }
-    }
 
-    public static void main(String[] args) {
-        launch(args);
-    }
+
+    public static void main(String[] args) { launch(args); }
 }

@@ -1,7 +1,6 @@
 package cscm12.cafe94;
 
 /**
- * [DatabaseHandler]
  * Class which handles SQL queries to the database.
  *
  * @author Paul Norman
@@ -15,10 +14,9 @@ import java.sql.*;
 public class DatabaseHandler {
 
     /**
-     * [database]
      * Connects to database.
      * @author Paul Norman
-     * @return database object containing the connection.
+     * @return <code>Connection</code> object pointing to the cloud database connection.
      */
     public static Connection database() {
         try {
@@ -28,7 +26,7 @@ public class DatabaseHandler {
                     "encrypt=false;" +
                     "trustServerCertificate=false;" +
                     "hostNameInCertificate=*.database.windows.net;" +
-                    "loginTimeout=60;";
+                    "loginTimeout=60;;";
             Connection con = DriverManager.getConnection(url);
             System.out.println("Connection established.");
             return con;
@@ -38,10 +36,9 @@ public class DatabaseHandler {
             return null;
         }
     }
-
     /*
-    public static Connection localdatabase() {
-        Connection localdatabase;
+    public static Connection database() {
+        Connection database;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             database = DriverManager.getConnection(
@@ -51,19 +48,21 @@ public class DatabaseHandler {
             e.printStackTrace();
             return null;
         }
-    }
+    }*/
 
     /**
-     * [tableUpdater]
      * Used to made edits, additions, or deletions from tables.
      * @param update A valid SQL update to the Cafe94 database.
      * @param CONSTRAINT_ERROR A unique error from violating constraint rules specific to that transaction.
      */
-    private static void tableUpdater(String update, String CONSTRAINT_ERROR) {
+    public static void tableUpdater(String update, String CONSTRAINT_ERROR) {
         Connection connect = database();
         try {
+            System.out.println("connecting");
             Statement statement = connect.createStatement();
-            statement.executeUpdate(update);
+            System.out.println("Statement made");
+            statement.execute(update);
+            System.out.println("updated");
         } catch (SQLIntegrityConstraintViolationException e) {
             System.out.println(CONSTRAINT_ERROR);
         } catch (Exception ex) {
@@ -73,7 +72,6 @@ public class DatabaseHandler {
 
 
     /**
-     * [newEntry]
      * Add new entry to table.
      * @param tableName The specified table to be updated
      * @param values The values of the new entry in SQL syntax.
@@ -81,7 +79,8 @@ public class DatabaseHandler {
      */
     public static void newEntry(String tableName, String values, String CONSTRAINT_ERROR){
         try {
-            String query = "INSERT " + tableName + " VALUES (" + values + ")";
+            String query = "INSERT INTO " + tableName + " VALUES (" + values + ");";
+            System.out.println(query);
             tableUpdater(query, CONSTRAINT_ERROR);
         } catch (Exception e){
             e.printStackTrace();
@@ -89,7 +88,6 @@ public class DatabaseHandler {
     }
 
     /**
-     * [editEntry]
      * Used to made edits to entries on the table.
      * @param tableName The specified table to be updated
      * @param column The column to search for the identifier.
@@ -100,8 +98,9 @@ public class DatabaseHandler {
     public static void editEntry(String tableName, String column, String identifier, String values,
                           String CONSTRAINT_ERROR) {
         try {
-            String query = "UPDATE " + tableName + " SET VALUES (" + values + ") WHERE " +
+            String query = "UPDATE " + tableName + " SET " + values + " WHERE " +
                     column + " = '" + identifier + "'";
+            System.out.println(query);
             tableUpdater(query, CONSTRAINT_ERROR);
         } catch (Exception e) {
             System.out.println("Input error.");
@@ -109,7 +108,6 @@ public class DatabaseHandler {
     }
 
     /**
-     * [deleteEntry]
      * Used to delete entries.
      * @param tableName The specified table to be updated
      * @param column The column to search.
@@ -128,13 +126,12 @@ public class DatabaseHandler {
     }
 
         /**
-         * [sqlCall]
          * This is a method which makes a SQL call to the database and returns the ResultSet.
          * Intended for class example use.
          * For convenience only. Any new calls used more than once should be added to this class/children.
          * @param query A valid SQL query to the Cafe94 database.
          */
-        private void sqlCall(String query) throws IOException{
+        private void callSql(String query) throws IOException{
                 Connection connect = database();
         try {
             Statement statement = connect.createStatement();
