@@ -12,21 +12,12 @@
             <Font size="24.0" />
          </font>
       </Text>
-      <Button fx:id="serveOrderButton" layoutX="25.0" layoutY="306.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="116.0" text="Serve" />
-      <Button fx:id="bookTableButton" layoutX="443.0" layoutY="306.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="78.0" text="Book" />
-      <Text fx:id="completedOrdersText" layoutX="119.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Completed Orders (Table Service)" />
-      <Text fx:id="unbookedTablesText" layoutX="437.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Unbooked Tables" />
-      <Button layoutX="248.0" layoutY="306.0" mnemonicParsing="false" onAction="#switchToStaffLogin" prefHeight="25.0" prefWidth="116.0" text="Logout" />
-      <TableView layoutX="25.0" layoutY="91.0" prefHeight="200.0" prefWidth="339.0">
-        <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
-        </columns>
-      </TableView>
-      <TableView layoutX="444.0" layoutY="91.0" prefHeight="200.0" prefWidth="78.0">
-         <columns>
-            <TableColumn prefWidth="75.0" text="Column X" />
-         </columns>
-      </TableView>
+      <Button fx:id="serveOrderButton" layoutX="370.0" layoutY="180.0" mnemonicParsing="false" text="Serve" />
+      <Button fx:id="bookTableButton" layoutX="370.0" layoutY="118.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="45.0" text="Book" />
+      <ChoiceBox fx:id="unbookedTablesList" layoutX="198.0" layoutY="118.0" prefWidth="150.0" />
+      <Text fx:id="completedOrdersText" layoutX="194.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Completed Orders (Table Service)" />
+      <ChoiceBox fx:id="completedOrdersListTab" layoutX="201.0" layoutY="180.0" prefWidth="150.0" />
+      <Text fx:id="unbookedTablesText" layoutX="230.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Unbooked Tables" />
+      <Button layoutX="273.0" layoutY="225.0" mnemonicParsing="false" onAction="#switchToStaffLogin" text="Logout" />
    </children>
 </Pane>

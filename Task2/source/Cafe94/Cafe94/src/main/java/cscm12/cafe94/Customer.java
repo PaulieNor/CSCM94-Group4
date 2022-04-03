@@ -5,13 +5,13 @@ package cscm12.cafe94;
  */
 public class Customer {
 
-    private String custID;
+    private int custID;
     private String firstName;
     private String lastName;
     private String address;
     private String postcode;
 
-    public Customer(String custID, String firstName, String lastName,
+    public Customer(int custID, String firstName, String lastName,
                    String address, String postcode) {
         this.custID = custID;
         this.firstName = firstName;
@@ -20,7 +20,7 @@ public class Customer {
         this.postcode = postcode;
     }
 
-    public String getCustID() {
+    public int getCustID() {
         return custID;
     }
 
@@ -40,7 +40,7 @@ public class Customer {
         return postcode;
     }
 
-    public void setCustID(String custID) {
+    public void setCustID(int custID) {
         this.custID = custID;
     }
 
@@ -63,16 +63,13 @@ public class Customer {
     /**
      * Adds values in Customer object to database.
      */
-    public void uploadCustomer(){
+    public void uploadBooking(){
         DatabaseHandler handler = new DatabaseHandler();
         try {
-            System.out.println(custID + "', '" + firstName + "', "+ lastName +  "', " +
-                                "'" + address + "', '" + postcode + "'");
-            handler.newEntry("Customers", "'"+ custID +
-                            "', '" + firstName +
-                            "', '"+ lastName +
-                            "', '" + address +
-                            "', '" + postcode + "'",
+            handler.newEntry("Customers", "CustomerFirstName='" + firstName +
+                            "', CustomerLastName='" + lastName +
+                            "', CustomerStreetAdd='" + address +
+                            "', CustomerPostCode='" + postcode + "'",
                     "Database Error. Entries may be in incorrect format.");
         } catch (NullPointerException e){
             System.out.println("A field is empty.");
@@ -82,10 +79,11 @@ public class Customer {
     /**
      * Edits the database customer entry with the same CustomerUserID, using values in Customer object.
      */
-    public void editCustomer(){
+    public void editBooking(){
         DatabaseHandler handler = new DatabaseHandler();
         try {
-            handler.editEntry("Customers", "CustomerUserID", custID,
+            handler.editEntry("Customers", "CustomerUserID",
+                    "CustomerUserID='" + custID,
                     "CustomerFirstName='" + firstName +
                             "', CustomerLastName='" + lastName +
                             "', CustomerStreetAdd='" + address +
