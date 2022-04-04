@@ -16,7 +16,6 @@ public class DBConnector {
         String password = "";
         String url = "jdbc:mysql://localhost:3306/cafe94database";
         Connection con = DriverManager.getConnection(url, username, password);
-
         return con;
     }
 }

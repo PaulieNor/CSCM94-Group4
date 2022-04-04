@@ -23,11 +23,11 @@
           <TableColumn prefWidth="75.0" text="C2" />
         </columns>
       </TableView>
-      <TableView layoutX="309.0" layoutY="114.0" prefHeight="145.0" prefWidth="270.0">
-         <columns>
-            <TableColumn prefWidth="75.0" text="C1" />
-            <TableColumn prefWidth="75.0" text="C2" />
-         </columns>
-      </TableView>
+      <ChoiceBox layoutX="300.0" layoutY="139.0" prefHeight="25.0" prefWidth="89.0" />
+      <ChoiceBox layoutX="400.0" layoutY="139.0" prefHeight="25.0" prefWidth="89.0" />
+      <ChoiceBox layoutX="498.0" layoutY="139.0" prefHeight="25.0" prefWidth="89.0" />
+      <Text fx:id="chooseSpecialText1" layoutX="302.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Main" textAlignment="CENTER" wrappingWidth="89.251953125" />
+      <Text fx:id="chooseSpecialText2" layoutX="399.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Side" textAlignment="CENTER" wrappingWidth="89.251953125" />
+      <Text fx:id="chooseSpecialText3" layoutX="497.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Drink" textAlignment="CENTER" wrappingWidth="89.251953125" />
    </children>
 </Pane>

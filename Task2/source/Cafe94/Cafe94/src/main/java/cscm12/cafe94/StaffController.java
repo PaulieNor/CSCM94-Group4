@@ -139,8 +139,8 @@ public class StaffController implements Initializable {
         String staff = "UPDATE Staff SET StaffType = '" + newStaffType.getText()
                 + "', StaffFirst_Name = '" + newStaffFName.getText() + "',StaffLast_Name = '"
                 + newStaffLName.getText() + "', StaffPassword = '" + newStaffPassword.getText()
-                + "', HoursToWork = '" + newHoursToWork.getText() + "' " + "WHERE StaffUsername = '"
-                + newStaffUsername.getText() + "'";
+                + "', HoursToWork = '" + newHoursToWork.getText() + "' "
+                + "WHERE StaffUsername = '" + newStaffUsername.getText() + "'";
         staffTableSQLCommand(staff);
         getStaffTable();
     }

@@ -80,4 +80,16 @@ public class StaffLoginController {
         stage.setScene(scene);
         stage.show();
     }
+
+    /**   [switchToCafe94]
+     Switches to Cafe94 welcome page.
+     @param event is to trigger fxml swap */
+    @FXML
+    public void switchToCafe94(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Cafe94.fxml")));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
 }

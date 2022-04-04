@@ -17,15 +17,19 @@
       <Text fx:id="completedOrdersText" layoutX="119.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Completed Orders (Table Service)" />
       <Text fx:id="unbookedTablesText" layoutX="437.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Unbooked Tables" />
       <Button layoutX="248.0" layoutY="306.0" mnemonicParsing="false" onAction="#switchToStaffLogin" prefHeight="25.0" prefWidth="116.0" text="Logout" />
-      <TableView layoutX="25.0" layoutY="91.0" prefHeight="200.0" prefWidth="339.0">
+      <TableView layoutX="25.0" layoutY="91.0" prefHeight="200.0" prefWidth="340.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
+          <TableColumn prefWidth="85.0" text="C1" />
+          <TableColumn prefWidth="85.0" text="C2" />
+            <TableColumn prefWidth="85.0" text="Column X" />
+            <TableColumn prefWidth="85.0" text="Column X" />
         </columns>
       </TableView>
-      <TableView layoutX="444.0" layoutY="91.0" prefHeight="200.0" prefWidth="78.0">
+      <TableView layoutX="400.0" layoutY="91.0" prefHeight="200.0" prefWidth="180.0">
          <columns>
-            <TableColumn prefWidth="75.0" text="Column X" />
+            <TableColumn prefWidth="60.0" text="Column X" />
+            <TableColumn prefWidth="60.0" text="Column X" />
+            <TableColumn prefWidth="60.0" text="Column X" />
          </columns>
       </TableView>
    </children>
