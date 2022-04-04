@@ -18,9 +18,11 @@ public class DatabaseHandler {
      * @author Paul Norman
      * @return <code>Connection</code> object pointing to the cloud database connection.
      */
+
+
     public static Connection database() {
         try {
-            String url = "jdbc:sqlserver://cafe94.database.windows.net:1433;database=cafe94" +
+            String url = "jdbc:sqlserver://cafe94.database.windows.net:1433;DatabaseName=cafe94" +
                     ";user=adminCafe@cafe94;" +
                     "password=cscm94Group4;" +
                     "encrypt=false;" +
@@ -36,20 +38,22 @@ public class DatabaseHandler {
             return null;
         }
     }
-    /*
+
+
+/**
     public static Connection database() {
         Connection database;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             database = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/CAFE94database", "root", "");
+                    "jdbc:mysql://localhost:3306/localCafe", "root", "");
             return database;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
-    }*/
-
+    }
+*/
     /**
      * Used to made edits, additions, or deletions from tables.
      * @param update A valid SQL update to the Cafe94 database.
