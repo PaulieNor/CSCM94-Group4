@@ -15,19 +15,11 @@
       <Button layoutX="65.0" layoutY="118.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="107.0" text="Delivery" />
       <Button layoutX="65.0" layoutY="223.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="107.0" text="Takeaway" />
       <Button layoutX="65.0" layoutY="327.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="107.0" text="Table Service" />
-      <TableView layoutX="206.0" layoutY="118.0" prefHeight="257.0" prefWidth="380.0">
+      <TableView layoutX="206.0" layoutY="118.0" prefHeight="257.0" prefWidth="374.0">
         <columns>
-          <TableColumn fx:id="itemNameMenu" prefWidth="100.0" text="C1" />
-          <TableColumn fx:id="itemTypeMenu" prefWidth="100.0" text="C2" />
-            <TableColumn fx:id="priceMenu" prefWidth="60.0" text="Column X" />
-            <TableColumn fx:id="timeToMakeMenu" prefWidth="60.0" text="Column X" />
-            <TableColumn fx:id="isVegetarianMenu" prefWidth="60.0" text="Column X" />
+          <TableColumn prefWidth="75.0" text="C1" />
+          <TableColumn prefWidth="75.0" text="C2" />
         </columns>
       </TableView>
-      <Text layoutX="355.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Menu" wrappingWidth="75.6328125">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Text>
    </children>
 </Pane>

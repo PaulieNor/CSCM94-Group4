@@ -5,16 +5,15 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cscm12.cafe94.CompleteOrder">
    <children>
       <Text layoutX="115.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cafe 94 - Table Service">
          <font>
             <Font size="36.0" />
          </font>
       </Text>
-      <Text layoutX="239.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Table Number:" />
-      <ChoiceBox layoutX="338.0" layoutY="119.0" prefHeight="25.0" prefWidth="19.0" />
+      <Text layoutX="239.0" layoutY="128.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Table Number:" />
+      <ChoiceBox layoutX="338.0" layoutY="111.0" prefHeight="25.0" prefWidth="19.0" />
       <ChoiceBox layoutX="384.0" layoutY="240.0" prefWidth="150.0" />
       <ChoiceBox layoutX="226.0" layoutY="240.0" prefWidth="150.0" />
       <ChoiceBox layoutX="67.0" layoutY="240.0" prefWidth="150.0" />
@@ -38,5 +37,9 @@
             <Font size="18.0" />
          </font>
       </Text>
+      <TextField layoutX="287.0" layoutY="140.0" />
+      <Text layoutX="182.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sit in Customer ID:" />
+      <Button layoutX="14.0" layoutY="361.0" mnemonicParsing="false" onAction="#switchToOrders" text="Back To Order" />
+      <Button layoutX="508.0" layoutY="361.0" mnemonicParsing="false" onAction="#switchToFinishOrderTab" text="Place Order" />
    </children>
 </Pane>

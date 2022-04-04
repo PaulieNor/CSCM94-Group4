@@ -5,8 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cscm12.cafe94.CompleteOrder">
    <children>
       <Text layoutX="172.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Order Complete">
          <font>
@@ -23,5 +22,6 @@
       <TextField fx:id="takeawaySide" layoutX="226.0" layoutY="245.0" />
       <Text layoutX="172.0" layoutY="302.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Drink:" />
       <TextField fx:id="takeawayDrink" layoutX="226.0" layoutY="285.0" />
+      <Button layoutX="20.0" layoutY="338.0" mnemonicParsing="false" onAction="#switchToStartScreen" prefHeight="48.0" prefWidth="109.0" text="Return To Home" />
    </children>
 </Pane>
