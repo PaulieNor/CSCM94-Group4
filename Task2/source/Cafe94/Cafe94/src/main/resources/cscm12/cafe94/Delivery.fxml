@@ -5,44 +5,40 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Text layoutX="159.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cafe 94 - Delivery">
+      <Text layoutX="22.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cafe 94 - Delivery">
          <font>
             <Font size="36.0" />
          </font>
       </Text>
-      <ChoiceBox layoutX="388.0" layoutY="303.0" prefWidth="150.0" />
-      <ChoiceBox layoutX="235.0" layoutY="303.0" prefWidth="150.0" />
-      <ChoiceBox layoutX="81.0" layoutY="303.0" prefWidth="150.0" />
-      <Text layoutX="440.0" layoutY="289.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Drink:">
+      <Text layoutX="535.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Drink:">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Text layoutX="291.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Side:">
+      <Text layoutX="434.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Side:">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Text layoutX="145.0" layoutY="289.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Main:">
+      <Text layoutX="336.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Main:">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Text layoutX="285.0" layoutY="251.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Order:">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Text>
-      <TextField layoutX="156.0" layoutY="106.0" />
-      <Text layoutX="60.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Name:" />
-      <Text layoutX="36.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Street Address:" />
-      <TextField layoutX="157.0" layoutY="136.0" />
-      <TextField layoutX="157.0" layoutY="200.0" />
-      <Text layoutX="36.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Phone Number:" />
-      <Text layoutX="50.0" layoutY="185.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Postcode:" />
-      <TextField layoutX="156.0" layoutY="168.0" />
+      <TextField layoutX="152.0" layoutY="106.0" />
+      <Text layoutX="45.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Name:" />
+      <Text layoutX="22.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Street Address:" />
+      <TextField layoutX="153.0" layoutY="136.0" />
+      <Text layoutX="36.0" layoutY="185.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Postcode:" />
+      <TextField layoutX="152.0" layoutY="168.0" />
+      <Button fx:id="makeOrder" layoutX="504.0" layoutY="345.0" mnemonicParsing="false" onAction="#switchToFinishOrderDel" prefHeight="41.0" prefWidth="82.0" text="Make Order" />
+      <Text layoutX="4.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Delivery Customer ID:" />
+      <TextField layoutX="152.0" layoutY="200.0" />
+      <Button layoutX="9.0" layoutY="345.0" mnemonicParsing="false" onAction="#switchToOrders" prefHeight="41.0" prefWidth="136.0" text="Back To Order Select" />
+      <ChoiceBox layoutX="317.0" layoutY="106.0" prefHeight="25.0" prefWidth="82.0" />
+      <ChoiceBox layoutX="412.0" layoutY="106.0" prefHeight="25.0" prefWidth="82.0" />
+      <ChoiceBox layoutX="504.0" layoutY="106.0" prefHeight="25.0" prefWidth="82.0" />
    </children>
 </Pane>

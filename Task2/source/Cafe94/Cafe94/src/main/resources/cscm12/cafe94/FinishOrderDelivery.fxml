@@ -5,7 +5,6 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Text layoutX="182.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Order Complete">
@@ -13,19 +12,20 @@
             <Font size="36.0" />
          </font>
       </Text>
-      <TextField layoutX="236.0" layoutY="152.0" />
-      <TextField layoutX="236.0" layoutY="120.0" />
-      <TextField layoutX="236.0" layoutY="184.0" />
-      <TextField layoutX="236.0" layoutY="215.0" />
-      <TextField layoutX="236.0" layoutY="248.0" />
-      <TextField layoutX="236.0" layoutY="280.0" />
-      <TextField layoutX="236.0" layoutY="312.0" />
-      <Text layoutX="175.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" />
-      <Text layoutX="153.0" layoutY="169.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Street Address:" />
-      <Text layoutX="151.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone Number:" />
-      <Text layoutX="166.0" layoutY="201.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Postcode:" />
-      <Text layoutX="177.0" layoutY="265.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Main:" />
-      <Text layoutX="179.0" layoutY="297.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Side:" />
-      <Text layoutX="176.0" layoutY="329.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Drink:" />
+      <TextField layoutX="151.0" layoutY="107.0" />
+      <TextField layoutX="151.0" layoutY="138.0" />
+      <TextField layoutX="406.0" layoutY="106.0" />
+      <TextField layoutX="406.0" layoutY="138.0" />
+      <TextField layoutX="406.0" layoutY="170.0" />
+      <Text layoutX="27.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Deliver Customer ID:" />
+      <Text layoutX="71.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Postcode:" />
+      <Text layoutX="347.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Main:" />
+      <Text layoutX="349.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Side:" />
+      <Text layoutX="346.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Drink:" />
+      <Text layoutX="16.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Estimated Delivery Time:" />
+      <TextField layoutX="151.0" layoutY="170.0" />
+      <Text layoutX="345.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Price" />
+      <TextField layoutX="405.0" layoutY="204.0" />
+      <Button layoutX="436.0" layoutY="320.0" mnemonicParsing="false" onAction="#switchToStartScreen" prefHeight="17.0" prefWidth="87.0" text="Return Home" />
    </children>
 </Pane>
