@@ -5,7 +5,7 @@ import javafx.beans.property.SimpleStringProperty;
 /**[ManageStaff]
  * Manage staff class is responsible for being the blank slate for staff information.
  * @author Sumi Sunuwar
- * @version 1.1 */
+ * @version 1.2 */
 public class Staff{
     private final SimpleStringProperty staffFName, staffLName,
             staffType, staffUsername, staffPassword;

@@ -23,7 +23,7 @@ import java.util.ResourceBundle;
  * [ManageStaff]
  * Responsible for filling up with staff information.
  * @author Sumi Sunuwar
- * @version 1.1*/
+ * @version 1.2*/
 public class StaffController implements Initializable {
     private Stage stage;
     private Scene scene;

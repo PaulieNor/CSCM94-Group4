@@ -17,7 +17,7 @@ import java.util.Objects;
  * [StaffLogin]
  * Responsible for logging in staff to their correct homepage.
  * @author Sumi Sunuwar
- * @version 1.1*/
+ * @version 1.3*/
 public class StaffLoginController {
     private Stage stage;
     private Scene scene;
@@ -83,7 +83,8 @@ public class StaffLoginController {
 
     /**   [switchToCafe94]
      Switches to Cafe94 welcome page.
-     @param event is to trigger fxml swap */
+     @param event is to trigger fxml swap.
+     @throws IOException for error. */
     @FXML
     public void switchToCafe94(ActionEvent event) throws IOException {
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Cafe94.fxml")));

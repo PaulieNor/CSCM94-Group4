@@ -18,7 +18,7 @@ import static cscm12.cafe94.StaffLoginController.staffSession;
 /**  [StaffHomepage]
  * Class which handles staffs custom homepage with functions based on their role.
  * @author Sumi Sunuwar
- * @version 1.1 */
+ * @version 1.2 */
 public class StaffHomepageController implements Initializable {
     private Stage stage;
     private Scene scene;
