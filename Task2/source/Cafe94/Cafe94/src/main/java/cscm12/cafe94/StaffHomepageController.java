@@ -60,7 +60,8 @@ public class StaffHomepageController implements Initializable {
 
     /**  [switchToStaffLogin]
      Switches to staffs login page.
-     @param event triggers button to go to the fxml upon clicking. */
+     @param event triggers button to go to the fxml upon clicking.
+     @throws IOException for errors. */
     @FXML
     public void switchToStaffLogin(ActionEvent event) throws IOException {
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("StaffLogin.fxml")));

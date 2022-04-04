@@ -103,7 +103,8 @@ public class StaffController implements Initializable {
     /**
      * [staffTableSQLCommand]
      * This is a method is used to execute SQL queries in the staff table.
-     * @param staff takes in a staff data to manipulate */
+     * @param staff takes in a staff data to manipulate
+     * @throws IOException for errors. */
     private void staffTableSQLCommand(String staff) throws SQLException {
         DBConnector staffDatabase = new DBConnector();
         Connection connect = staffDatabase.getConnection();
@@ -176,7 +177,8 @@ public class StaffController implements Initializable {
 
     /**   [switchToStaffLogin]
      Switches to staffs login page.
-     @param event is to trigger fxml swap */
+     @param event is to trigger fxml swap
+     @throws IOException for errors. */
     @FXML
     public void switchToStaffLogin(ActionEvent event) throws IOException {
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("StaffLogin.fxml")));
@@ -188,7 +190,8 @@ public class StaffController implements Initializable {
 
     /**   [switchToManager]
      Switches to Managers page.
-     @param event is to trigger fxml swap */
+     @param event is to trigger fxml swap
+     @throws IOException for errors. */
     @FXML
     public void switchToManager(ActionEvent event) throws IOException {
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Manager.fxml")));
@@ -200,7 +203,8 @@ public class StaffController implements Initializable {
 
     /**   [switchToManager]
      Switches to Cafe94 report page.
-     @param event is to trigger fxml swap */
+     @param event is to trigger fxml swap
+     @throws IOException for errors. */
     @FXML
     public void switchToManagerReport(ActionEvent event) throws IOException {
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("ManagerReport.fxml")));
