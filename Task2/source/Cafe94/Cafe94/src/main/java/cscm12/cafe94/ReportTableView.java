@@ -15,15 +15,20 @@ public class ReportTableView {
     private String columnFour;
     private String columnFive;
     private String columnSix;
+    private String columnSeven;
+    private String columnEight;
 
     public ReportTableView(String columnOne, String columnTwo, String columnThree,
-                           String columnFour, String columnFive, String columnSix) {
+                           String columnFour, String columnFive, String columnSix,
+                           String columnSeven, String columnEight) {
         this.columnOne = columnOne;
         this.columnTwo = columnTwo;
         this.columnThree = columnThree;
         this.columnFour = columnFour;
         this.columnFive = columnFive;
         this.columnSix = columnSix;
+        this.columnSeven = columnSeven;
+        this.columnEight = columnEight;
     }
 
     public String getColumnOne() {
@@ -72,5 +77,21 @@ public class ReportTableView {
 
     public void setColumnSix(String columnSix) {
         this.columnSix = columnSix;
+    }
+
+    public String getColumnSeven() {
+        return columnSeven;
+    }
+
+    public void setColumnSeven(String columnSeven) {
+        this.columnSeven = columnSeven;
+    }
+
+    public String getColumnEight() {
+        return columnEight;
+    }
+
+    public void setColumnEight(String columnEight) {
+        this.columnEight = columnEight;
     }
 }

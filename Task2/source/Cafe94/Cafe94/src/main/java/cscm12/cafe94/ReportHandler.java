@@ -16,23 +16,18 @@ public class ReportHandler {
 
     //SQL queries for tblData.
     static String queryBookings = "SELECT * FROM bookingtables";
-    static String queryOrders = "SELECT * FROM orders";
+    static String queryDelivery = "SELECT * FROM deliveryorders";
+    static String querySitDownOrders = "SELECT * FROM sitdownorders";
     static String queryMenu = "SELECT * FROM menuitems";
     static String queryCustomers = "SELECT * FROM customers";
+    static String queryTakeaway = "SELECT * FROM takeawayorders";
 
     //SQL queries for labels.
-    static String queryTS = "SELECT SUM(quantity) FROM items_ordered";
-    static String queryTotalCost = "SELECT SUM(Total) from vFinanceSheet";
-    static String queryMPI = "select menu_id, SUM(quantity) from items_ordered " +
-            "GROUP BY menu_id ORDER BY quantity ASC";
-    static String queryTopCustomer = "SELECT c.CustomerUserID FROM Customers as c " +
-            "INNER JOIN ( " +
-            "SELECT TOP 1 " +
-            "customer_id, COUNT(customer_id) AS 'value_occurrence' " +
-            "FROM vMasterOrderSheet " +
-            "GROUP BY customer_id " +
-            "ORDER BY 'value_occurrence' DESC) as mos " +
-            "ON c.CustomerReferenceNumber=mos.customer_id";
+    static String queryTS = "SELECT COUNT(BookingID) FROM bookingtables";
+    static String queryTotalCost = "SELECT SUM(price_main + price_side + price_drink) " +
+            "FROM all_orders";
+    static String queryMPI = "";
+    static String queryTopCustomer = "";
 
     /**
      * Collects data on ordered items.
@@ -52,6 +47,7 @@ public class ReportHandler {
                 data.add(new ReportTableView(resultSet.getString(1),
                         resultSet.getString(2), resultSet.getString(3),
                         resultSet.getString(4), resultSet.getString(5),
+                        resultSet.getString(1), resultSet.getString(1),
                         resultSet.getString(1)));
             }
             tblData.setItems(data);
@@ -80,7 +76,8 @@ public class ReportHandler {
                 data.add(new ReportTableView(resultSet.getString(1),
                         resultSet.getString(2), resultSet.getString(3),
                         resultSet.getString(4), resultSet.getString(5),
-                        resultSet.getString(6)));
+                        resultSet.getString(6), resultSet.getString(1),
+                        resultSet.getString(1)));
             }
             tblData.setItems(data);
         }
@@ -108,6 +105,7 @@ public class ReportHandler {
                 data.add(new ReportTableView(resultSet.getString(1),
                         resultSet.getString(2), resultSet.getString(3),
                         resultSet.getString(4), resultSet.getString(5),
+                        resultSet.getString(6), resultSet.getString(6),
                         resultSet.getString(6)));
             }
             tblData.setItems(data);
@@ -120,23 +118,74 @@ public class ReportHandler {
     }
 
     /**
-     * Collects data on customer orders.
+     * Collects data on customer delivery orders.
      * @param con
      * @param data
      * @param tblData
      * @throws SQLException
      */
 
-    public static void getOrders (Connection con, ObservableList data,
-                                   TableView tblData) throws SQLException {
+    public static void getDelivery (Connection con, ObservableList data,
+                                    TableView tblData) throws SQLException {
         try {
-            ResultSet resultSet = con.createStatement().executeQuery(queryOrders);
+            ResultSet resultSet = con.createStatement().executeQuery(queryDelivery);
 
             while (resultSet.next()) {
                 data.add(new ReportTableView(resultSet.getString(1),
                         resultSet.getString(2), resultSet.getString(3),
                         resultSet.getString(4), resultSet.getString(5),
-                        resultSet.getString(5)));
+                        resultSet.getString(6), resultSet.getString(7),
+                        resultSet.getString(7)));
+            }
+            tblData.setItems(data);
+        }
+        catch (SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("An error has occcured (getOrders): \r\n" + e.toString());
+            alert.show();
+        }
+    }
+
+    /**
+     * Collects data on customer takeaway orders.
+     * @param con
+     * @param data
+     * @param tblData
+     * @throws SQLException
+     */
+
+    public static void getTakeaway (Connection con, ObservableList data,
+                                    TableView tblData) throws SQLException {
+        try {
+            ResultSet resultSet = con.createStatement().executeQuery(queryTakeaway);
+
+            while (resultSet.next()) {
+                data.add(new ReportTableView(resultSet.getString(1),
+                        resultSet.getString(2), resultSet.getString(3),
+                        resultSet.getString(4), resultSet.getString(5),
+                        resultSet.getString(6), resultSet.getString(7),
+                        resultSet.getString(8)));
+            }
+            tblData.setItems(data);
+        }
+        catch (SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("An error has occcured (getOrders): \r\n" + e.toString());
+            alert.show();
+        }
+    }
+
+    public static void getSitDownOrders (Connection con, ObservableList data,
+                                    TableView tblData) throws SQLException {
+        try {
+            ResultSet resultSet = con.createStatement().executeQuery(querySitDownOrders);
+
+            while (resultSet.next()) {
+                data.add(new ReportTableView(resultSet.getString(1),
+                        resultSet.getString(2), resultSet.getString(3),
+                        resultSet.getString(4), resultSet.getString(5),
+                        resultSet.getString(6), resultSet.getString(7),
+                        resultSet.getString(8)));
             }
             tblData.setItems(data);
         }
@@ -175,7 +224,7 @@ public class ReportHandler {
     }
 
     /**
-     * Collects data on total number of orders.
+     * Collects data on total number of tables booked.
      * @param con
      * @return
      * @throws SQLException

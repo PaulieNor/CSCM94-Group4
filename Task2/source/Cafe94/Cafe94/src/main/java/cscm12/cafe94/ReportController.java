@@ -32,12 +32,13 @@ public class ReportController {
     private Circle circleConnection;
     @FXML
     private javafx.scene.control.Button btnMenu, btnShowCustomers,
-            btnShowBookings, btnOrders, btnConnect;
+            btnShowBookings, btnDelivery, btnSitDown, btnTakeaway,
+            btnHomepage, btnConnect;
     @FXML
     private TableView<ReportTableView> tblData;
     @FXML
     private TableColumn<ReportTableView, String> columnOne, columnTwo, columnThree,
-    columnFour, columnFive, columnSix;
+    columnFour, columnFive, columnSix, columnSeven, columnEight;
 
     Connection con = null;
 
@@ -82,7 +83,10 @@ public class ReportController {
         columnThree.setText("Customer ID");
         columnFour.setText("No. of Guests");
         columnFive.setText("Table ID");
+
         columnSix.setText(null);
+        columnSeven.setText(null);
+        columnEight.setText(null);
 
         tblData.getItems().clear();
         tblData.setColumnResizePolicy(tblData.CONSTRAINED_RESIZE_POLICY);
@@ -97,17 +101,55 @@ public class ReportController {
      */
 
     @FXML
-    protected void showOrders(ActionEvent e) throws SQLException {
+    protected void showDelivery(ActionEvent e) throws SQLException {
         columnOne.setText("Order ID");
         columnTwo.setText("Customer ID");
-        columnThree.setText("Type");
-        columnFour.setText("Address");
-        columnFive.setText("Driver Number");
+        columnThree.setText("Address");
+        columnFour.setText("Order Complete");
+        columnFive.setText("Delivery Main");
+        columnSix.setText("Delivery Side");
+        columnSeven.setText("Delivery Drink");
+
+        columnEight.setText(null);
 
         tblData.getItems().clear();
         tblData.setColumnResizePolicy(tblData.CONSTRAINED_RESIZE_POLICY);
-        setCellTableSix();
-        ReportHandler.getOrders(con, data, tblData);
+        setCellTableSeven();
+        ReportHandler.getDelivery(con, data, tblData);
+    }
+
+    @FXML
+    protected void showSitDown(ActionEvent e) throws SQLException {
+        columnOne.setText("Order ID");
+        columnTwo.setText("Customer ID");
+        columnThree.setText("Table Number");
+        columnFour.setText("Order Complete");
+        columnFive.setText("Main");
+        columnSix.setText("Side");
+        columnSeven.setText("Drink");
+        columnEight.setText("Is Server");
+
+        tblData.getItems().clear();
+        tblData.setColumnResizePolicy(tblData.CONSTRAINED_RESIZE_POLICY);
+        setCellTableEight();
+        ReportHandler.getSitDownOrders(con, data, tblData);
+    }
+
+    @FXML
+    protected void showTakeaway(ActionEvent e) throws SQLException {
+        columnOne.setText("Order ID");
+        columnTwo.setText("Customer ID");
+        columnThree.setText("Pickup Time");
+        columnFour.setText("Order Complete");
+        columnFive.setText("Main");
+        columnSix.setText("Side");
+        columnSeven.setText("Drink");
+        columnEight.setText("Is Collected");
+
+        tblData.getItems().clear();
+        tblData.setColumnResizePolicy(tblData.CONSTRAINED_RESIZE_POLICY);
+        setCellTableEight();
+        ReportHandler.getTakeaway(con, data, tblData);
     }
 
     /**
@@ -125,6 +167,9 @@ public class ReportController {
         columnFive.setText("Waiting Time");
         columnSix.setText("Vegetarian");
 
+        columnSeven.setText(null);
+        columnEight.setText(null);
+
         tblData.getItems().clear();
         tblData.setColumnResizePolicy(tblData.CONSTRAINED_RESIZE_POLICY);
         setCellTableSix();
@@ -139,6 +184,9 @@ public class ReportController {
         columnFour.setText("Surname");
         columnFive.setText("Address");
         columnSix.setText("Postcode");
+
+        columnSeven.setText(null);
+        columnEight.setText(null);
 
         tblData.getItems().clear();
         tblData.setColumnResizePolicy(tblData.CONSTRAINED_RESIZE_POLICY);
@@ -176,8 +224,62 @@ public class ReportController {
 
         btnShowBookings.setDisable(false);
         btnMenu.setDisable(false);
-        btnOrders.setDisable(false);
+        btnDelivery.setDisable(false);
+        btnSitDown.setDisable(false);
+        btnTakeaway.setDisable(false);
         btnShowCustomers.setDisable(false);
+
+    }
+
+    //BELOW Code for setting Table View columns
+
+    /**
+     * Assigns columns value for data to points at (8 columns).
+     */
+    private void setCellTableEight () {
+
+        columnOne.setCellValueFactory(new PropertyValueFactory<>("columnOne"));
+        columnTwo.setCellValueFactory(new PropertyValueFactory<>("columnTwo"));
+        columnThree.setCellValueFactory(new PropertyValueFactory<>("columnThree"));
+        columnFour.setCellValueFactory(new PropertyValueFactory<>("columnFour"));
+        columnFive.setCellValueFactory(new PropertyValueFactory<>("columnFive"));
+        columnSix.setCellValueFactory(new PropertyValueFactory<>("columnSix"));
+        columnSeven.setCellValueFactory(new PropertyValueFactory<>("columnSeven"));
+        columnEight.setCellValueFactory(new PropertyValueFactory<>("columnEight"));
+
+        columnOne.setSortable(false);
+        columnTwo.setSortable(false);
+        columnThree.setSortable(false);
+        columnFour.setSortable(false);
+        columnFive.setSortable(false);
+        columnSix.setSortable(false);
+        columnSeven.setSortable(false);
+        columnEight.setSortable(false);
+
+    }
+
+    /**
+     * Assigns columns value for data to points at (7 columns).
+     */
+    private void setCellTableSeven () {
+
+        columnOne.setCellValueFactory(new PropertyValueFactory<>("columnOne"));
+        columnTwo.setCellValueFactory(new PropertyValueFactory<>("columnTwo"));
+        columnThree.setCellValueFactory(new PropertyValueFactory<>("columnThree"));
+        columnFour.setCellValueFactory(new PropertyValueFactory<>("columnFour"));
+        columnFive.setCellValueFactory(new PropertyValueFactory<>("columnFive"));
+        columnSix.setCellValueFactory(new PropertyValueFactory<>("columnSix"));
+        columnSeven.setCellValueFactory(new PropertyValueFactory<>("columnSeven"));
+
+        columnEight.setCellValueFactory(null);
+
+        columnOne.setSortable(false);
+        columnTwo.setSortable(false);
+        columnThree.setSortable(false);
+        columnFour.setSortable(false);
+        columnFive.setSortable(false);
+        columnSix.setSortable(false);
+        columnSeven.setSortable(false);
 
     }
 
@@ -192,6 +294,9 @@ public class ReportController {
         columnFour.setCellValueFactory(new PropertyValueFactory<>("columnFour"));
         columnFive.setCellValueFactory(new PropertyValueFactory<>("columnFive"));
         columnSix.setCellValueFactory(new PropertyValueFactory<>("columnSix"));
+
+        columnSeven.setCellValueFactory(null);
+        columnEight.setCellValueFactory(null);
 
         columnOne.setSortable(false);
         columnTwo.setSortable(false);
@@ -214,6 +319,8 @@ public class ReportController {
         columnFive.setCellValueFactory(new PropertyValueFactory<>("columnFive"));
 
         columnSix.setCellValueFactory(null);
+        columnSeven.setCellValueFactory(null);
+        columnEight.setCellValueFactory(null);
 
         columnOne.setSortable(false);
         columnTwo.setSortable(false);

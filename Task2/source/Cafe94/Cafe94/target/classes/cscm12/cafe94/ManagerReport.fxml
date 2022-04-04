@@ -29,8 +29,12 @@
                     fx:id="btnShowBookings" onAction="#showBookings" disable="true"/>
             <Button text="Customers"
                     fx:id="btnShowCustomers" onAction="#showCustomers" disable="true"/>
-            <Button text="Load Orders"
-                    fx:id="btnOrders" disable="true" onAction="#showOrders"/>
+            <Button text="Load Delivery Orders"
+                    fx:id="btnDelivery" disable="true" onAction="#showDelivery"/>
+            <Button text="Load Sit Down Orders"
+                    fx:id="btnSitDown" disable="true" onAction="#showSitDown"/>
+            <Button text="Load Takeaway Orders"
+                    fx:id="btnTakeaway" disable="true" onAction="#showTakeaway"/>
             <Button text="Home"
                     fx:id="btnHomepage" onAction="#returnToHomepage"/>
         </VBox>
@@ -44,6 +48,8 @@
                     <TableColumn fx:id="columnFour"/>
                     <TableColumn fx:id="columnFive"/>
                     <TableColumn fx:id="columnSix"/>
+                    <TableColumn fx:id="columnSeven"/>
+                    <TableColumn fx:id="columnEight"/>
                 </columns>
             </TableView>
     </center>
