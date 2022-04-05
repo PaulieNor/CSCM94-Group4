@@ -1,0 +1,32 @@
+
+    public ObservableList<Menu> getDrinks() {
+        DatabaseHandler handler = new DatabaseHandler();
+        Connection connect = handler.database();
+        ObservableList<Menu> drinkItems = FXCollections.observableArrayList();
+        try {
+            Statement statement = connect.createStatement();
+            String sql = "SELECT ItemName FROM SimpleMenu WHERE ItemType = 'Drink';";
+            PreparedStatement checkDatabase = connect.prepareStatement(sql);
+            ResultSet resultSet = checkDatabase.executeQuery();
+            Menu menu;
+            while (resultSet.next()) {
+                menu = new Menu(resultSet.getString("ItemName"));
+                drinkItems.add(menu);
+            }
+            statement.close();
+            connect.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return drinkItems;
+    }
+
+    public void getDrinkTable() {
+        ObservableList<Menu> drinks = getDrinks();
+        try {
+            Drinks.setCellValueFactory(cellData -> cellData.getValue().itemProperty());
+            drinkItems.setItems(drinks);
+        } catch (NullPointerException n) {
+            System.out.println(" ");
+        }
+    }
