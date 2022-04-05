@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.ImageView?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: aliceblue;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cscm12.cafe94.StartScreenController">
+   <children>
+      <Text layoutX="129.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to Cafe 94!!">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Text>
+      <Button fx:id="switchStaffButton" layoutX="74.0" layoutY="162.0" mnemonicParsing="false" onAction="#switchToStaffLogin" prefHeight="77.0" prefWidth="125.0" text="Staff" />
+      <Button fx:id="switchCustButton" layoutX="390.0" layoutY="162.0" mnemonicParsing="false" onAction="#switchToOrderType" prefHeight="77.0" prefWidth="125.0" text="Customer" />
+   </children>
+</Pane>

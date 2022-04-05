@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cscm12.cafe94.CompleteOrderController">
+   <children>
+      <Text layoutX="115.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cafe 94 - Table Service">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Text>
+      <Text layoutX="60.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Table Number:" />
+      <ChoiceBox layoutX="165.0" layoutY="107.0" prefHeight="25.0" prefWidth="19.0" />
+      <ChoiceBox layoutX="384.0" layoutY="240.0" prefWidth="150.0" />
+      <ChoiceBox layoutX="226.0" layoutY="240.0" prefWidth="150.0" />
+      <ChoiceBox layoutX="67.0" layoutY="240.0" prefWidth="150.0" />
+      <Text layoutX="436.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Drink:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="282.0" layoutY="227.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Side:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="131.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Main:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="276.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Order:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <TextField layoutX="165.0" layoutY="144.0" />
+      <Text layoutX="60.0" layoutY="161.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sit in Customer ID:" />
+      <Button layoutX="14.0" layoutY="361.0" mnemonicParsing="false" onAction="#switchToOrders" text="Back To Order" />
+      <Button layoutX="508.0" layoutY="361.0" mnemonicParsing="false" onAction="#switchToFinishOrderTab" text="Place Order" />
+   </children>
+</Pane>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cscm12.cafe94.OrderTypeController">
+   <children>
+      <Text layoutX="240.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cafe 94">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Text>
+      <Button layoutX="451.0" layoutY="341.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="125.0" text="Dietary Info" />
+      <Button layoutX="83.0" layoutY="131.0" mnemonicParsing="false" onAction="#switchToDelivery" prefHeight="39.0" prefWidth="125.0" text="Delivery" />
+      <Button layoutX="83.0" layoutY="194.0" mnemonicParsing="false" onAction="#switchToTableService" prefHeight="39.0" prefWidth="125.0" text="Table Service" />
+      <Button layoutX="83.0" layoutY="255.0" mnemonicParsing="false" onAction="#switchToTakeaway" prefHeight="39.0" prefWidth="125.0" text="Takeaway" />
+      <Text layoutX="375.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Menu">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font></Text>
+      <Button layoutX="21.0" layoutY="341.0" mnemonicParsing="false" onAction="#switchToStartScreen" prefHeight="39.0" prefWidth="125.0" text="Return To Home" />
+      <TableView fx:id="mainItems" layoutX="230.0" layoutY="125.0" prefHeight="200.0" prefWidth="100.0">
+        <columns>
+          <TableColumn fx:id="Mains" prefWidth="100.0" text="Mains" />
+        </columns>
+      </TableView>
+      <TableView fx:id="sideItems" layoutX="330.0" layoutY="125.0" prefHeight="200.0" prefWidth="100.0">
+         <columns>
+            <TableColumn fx:id="Sides" prefWidth="100.0" text="Sides" />
+         </columns>
+      </TableView>
+      <TableView fx:id="drinkItems" layoutX="430.0" layoutY="125.0" prefHeight="200.0" prefWidth="100.0">
+         <columns>
+            <TableColumn fx:id="Drinks" prefWidth="100.0" text="Drinks" />
+         </columns>
+      </TableView>
+   </children>
+</Pane>
