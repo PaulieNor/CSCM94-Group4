@@ -10,12 +10,12 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cscm12.cafe94.StaffController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cscm12.cafe94.StaffController">
     <children>
         <ToolBar layoutY="440.0" prefHeight="40.0" prefWidth="720.0">
             <items>
                 <Button fx:id="staffHomepageButton" mnemonicParsing="false" onAction="#switchToManager" prefHeight="26.0" prefWidth="54.0" text="Home" />
-                <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="54.0" text="Report" />
+                <Button mnemonicParsing="false" onAction="#switchToManagerReport" prefHeight="26.0" prefWidth="54.0" text="Report" />
                 <Button mnemonicParsing="false" onAction="#switchToStaffLogin" text="Logout" />
             </items>
         </ToolBar>
